@@ -36,6 +36,144 @@ const categoryColors: { [key: string]: string } = {
   gourmand: "bg-amber-50 border-amber-200 hover:bg-amber-100",
 }
 
+const noteTermMap: Record<string, string> = {
+  rose: "Rosa",
+  jasmine: "Jasmim",
+  iris: "Íris",
+  tuberose: "Tuberosa",
+  violet: "Violeta",
+  lily: "Lírio",
+  peony: "Peônia",
+  sandalwood: "Sândalo",
+  cedar: "Cedro",
+  bergamot: "Bergamota",
+  lemon: "Limão",
+  grapefruit: "Toranja",
+  orange: "Laranja",
+  mandarin: "Mandarina",
+  vanilla: "Baunilha",
+  amber: "Âmbar",
+  musk: "Almíscar",
+  mint: "Hortelã",
+  cinnamon: "Canela",
+  ginger: "Gengibre",
+  saffron: "Açafrão",
+  pear: "Pera",
+  peach: "Pêssego",
+  pineapple: "Abacaxi",
+  cherry: "Cereja",
+  plum: "Ameixa",
+  grass: "Grama",
+  ocean: "Oceano",
+  rain: "Chuva",
+  seaweed: "Algas marinhas",
+  coffee: "Café",
+  chocolate: "Chocolate",
+  caramel: "Caramelo",
+  honey: "Mel",
+  almond: "Amêndoa",
+  coconut: "Coco",
+}
+
+const translateNoteName = (name: string) => {
+  const direct = noteTermMap[name.toLowerCase()]
+  if (direct) return direct
+  return name
+    .split(" ")
+    .map((word) => noteTermMap[word.toLowerCase()] ?? word)
+    .join(" ")
+}
+
+const descriptionTermMap: Record<string, string> = {
+  the: "a",
+  queen: "rainha",
+  of: "de",
+  flowers: "flores",
+  brings: "traz",
+  rich: "rico",
+  sweet: "doce",
+  sensual: "sensual",
+  elegant: "elegante",
+  powdery: "atalcado",
+  intense: "intenso",
+  creamy: "cremoso",
+  fresh: "fresco",
+  bright: "vibrante",
+  warm: "quente",
+  dry: "seco",
+  dark: "escuro",
+  soft: "suave",
+  light: "leve",
+  cool: "refrescante",
+  clean: "limpo",
+  airy: "aéreo",
+  sparkling: "cintilante",
+  zesty: "vivo",
+  tart: "ácido",
+  juicy: "suculento",
+  bitter: "amargo",
+  uplifting: "revigorante",
+  comforting: "aconchegante",
+  enveloping: "envolvente",
+  woody: "amadeirado",
+  floral: "floral",
+  citrus: "cítrico",
+  spicy: "especiado",
+  fruity: "frutado",
+  earthy: "terroso",
+  resinous: "resinoso",
+  aromatic: "aromático",
+  animalic: "animálico",
+  medicinal: "medicinal",
+  smoky: "defumado",
+  leathery: "couroso",
+  balsamic: "balsâmico",
+  marine: "marinho",
+  aquatic: "aquático",
+  ozonic: "ozônico",
+  green: "verde",
+  dewy: "orvalhado",
+  delicate: "delicado",
+  innocent: "inocente",
+  romantic: "romântico",
+  exotic: "exótico",
+  mysterious: "misterioso",
+  honeyed: "melado",
+  milky: "lácteo",
+  buttery: "amanteigado",
+  peppery: "apimentado",
+  metallic: "metálico",
+  watery: "aquoso",
+  refreshing: "refrescante",
+  soapy: "ensaboado",
+  qualities: "qualidades",
+  quality: "qualidade",
+  facets: "facetas",
+  undertones: "subtons",
+  nuances: "nuances",
+  notes: "notas",
+  note: "nota",
+  resin: "resina",
+  wood: "madeira",
+  root: "raiz",
+  blossom: "flor",
+  leaves: "folhas",
+  orange: "laranja",
+  bitterorange: "laranja-amarga",
+  and: "e",
+  with: "com",
+  like: "semelhante",
+  slightly: "levemente",
+}
+
+const translateNoteDescription = (description: string) => {
+  return description.replace(/\b[a-zA-Z-]+\b/g, (token) => {
+    const normalized = token.toLowerCase()
+    const compact = normalized.replace(/-/g, "")
+    return descriptionTermMap[normalized] ?? descriptionTermMap[compact] ?? token
+  })
+}
+
 export default function NotesPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("all")
@@ -158,10 +296,10 @@ export default function NotesPage() {
                         }`}
                       >
                         <h3 className="font-serif text-lg font-medium text-foreground group-hover:text-primary transition-colors">
-                          {note.name}
+                          {translateNoteName(note.name)}
                         </h3>
                         <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
-                          {note.description}
+                          {translateNoteDescription(note.description)}
                         </p>
                         <p className="mt-3 text-sm font-medium text-foreground">
                           {note.perfumeCount.toLocaleString()} perfumes

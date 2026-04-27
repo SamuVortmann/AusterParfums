@@ -58,7 +58,7 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // In production, this would send the form data to an API
+    // Em producao, aqui enviaria os dados para uma API
     setSubmitted(true)
   }
 
@@ -120,7 +120,7 @@ export default function ContactPage() {
                     <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
                       <Mail className="h-8 w-8 text-emerald-600" />
                     </div>
-                    <h3 className="font-serif text-xl font-semibold text-emerald-900">Message Sent!</h3>
+                    <h3 className="font-serif text-xl font-semibold text-emerald-900">Mensagem enviada!</h3>
                     <p className="mt-2 text-emerald-700">
                       Obrigado por entrar em contato. Vamos responder em até 24–48 horas.
                     </p>
@@ -161,7 +161,7 @@ export default function ContactPage() {
                           required
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          placeholder="you@example.com"
+                          placeholder="voce@exemplo.com"
                         />
                       </div>
                     </div>

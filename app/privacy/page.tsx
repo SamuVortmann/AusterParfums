@@ -3,88 +3,88 @@ import { Footer } from "@/components/footer"
 
 const sections = [
   {
-    title: "Information We Collect",
-    content: `We collect information you provide directly to us, such as when you create an account, submit reviews, or contact us. This may include:
+    title: "Informacoes que coletamos",
+    content: `Coletamos informacoes fornecidas diretamente por voce, como ao criar conta, publicar avaliacoes ou entrar em contato:
 
-- Name and email address
-- Profile information and preferences
-- Fragrance reviews and ratings
-- Collection and wishlist data
-- Communications with us
+- Nome e endereco de e-mail
+- Informacoes de perfil e preferencias
+- Avaliacoes e notas de fragrancias
+- Dados de colecao e lista de desejos
+- Comunicacoes com nossa equipe
 
-We also automatically collect certain information when you use our platform, including device information, IP address, and browsing behavior through cookies and similar technologies.`
+Tambem coletamos automaticamente dados de uso, como dispositivo, IP e navegacao, por meio de cookies e tecnologias semelhantes.`
   },
   {
-    title: "How We Use Your Information",
-    content: `We use the information we collect to:
+    title: "Como usamos suas informacoes",
+    content: `Usamos os dados coletados para:
 
-- Provide, maintain, and improve our services
-- Personalize your fragrance recommendations
-- Process your account registration and manage your profile
-- Send you updates, newsletters, and marketing communications (with your consent)
-- Respond to your comments, questions, and requests
-- Monitor and analyze trends, usage, and activities
-- Detect, investigate, and prevent fraudulent transactions and other illegal activities
-- Comply with legal obligations`
+- Fornecer, manter e melhorar os servicos
+- Personalizar recomendacoes de fragrancias
+- Gerenciar sua conta e perfil
+- Enviar novidades e comunicacoes de marketing (com consentimento)
+- Responder a comentarios, duvidas e solicitacoes
+- Monitorar e analisar uso da plataforma
+- Detectar e prevenir fraudes e atividades ilegais
+- Cumprir obrigacoes legais`
   },
   {
-    title: "Information Sharing",
-    content: `We do not sell your personal information. We may share your information in the following circumstances:
+    title: "Compartilhamento de informacoes",
+    content: `Nao vendemos seus dados pessoais. Podemos compartilhar informacoes nas seguintes situacoes:
 
-- With your consent or at your direction
-- With service providers who perform services on our behalf
-- To comply with legal obligations
-- To protect the rights, privacy, safety, or property of Verdara, you, or others
-- In connection with a merger, acquisition, or sale of assets
+- Com seu consentimento ou por sua solicitacao
+- Com prestadores de servico que atuam em nosso nome
+- Para cumprimento de obrigacoes legais
+- Para proteger direitos, privacidade e seguranca da Verdara, de voce ou de terceiros
+- Em operacoes societarias (fusão, aquisicao ou venda de ativos)
 
-Your public profile information, reviews, and ratings are visible to other users of the platform.`
+Informacoes publicas de perfil, avaliacoes e notas podem ser visiveis para outros usuarios.`
   },
   {
-    title: "Data Security",
-    content: `We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or electronic storage is 100% secure.
+    title: "Seguranca de dados",
+    content: `Aplicamos medidas tecnicas e organizacionais para proteger seus dados contra acesso, alteracao, divulgacao ou destruicao nao autorizados.
 
-We use encryption, secure servers, and regular security audits to protect your data. We also limit access to personal information to employees who need it to perform their job functions.`
+Usamos criptografia, servidores seguros e revisoes periodicas. Ainda assim, nenhum metodo de transmissao ou armazenamento e 100% seguro.`
   },
   {
-    title: "Your Rights and Choices",
-    content: `You have certain rights regarding your personal information:
+    title: "Seus direitos e escolhas",
+    content: `Voce possui direitos sobre seus dados pessoais:
 
-- Access: You can request access to the personal information we hold about you
-- Correction: You can update or correct your personal information through your account settings
-- Deletion: You can request deletion of your account and associated data
-- Opt-out: You can opt out of marketing communications at any time
-- Data portability: You can request a copy of your data in a portable format
+- Acesso: solicitar quais dados mantemos sobre voce
+- Correcao: atualizar dados nas configuracoes da conta
+- Exclusao: solicitar remocao da conta e dados relacionados
+- Opt-out: deixar de receber comunicacoes de marketing
+- Portabilidade: solicitar copia dos dados em formato portavel
 
-To exercise these rights, please contact us at privacy@verdara.com.`
+Para exercer esses direitos, escreva para privacy@verdara.com.`
   },
   {
-    title: "Cookies and Tracking",
-    content: `We use cookies and similar tracking technologies to collect information about your browsing activities. You can manage your cookie preferences through your browser settings.
+    title: "Cookies e rastreamento",
+    content: `Usamos cookies e tecnologias similares para entender sua navegacao. Voce pode gerenciar preferencias no seu navegador.
 
-Types of cookies we use:
-- Essential cookies: Required for basic site functionality
-- Analytics cookies: Help us understand how visitors interact with our site
-- Preference cookies: Remember your settings and preferences
-- Marketing cookies: Used to deliver relevant advertisements`
+Tipos de cookies:
+- Essenciais: funcionamento basico do site
+- Analiticos: entendimento de uso da plataforma
+- Preferencias: memorizacao de configuracoes
+- Marketing: exibicao de comunicacoes relevantes`
   },
   {
-    title: "Children's Privacy",
-    content: `Our services are not directed to children under 13 years of age. We do not knowingly collect personal information from children under 13. If we become aware that we have collected personal information from a child under 13, we will take steps to delete that information.`
+    title: "Privacidade de criancas",
+    content: `Nossos servicos nao sao destinados a menores de 13 anos. Nao coletamos intencionalmente dados pessoais de criancas. Se identificarmos coleta indevida, removeremos as informacoes.`
   },
   {
-    title: "International Data Transfers",
-    content: `Your information may be transferred to and processed in countries other than your country of residence. These countries may have data protection laws that are different from the laws of your country. We take appropriate safeguards to ensure your personal information remains protected.`
+    title: "Transferencias internacionais",
+    content: `Seus dados podem ser transferidos e processados em outros paises, cujas leis de protecao podem ser diferentes das do seu pais. Adotamos salvaguardas apropriadas para manter a protecao dos dados.`
   },
   {
-    title: "Changes to This Policy",
-    content: `We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date. We encourage you to review this Privacy Policy periodically.`
+    title: "Alteracoes nesta politica",
+    content: `Podemos atualizar esta Politica de Privacidade periodicamente. As mudancas serao publicadas nesta pagina com a data de ultima atualizacao revisada.`
   },
   {
-    title: "Contact Us",
-    content: `If you have any questions about this Privacy Policy or our privacy practices, please contact us at:
+    title: "Contato",
+    content: `Se tiver duvidas sobre esta Politica de Privacidade, fale com a gente:
 
 Email: privacy@verdara.com
-Address: 123 Fragrance Way, San Francisco, CA 94102`
+Endereco: 123 Fragrance Way, San Francisco, CA 94102`
   },
 ]
 
@@ -98,13 +98,13 @@ export default function PrivacyPage() {
         <section className="bg-secondary py-12 lg:py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground">
-              Privacy Policy
+              Politica de privacidade
             </h1>
             <p className="mt-4 text-muted-foreground">
-              Last Updated: April 26, 2026
+              Ultima atualizacao: 26 de abril de 2026
             </p>
             <p className="mt-6 text-lg text-muted-foreground text-pretty">
-              At Verdara, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.
+              Na Verdara, levamos sua privacidade a serio. Esta politica explica como coletamos, usamos, compartilhamos e protegemos suas informacoes.
             </p>
           </div>
         </section>

@@ -18,19 +18,19 @@ import Link from "next/link"
 import { getPerfumeImage } from "@/lib/perfume-images"
 
 const genderFilters = [
-  { value: "all", label: "All Genders" },
-  { value: "men", label: "For Men" },
-  { value: "women", label: "For Women" },
+  { value: "all", label: "Todos os generos" },
+  { value: "men", label: "Masculino" },
+  { value: "women", label: "Feminino" },
   { value: "unisex", label: "Unisex" },
 ]
 
 const sortOptions = [
-  { value: "popular", label: "Most Popular" },
-  { value: "top-rated", label: "Top Rated" },
-  { value: "newest", label: "Newest" },
-  { value: "oldest", label: "Oldest" },
-  { value: "name-asc", label: "Name A-Z" },
-  { value: "name-desc", label: "Name Z-A" },
+  { value: "popular", label: "Mais populares" },
+  { value: "top-rated", label: "Mais bem avaliados" },
+  { value: "newest", label: "Mais recentes" },
+  { value: "oldest", label: "Mais antigos" },
+  { value: "name-asc", label: "Nome A-Z" },
+  { value: "name-desc", label: "Nome Z-A" },
 ]
 
 export default function PerfumesPage() {
@@ -92,10 +92,10 @@ export default function PerfumesPage() {
         <div className="bg-secondary py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground text-balance">
-              Explore Perfumes
+              Explorar perfumes
             </h1>
             <p className="mt-4 text-lg text-muted-foreground max-w-2xl text-pretty">
-              Discover your next signature scent from our collection of over 80,000 fragrances.
+              Descubra seu proximo perfume assinatura na nossa colecao com mais de 80.000 fragrancias.
             </p>
           </div>
         </div>
@@ -109,7 +109,7 @@ export default function PerfumesPage() {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="search"
-                  placeholder="Search perfumes, brands, notes..."
+                  placeholder="Buscar perfumes, marcas e notas..."
                   className="pl-10 bg-background"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -165,14 +165,14 @@ export default function PerfumesPage() {
                   className="hidden sm:flex"
                 >
                   <SlidersHorizontal className="h-4 w-4" />
-                  <span className="sr-only">More filters</span>
+                  <span className="sr-only">Mais filtros</span>
                 </Button>
               </div>
             </div>
 
             {/* Results count */}
             <p className="mt-4 text-sm text-muted-foreground">
-              Showing {filteredPerfumes.length} perfumes
+              Mostrando {filteredPerfumes.length} perfumes
             </p>
           </div>
         </div>
@@ -197,7 +197,7 @@ export default function PerfumesPage() {
             </div>
           ) : (
             <div className="text-center py-16">
-              <p className="text-lg text-muted-foreground">No perfumes found matching your criteria.</p>
+              <p className="text-lg text-muted-foreground">Nenhum perfume encontrado para esses filtros.</p>
               <Button
                 variant="outline"
                 className="mt-4"
@@ -207,7 +207,7 @@ export default function PerfumesPage() {
                   setSortBy("popular")
                 }}
               >
-                Clear filters
+                Limpar filtros
               </Button>
             </div>
           )}

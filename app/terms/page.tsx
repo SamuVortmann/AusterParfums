@@ -3,119 +3,117 @@ import { Footer } from "@/components/footer"
 
 const sections = [
   {
-    title: "Acceptance of Terms",
-    content: `By accessing or using Verdara ("the Platform"), you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
+    title: "Aceitacao dos termos",
+    content: `Ao acessar ou usar a Verdara ("Plataforma"), voce concorda com estes Termos de Servico e com a legislacao aplicavel.
 
-These Terms of Service apply to all visitors, users, and others who access or use the Platform.`
+Se nao concordar, nao deve utilizar este site. Estes termos se aplicam a visitantes, usuarios e qualquer pessoa que acesse a Plataforma.`
   },
   {
-    title: "Description of Service",
-    content: `Verdara is a fragrance discovery platform that provides:
+    title: "Descricao do servico",
+    content: `A Verdara e uma plataforma de descoberta de fragrancias que oferece:
 
-- A comprehensive database of fragrances and perfume information
-- User reviews, ratings, and community discussions
-- Personalized fragrance recommendations and discovery tools
-- Collection management and wishlist features
-- Educational content about perfumery
+- Banco de dados de fragrancias e informacoes de perfumes
+- Avaliacoes, notas e discussoes da comunidade
+- Recomendacoes personalizadas e ferramentas de descoberta
+- Recursos de colecao e lista de desejos
+- Conteudo educativo sobre perfumaria
 
-We reserve the right to modify, suspend, or discontinue any aspect of the Platform at any time without notice.`
+Podemos modificar, suspender ou encerrar qualquer parte da Plataforma a qualquer momento, sem aviso previo.`
   },
   {
-    title: "User Accounts",
-    content: `To access certain features of the Platform, you may be required to create an account. You agree to:
+    title: "Contas de usuario",
+    content: `Para acessar alguns recursos, voce pode precisar criar conta. Voce concorda em:
 
-- Provide accurate, current, and complete information during registration
-- Maintain the security of your password and account
-- Accept responsibility for all activities that occur under your account
-- Notify us immediately of any unauthorized use of your account
+- Fornecer informacoes corretas e atualizadas
+- Manter a seguranca da senha e da conta
+- Assumir responsabilidade pelas atividades da conta
+- Informar uso nao autorizado imediatamente
 
-We reserve the right to suspend or terminate accounts that violate these terms or engage in fraudulent or harmful activity.`
+Podemos suspender ou encerrar contas que violem estes termos ou pratiquem atividade fraudulenta/prejudicial.`
   },
   {
-    title: "User Content",
-    content: `You retain ownership of content you submit to the Platform, including reviews, ratings, comments, and collection information ("User Content"). By submitting User Content, you grant Verdara a worldwide, non-exclusive, royalty-free license to use, reproduce, modify, and display your User Content in connection with the Platform.
+    title: "Conteudo do usuario",
+    content: `Voce mantem a titularidade do conteudo enviado (avaliacoes, comentarios, notas e colecoes). Ao enviar conteudo, concede a Verdara licenca mundial, nao exclusiva e sem royalties para uso no contexto da Plataforma.
 
-You agree that your User Content will not:
-- Infringe on any third party's intellectual property rights
-- Contain false, misleading, or defamatory statements
-- Include spam, advertising, or promotional material
-- Violate any applicable laws or regulations
-- Contain harmful, offensive, or inappropriate content`
+Seu conteudo nao pode:
+- Violar propriedade intelectual de terceiros
+- Conter informacoes falsas, enganosas ou difamatorias
+- Incluir spam, publicidade ou promocao indevida
+- Violar leis e regulamentos aplicaveis
+- Conter material ofensivo ou inadequado`
   },
   {
-    title: "Intellectual Property",
-    content: `The Platform and its original content (excluding User Content), features, and functionality are owned by Verdara and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.
+    title: "Propriedade intelectual",
+    content: `A Plataforma e seu conteudo original (exceto conteudo de usuario) pertencem a Verdara e sao protegidos por leis de propriedade intelectual.
 
-You may not:
-- Copy, modify, or distribute Platform content without permission
-- Use the Verdara name, logo, or trademarks without authorization
-- Reverse engineer or attempt to extract source code
-- Use automated systems to access the Platform without permission`
+Voce nao pode:
+- Copiar, modificar ou distribuir conteudo sem permissao
+- Usar nome, logo ou marcas da Verdara sem autorizacao
+- Fazer engenharia reversa ou tentar extrair codigo-fonte
+- Usar sistemas automatizados sem permissao`
   },
   {
-    title: "Prohibited Activities",
-    content: `You agree not to engage in any of the following activities:
+    title: "Atividades proibidas",
+    content: `Voce concorda em nao praticar:
 
-- Violating any applicable laws or regulations
-- Impersonating another person or entity
-- Interfering with or disrupting the Platform or servers
-- Attempting to gain unauthorized access to any portion of the Platform
-- Using the Platform for any commercial purpose without authorization
-- Harvesting or collecting user information without consent
-- Transmitting viruses, malware, or other harmful code
-- Engaging in any conduct that restricts or inhibits anyone's use of the Platform`
+- Violacao de leis e regulamentos
+- Falsidade de identidade
+- Interferencia no funcionamento da Plataforma
+- Tentativa de acesso nao autorizado
+- Uso comercial sem autorizacao
+- Coleta de dados sem consentimento
+- Envio de virus, malware ou codigo malicioso
+- Conduta que limite o uso da Plataforma por terceiros`
   },
   {
-    title: "Third-Party Links",
-    content: `The Platform may contain links to third-party websites or services that are not owned or controlled by Verdara. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services.
-
-You acknowledge and agree that Verdara shall not be responsible or liable for any damage or loss caused by the use of any such content, goods, or services available through any third-party websites or services.`
+    title: "Links de terceiros",
+    content: `A Plataforma pode conter links para sites e servicos de terceiros. A Verdara nao controla e nao se responsabiliza por conteudo, politicas ou praticas desses terceiros.`
   },
   {
-    title: "Disclaimer of Warranties",
-    content: `THE PLATFORM IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS. VERDARA MAKES NO WARRANTIES, EXPRESSED OR IMPLIED, AND HEREBY DISCLAIMS ALL WARRANTIES, INCLUDING WITHOUT LIMITATION, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+    title: "Isencao de garantias",
+    content: `A PLATAFORMA E OFERECIDA "NO ESTADO EM QUE SE ENCONTRA" E "CONFORME DISPONIBILIDADE". A VERDARA NAO OFERECE GARANTIAS EXPRESSAS OU IMPLICITAS.
 
-Verdara does not warrant that:
-- The Platform will function uninterrupted, secure, or error-free
-- The results obtained from the Platform will be accurate or reliable
-- Any errors in the Platform will be corrected`
+Nao garantimos que:
+- A Plataforma funcione sem interrupcoes ou erros
+- Os resultados sejam sempre precisos
+- Todas as falhas sejam corrigidas`
   },
   {
-    title: "Limitation of Liability",
-    content: `IN NO EVENT SHALL VERDARA, ITS DIRECTORS, EMPLOYEES, PARTNERS, AGENTS, SUPPLIERS, OR AFFILIATES BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM:
+    title: "Limitacao de responsabilidade",
+    content: `EM NENHUMA HIPOTESE A VERDARA SERA RESPONSAVEL POR DANOS INDIRETOS, INCIDENTAIS, ESPECIAIS OU CONSEQUENCIAIS DECORRENTES DE:
 
-- Your access to or use of or inability to access or use the Platform
-- Any conduct or content of any third party on the Platform
-- Any content obtained from the Platform
-- Unauthorized access, use, or alteration of your transmissions or content`
+- Uso ou impossibilidade de uso da Plataforma
+- Conduta ou conteudo de terceiros
+- Conteudo obtido na Plataforma
+- Acesso nao autorizado aos seus dados ou transmissoes`
   },
   {
-    title: "Indemnification",
-    content: `You agree to defend, indemnify, and hold harmless Verdara and its licensees and licensors, and their employees, contractors, agents, officers, and directors, from and against any claims, damages, obligations, losses, liabilities, costs, or debt, and expenses arising from:
+    title: "Indenizacao",
+    content: `Voce concorda em indenizar a Verdara por reclamacoes, danos, perdas e custos decorrentes de:
 
-- Your use of and access to the Platform
-- Your violation of any term of these Terms of Service
-- Your violation of any third party right, including any copyright, property, or privacy right
-- Any claim that your User Content caused damage to a third party`
+- Seu uso da Plataforma
+- Violacao destes Termos
+- Violacao de direitos de terceiros
+- Reclamacoes relacionadas ao conteudo enviado por voce`
   },
   {
-    title: "Governing Law",
-    content: `These Terms shall be governed and construed in accordance with the laws of the State of California, United States, without regard to its conflict of law provisions.
+    title: "Lei aplicavel",
+    content: `Estes Termos sao regidos pelas leis do Estado da California, Estados Unidos.
 
-Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable, the remaining provisions will remain in effect.`
+Se qualquer disposicao for considerada invalida, as demais permanecem em vigor.`
   },
   {
-    title: "Changes to Terms",
-    content: `We reserve the right to modify or replace these Terms at any time at our sole discretion. If a revision is material, we will provide at least 30 days notice prior to any new terms taking effect.
+    title: "Alteracoes nos termos",
+    content: `Podemos atualizar estes Termos a qualquer momento. Em caso de alteracoes relevantes, publicaremos aviso com antecedencia razoavel.
 
-By continuing to access or use our Platform after any revisions become effective, you agree to be bound by the revised terms.`
+Ao continuar usando a Plataforma apos as alteracoes, voce concorda com os novos termos.`
   },
   {
-    title: "Contact Us",
-    content: `If you have any questions about these Terms of Service, please contact us at:
+    title: "Contato",
+    content: `Se tiver duvidas sobre estes Termos, entre em contato:
 
 Email: legal@verdara.com
-Address: 123 Fragrance Way, San Francisco, CA 94102`
+Endereco: 123 Fragrance Way, San Francisco, CA 94102`
   },
 ]
 
@@ -129,13 +127,13 @@ export default function TermsPage() {
         <section className="bg-secondary py-12 lg:py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground">
-              Terms of Service
+              Termos de servico
             </h1>
             <p className="mt-4 text-muted-foreground">
-              Last Updated: April 26, 2026
+              Ultima atualizacao: 26 de abril de 2026
             </p>
             <p className="mt-6 text-lg text-muted-foreground text-pretty">
-              Please read these Terms of Service carefully before using the Verdara platform. Your access to and use of the service is conditioned on your acceptance of and compliance with these terms.
+              Leia estes Termos de Servico com atencao antes de usar a Verdara. Seu acesso e uso dependem da sua concordancia com estas regras.
             </p>
           </div>
         </section>

@@ -30,77 +30,77 @@ interface QuizQuestion {
 const quizQuestions: QuizQuestion[] = [
   {
     id: 1,
-    question: "When do you usually wear fragrance?",
-    subtitle: "Select all that apply",
+    question: "Quando você costuma usar fragrância?",
+    subtitle: "Selecione todas as opções que se aplicam",
     type: "multiple",
     options: [
-      { value: "daily", label: "Daily Wear", description: "Office, casual outings", icon: <Sun className="h-6 w-6" />, traits: ["versatile", "fresh", "subtle"] },
-      { value: "evening", label: "Evening Events", description: "Dinners, parties", icon: <Moon className="h-6 w-6" />, traits: ["intense", "seductive", "warm"] },
-      { value: "special", label: "Special Occasions", description: "Dates, celebrations", icon: <Sparkles className="h-6 w-6" />, traits: ["unique", "memorable", "luxurious"] },
-      { value: "outdoor", label: "Outdoor Activities", description: "Sports, nature", icon: <TreePine className="h-6 w-6" />, traits: ["fresh", "aquatic", "energizing"] },
+      { value: "daily", label: "Uso diário", description: "Trabalho, saídas casuais", icon: <Sun className="h-6 w-6" />, traits: ["versatile", "fresh", "subtle"] },
+      { value: "evening", label: "Eventos noturnos", description: "Jantares, festas", icon: <Moon className="h-6 w-6" />, traits: ["intense", "seductive", "warm"] },
+      { value: "special", label: "Ocasiões especiais", description: "Encontros, celebrações", icon: <Sparkles className="h-6 w-6" />, traits: ["unique", "memorable", "luxurious"] },
+      { value: "outdoor", label: "Atividades ao ar livre", description: "Esporte, natureza", icon: <TreePine className="h-6 w-6" />, traits: ["fresh", "aquatic", "energizing"] },
     ]
   },
   {
     id: 2,
-    question: "Which environment appeals to you most?",
-    subtitle: "Choose the scene that resonates with you",
+    question: "Qual ambiente mais combina com você?",
+    subtitle: "Escolha a cena que mais te representa",
     type: "image",
     options: [
-      { value: "forest", label: "Misty Forest", image: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&h=300&fit=crop", traits: ["woody", "green", "earthy"] },
-      { value: "beach", label: "Ocean Breeze", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop", traits: ["aquatic", "fresh", "clean"] },
-      { value: "garden", label: "Blooming Garden", image: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&h=300&fit=crop", traits: ["floral", "sweet", "romantic"] },
-      { value: "desert", label: "Desert Sunset", image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=400&h=300&fit=crop", traits: ["spicy", "warm", "exotic"] },
+      { value: "forest", label: "Floresta com neblina", image: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&h=300&fit=crop", traits: ["woody", "green", "earthy"] },
+      { value: "beach", label: "Brisa do oceano", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop", traits: ["aquatic", "fresh", "clean"] },
+      { value: "garden", label: "Jardim florido", image: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&h=300&fit=crop", traits: ["floral", "sweet", "romantic"] },
+      { value: "desert", label: "Pôr do sol no deserto", image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=400&h=300&fit=crop", traits: ["spicy", "warm", "exotic"] },
     ]
   },
   {
     id: 3,
-    question: "What scent families attract you?",
-    subtitle: "Select up to 3 favorites",
+    question: "Quais famílias olfativas te atraem?",
+    subtitle: "Selecione até 3 favoritas",
     type: "multiple",
     options: [
-      { value: "floral", label: "Floral", description: "Rose, jasmine, lily", icon: <Flower2 className="h-6 w-6" />, traits: ["romantic", "feminine", "elegant"] },
-      { value: "woody", label: "Woody", description: "Sandalwood, cedar, oud", icon: <TreePine className="h-6 w-6" />, traits: ["sophisticated", "grounding", "warm"] },
-      { value: "fresh", label: "Fresh", description: "Citrus, green, aquatic", icon: <Wind className="h-6 w-6" />, traits: ["clean", "energizing", "light"] },
-      { value: "oriental", label: "Oriental", description: "Vanilla, amber, spices", icon: <Flame className="h-6 w-6" />, traits: ["sensual", "mysterious", "warm"] },
-      { value: "gourmand", label: "Gourmand", description: "Coffee, chocolate, caramel", icon: <Coffee className="h-6 w-6" />, traits: ["sweet", "cozy", "indulgent"] },
-      { value: "aquatic", label: "Aquatic", description: "Ocean, rain, fresh air", icon: <Waves className="h-6 w-6" />, traits: ["refreshing", "clean", "casual"] },
+      { value: "floral", label: "Floral", description: "Rosa, jasmim, lírio", icon: <Flower2 className="h-6 w-6" />, traits: ["romantic", "feminine", "elegant"] },
+      { value: "woody", label: "Amadeirado", description: "Sândalo, cedro, oud", icon: <TreePine className="h-6 w-6" />, traits: ["sophisticated", "grounding", "warm"] },
+      { value: "fresh", label: "Fresco", description: "Cítrico, verde, aquático", icon: <Wind className="h-6 w-6" />, traits: ["clean", "energizing", "light"] },
+      { value: "oriental", label: "Oriental", description: "Baunilha, âmbar, especiarias", icon: <Flame className="h-6 w-6" />, traits: ["sensual", "mysterious", "warm"] },
+      { value: "gourmand", label: "Gourmand", description: "Café, chocolate, caramelo", icon: <Coffee className="h-6 w-6" />, traits: ["sweet", "cozy", "indulgent"] },
+      { value: "aquatic", label: "Aquático", description: "Oceano, chuva, ar fresco", icon: <Waves className="h-6 w-6" />, traits: ["refreshing", "clean", "casual"] },
     ]
   },
   {
     id: 4,
-    question: "How long should your fragrance last?",
-    subtitle: "Choose your preferred longevity",
+    question: "Quanto tempo sua fragrância deve durar?",
+    subtitle: "Escolha a fixação preferida",
     type: "single",
     options: [
-      { value: "light", label: "2-4 hours", description: "Light and subtle", traits: ["subtle", "fresh", "casual"] },
-      { value: "moderate", label: "4-6 hours", description: "Moderate presence", traits: ["balanced", "versatile", "office-friendly"] },
-      { value: "long", label: "6-8 hours", description: "Long-lasting", traits: ["intense", "powerful", "memorable"] },
-      { value: "beast", label: "8+ hours", description: "Beast mode!", traits: ["strong", "projecting", "statement"] },
+      { value: "light", label: "2-4 horas", description: "Leve e sutil", traits: ["subtle", "fresh", "casual"] },
+      { value: "moderate", label: "4-6 horas", description: "Presença moderada", traits: ["balanced", "versatile", "office-friendly"] },
+      { value: "long", label: "6-8 horas", description: "Longa duração", traits: ["intense", "powerful", "memorable"] },
+      { value: "beast", label: "8+ horas", description: "Super potente", traits: ["strong", "projecting", "statement"] },
     ]
   },
   {
     id: 5,
-    question: "What impression do you want to leave?",
-    subtitle: "Select the vibe that fits you",
+    question: "Que impressão você quer causar?",
+    subtitle: "Escolha a vibe que combina com você",
     type: "single",
     options: [
-      { value: "confident", label: "Confident & Bold", description: "Command attention when you enter a room", traits: ["powerful", "intense", "striking"] },
-      { value: "mysterious", label: "Mysterious & Intriguing", description: "Leave people wanting to know more", traits: ["unique", "complex", "seductive"] },
-      { value: "approachable", label: "Warm & Approachable", description: "Invite people in with your presence", traits: ["cozy", "friendly", "inviting"] },
-      { value: "elegant", label: "Refined & Elegant", description: "Exude sophistication and class", traits: ["classy", "polished", "timeless"] },
-      { value: "fresh", label: "Clean & Fresh", description: "Radiate freshness and positivity", traits: ["clean", "uplifting", "energetic"] },
+      { value: "confident", label: "Confiante e marcante", description: "Chame atenção quando entrar no ambiente", traits: ["powerful", "intense", "striking"] },
+      { value: "mysterious", label: "Misterioso e intrigante", description: "Deixe as pessoas querendo saber mais", traits: ["unique", "complex", "seductive"] },
+      { value: "approachable", label: "Aconchegante e acessível", description: "Convide as pessoas com sua presença", traits: ["cozy", "friendly", "inviting"] },
+      { value: "elegant", label: "Refinado e elegante", description: "Transmita sofisticação e classe", traits: ["classy", "polished", "timeless"] },
+      { value: "fresh", label: "Limpo e fresco", description: "Irradie frescor e energia positiva", traits: ["clean", "uplifting", "energetic"] },
     ]
   },
   {
     id: 6,
-    question: "What season is your favorite?",
-    subtitle: "This helps us match fragrance weight",
+    question: "Qual é sua estação favorita?",
+    subtitle: "Isso ajuda a ajustar intensidade e perfil",
     type: "single",
     options: [
-      { value: "spring", label: "Spring", description: "Fresh blooms, new beginnings", traits: ["floral", "green", "light"] },
-      { value: "summer", label: "Summer", description: "Warm sun, ocean breeze", traits: ["aquatic", "citrus", "fresh"] },
-      { value: "fall", label: "Fall", description: "Cozy sweaters, falling leaves", traits: ["spicy", "woody", "warm"] },
-      { value: "winter", label: "Winter", description: "Fireside warmth, cold nights", traits: ["oriental", "gourmand", "rich"] },
+      { value: "spring", label: "Primavera", description: "Flores frescas, novos começos", traits: ["floral", "green", "light"] },
+      { value: "summer", label: "Verão", description: "Sol quente, brisa do mar", traits: ["aquatic", "citrus", "fresh"] },
+      { value: "fall", label: "Outono", description: "Roupas confortáveis, folhas caindo", traits: ["spicy", "woody", "warm"] },
+      { value: "winter", label: "Inverno", description: "Calor da lareira, noites frias", traits: ["oriental", "gourmand", "rich"] },
     ]
   },
 ]
@@ -146,39 +146,39 @@ function calculateResults(answers: Record<number, string[]>): QuizResult {
   // Define profiles
   const profiles: Record<string, QuizResult["profile"]> = {
     sophisticated: {
-      name: "The Sophisticate",
-      description: "You gravitate towards refined, elegant fragrances that make a subtle but lasting impression. Quality over quantity is your motto.",
-      primaryNotes: ["Iris", "Sandalwood", "Amber"],
-      secondaryNotes: ["Rose", "Vetiver", "Musk"],
-      characteristics: ["Elegant", "Timeless", "Refined"]
+      name: "O Sofisticado",
+      description: "Você prefere fragrâncias refinadas e elegantes, que deixam impressão sutil, porém duradoura.",
+      primaryNotes: ["Íris", "Sândalo", "Âmbar"],
+      secondaryNotes: ["Rosa", "Vetiver", "Almíscar"],
+      characteristics: ["Elegante", "Clássico", "Refinado"]
     },
     adventurer: {
-      name: "The Adventurer",
-      description: "Fresh, energizing scents call to you. You prefer fragrances that evoke the outdoors and keep you feeling alive.",
-      primaryNotes: ["Bergamot", "Sea Notes", "Cedar"],
-      secondaryNotes: ["Grapefruit", "Mint", "Vetiver"],
-      characteristics: ["Energetic", "Fresh", "Dynamic"]
+      name: "O Aventureiro",
+      description: "Você gosta de perfumes frescos e energizantes, com sensação de natureza e liberdade.",
+      primaryNotes: ["Bergamota", "Notas marinhas", "Cedro"],
+      secondaryNotes: ["Toranja", "Hortelã", "Vetiver"],
+      characteristics: ["Energético", "Fresco", "Dinâmico"]
     },
     romantic: {
-      name: "The Romantic",
-      description: "Floral and sweet notes capture your heart. You love fragrances that feel warm, inviting, and undeniably beautiful.",
-      primaryNotes: ["Rose", "Jasmine", "Vanilla"],
-      secondaryNotes: ["Peony", "Musk", "Tonka Bean"],
-      characteristics: ["Romantic", "Warm", "Enchanting"]
+      name: "O Romântico",
+      description: "Notas florais e adocicadas te conquistam. Você gosta de fragrâncias acolhedoras e encantadoras.",
+      primaryNotes: ["Rosa", "Jasmim", "Baunilha"],
+      secondaryNotes: ["Peônia", "Almíscar", "Fava Tonka"],
+      characteristics: ["Romântico", "Quente", "Encantador"]
     },
     mystic: {
-      name: "The Mystic",
-      description: "You&apos;re drawn to complex, mysterious fragrances with depth. Oud, incense, and exotic spices speak to your soul.",
-      primaryNotes: ["Oud", "Saffron", "Incense"],
-      secondaryNotes: ["Amber", "Patchouli", "Leather"],
-      characteristics: ["Mysterious", "Complex", "Intriguing"]
+      name: "O Místico",
+      description: "Você se conecta com fragrâncias complexas e misteriosas. Oud, incenso e especiarias exóticas definem seu estilo.",
+      primaryNotes: ["Oud", "Açafrão", "Incenso"],
+      secondaryNotes: ["Âmbar", "Patchouli", "Couro"],
+      characteristics: ["Misterioso", "Complexo", "Intrigante"]
     },
     minimalist: {
-      name: "The Minimalist",
-      description: "Clean, skin-like scents are your signature. You prefer fragrances that enhance rather than overpower.",
-      primaryNotes: ["Musk", "Cedar", "Iris"],
-      secondaryNotes: ["White Tea", "Cotton", "Skin Accord"],
-      characteristics: ["Clean", "Subtle", "Modern"]
+      name: "O Minimalista",
+      description: "Perfumes limpos e discretos são sua assinatura. Você prefere fragrâncias que complementam sem exagerar.",
+      primaryNotes: ["Almíscar", "Cedro", "Íris"],
+      secondaryNotes: ["Chá Branco", "Algodão", "Acorde de Pele"],
+      characteristics: ["Limpo", "Sutil", "Moderno"]
     }
   }
 
@@ -300,10 +300,10 @@ export default function ScentFinderQuizPage() {
           {/* Fragrance DNA */}
           <Card className="mb-12">
             <CardContent className="p-8">
-              <h2 className="font-serif text-2xl font-semibold mb-6 text-center">Your Fragrance DNA</h2>
+            <h2 className="font-serif text-2xl font-semibold mb-6 text-center">Seu DNA olfativo</h2>
               <div className="grid md:grid-cols-3 gap-8">
                 <div>
-                  <h3 className="text-sm font-medium text-muted-foreground mb-3">Primary Notes</h3>
+                  <h3 className="text-sm font-medium text-muted-foreground mb-3">Notas principais</h3>
                   <div className="flex flex-wrap gap-2">
                     {results.profile.primaryNotes.map(note => (
                       <span key={note} className="px-3 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium">
@@ -313,7 +313,7 @@ export default function ScentFinderQuizPage() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-sm font-medium text-muted-foreground mb-3">Secondary Notes</h3>
+                  <h3 className="text-sm font-medium text-muted-foreground mb-3">Notas secundárias</h3>
                   <div className="flex flex-wrap gap-2">
                     {results.profile.secondaryNotes.map(note => (
                       <span key={note} className="px-3 py-1.5 bg-secondary text-secondary-foreground rounded-full text-sm">
@@ -323,7 +323,7 @@ export default function ScentFinderQuizPage() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-sm font-medium text-muted-foreground mb-3">Your Vibes</h3>
+                  <h3 className="text-sm font-medium text-muted-foreground mb-3">Seu estilo</h3>
                   <div className="flex flex-wrap gap-2">
                     {results.profile.characteristics.map(char => (
                       <span key={char} className="px-3 py-1.5 bg-accent/50 text-accent-foreground rounded-full text-sm">
@@ -338,7 +338,7 @@ export default function ScentFinderQuizPage() {
 
           {/* Recommendations */}
           <div>
-            <h2 className="font-serif text-2xl font-semibold mb-6 text-center">Your Perfect Matches</h2>
+            <h2 className="font-serif text-2xl font-semibold mb-6 text-center">Seus melhores resultados</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {results.matches.map(({ perfume, matchScore }) => (
                 <Link key={perfume.id} href={`/perfumes/${perfume.id}`}>
@@ -352,7 +352,7 @@ export default function ScentFinderQuizPage() {
                           className="object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                         <div className="absolute top-3 right-3 bg-primary text-primary-foreground px-2 py-1 rounded-full text-xs font-medium">
-                          {matchScore}% Match
+                          {matchScore}% compatível
                         </div>
                       </div>
                       <div className="p-4">
@@ -360,7 +360,7 @@ export default function ScentFinderQuizPage() {
                         <h3 className="font-serif font-semibold text-foreground">{perfume.name}</h3>
                         <div className="flex items-center gap-1 mt-1">
                           <span className="text-sm text-primary font-medium">{perfume.rating}</span>
-                          <span className="text-xs text-muted-foreground">({perfume.reviewCount.toLocaleString()} reviews)</span>
+                          <span className="text-xs text-muted-foreground">({perfume.reviewCount.toLocaleString()} avaliações)</span>
                         </div>
                       </div>
                     </CardContent>
@@ -373,10 +373,10 @@ export default function ScentFinderQuizPage() {
           {/* Actions */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
             <Button variant="outline" onClick={() => { setShowResults(false); setCurrentQuestion(0); setAnswers({}) }}>
-              Retake Quiz
+              Refazer quiz
             </Button>
             <Link href="/discover/dna">
-              <Button>View Full DNA Profile</Button>
+              <Button>Ver perfil de DNA completo</Button>
             </Link>
           </div>
         </main>
@@ -392,8 +392,8 @@ export default function ScentFinderQuizPage() {
         {/* Progress */}
         <div className="mb-8">
           <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
-            <span>Question {currentQuestion + 1} of {quizQuestions.length}</span>
-            <span>{Math.round(progress)}% complete</span>
+            <span>Pergunta {currentQuestion + 1} de {quizQuestions.length}</span>
+            <span>{Math.round(progress)}% concluído</span>
           </div>
           <Progress value={progress} className="h-2" />
         </div>
@@ -487,14 +487,14 @@ export default function ScentFinderQuizPage() {
             className="gap-2"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back
+            Voltar
           </Button>
           <Button
             onClick={handleNext}
             disabled={!canProceed}
             className="gap-2"
           >
-            {currentQuestion === quizQuestions.length - 1 ? "See Results" : "Next"}
+            {currentQuestion === quizQuestions.length - 1 ? "Ver resultados" : "Próxima"}
             <ArrowRight className="h-4 w-4" />
           </Button>
         </div>

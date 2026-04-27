@@ -98,7 +98,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2026 Verdara. All rights reserved.
+            © 2026 Verdara. Todos os direitos reservados.
           </p>
           <div className="flex items-center gap-6">
             <Link href="https://instagram.com" className="text-sm text-muted-foreground hover:text-foreground transition-colors">

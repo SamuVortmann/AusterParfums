@@ -3,7 +3,7 @@
 import { use, useState } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { perfumes, getReviewsByPerfume, getSimilarPerfumes, type Review, type Inspiration } from "@/lib/data"
+import { perfumes, notes, getReviewsByPerfume, getSimilarPerfumes, type Review, type Inspiration } from "@/lib/data"
 import { Heart, Star, Share2, Clock, Wind, ThumbsUp, ChevronRight, Sparkles, DollarSign } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -42,16 +42,16 @@ function ReviewCard({ review }: { review: Review }) {
           <div className="mt-4 flex items-center gap-6 text-sm">
             <div className="flex items-center gap-2 text-muted-foreground">
               <Clock className="h-4 w-4" />
-              <span>Longevity: {review.longevity}/10</span>
+              <span>Fixação: {review.longevity}/10</span>
             </div>
             <div className="flex items-center gap-2 text-muted-foreground">
               <Wind className="h-4 w-4" />
-              <span>Sillage: {review.sillage}/10</span>
+              <span>Projeção: {review.sillage}/10</span>
             </div>
           </div>
           <button className="mt-4 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
             <ThumbsUp className="h-4 w-4" />
-            <span>Helpful ({review.likes})</span>
+            <span>Útil ({review.likes})</span>
           </button>
         </div>
       </div>
@@ -67,9 +67,9 @@ function InspirationCard({ inspiration }: { inspiration: Inspiration }) {
   }
   
   const priceLabels = {
-    budget: "Budget-Friendly",
-    mid: "Mid-Range",
-    luxury: "Luxury"
+    budget: "Bom custo-benefício",
+    mid: "Faixa intermediária",
+    luxury: "Luxo"
   }
   
   return (
@@ -85,7 +85,7 @@ function InspirationCard({ inspiration }: { inspiration: Inspiration }) {
           <p className="text-sm text-muted-foreground">{inspiration.brand}</p>
         </div>
         <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
-          {inspiration.similarity}% match
+          {inspiration.similarity}% de compatibilidade
         </div>
       </div>
       
@@ -100,7 +100,7 @@ function InspirationCard({ inspiration }: { inspiration: Inspiration }) {
               key={note}
               className="px-2 py-0.5 text-xs bg-secondary rounded-full text-muted-foreground"
             >
-              {note}
+              {translateOlfactoryTerm(note)}
             </span>
           ))}
         </div>
@@ -130,6 +130,108 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
     ...perfume.middleNotes.map((n) => ({ note: n, type: "Middle" })),
     ...perfume.baseNotes.map((n) => ({ note: n, type: "Base" })),
   ]
+  const termTranslations: Record<string, string> = {
+    bergamot: "bergamota",
+    lemon: "limão",
+    orange: "laranja",
+    grapefruit: "toranja",
+    lime: "lima",
+    mandarin: "mandarina",
+    rose: "rosa",
+    jasmine: "jasmim",
+    iris: "íris",
+    lily: "lírio",
+    violet: "violeta",
+    peony: "peônia",
+    lavender: "lavanda",
+    vanilla: "baunilha",
+    amber: "âmbar",
+    musk: "almíscar",
+    sandalwood: "sândalo",
+    cedar: "cedro",
+    oakmoss: "musgo de carvalho",
+    tobacco: "tabaco",
+    leather: "couro",
+    incense: "incenso",
+    saffron: "açafrão",
+    cinnamon: "canela",
+    ginger: "gengibre",
+    cardamom: "cardamomo",
+    pepper: "pimenta",
+    black: "preta",
+    pink: "rosa",
+    white: "branco",
+    green: "verde",
+    fresh: "fresco",
+    woody: "amadeirado",
+    floral: "floral",
+    spicy: "especiado",
+    fruity: "frutado",
+    aquatic: "aquático",
+    note: "nota",
+    notes: "notas",
+    blossom: "flor",
+    flower: "flor",
+    water: "aquático",
+    sea: "marinho",
+  }
+  const translateOlfactoryTerm = (term: string) =>
+    term
+      .split(/(\s+|[-/()])/)
+      .map((token) => {
+        const key = token.toLowerCase()
+        if (!/[a-z]/i.test(token)) return token
+        return termTranslations[key] ?? token
+      })
+      .join("")
+      .replace(/\bpimenta rosa\b/gi, "pimenta-rosa")
+  const translateGender = (gender: string) => {
+    const map: Record<string, string> = {
+      men: "Masculino",
+      women: "Feminino",
+      unisex: "Unissex",
+    }
+    return map[gender.toLowerCase()] ?? gender
+  }
+  const translateDescription = (description: string) => {
+    const rules: Array<[RegExp, string]> = [
+      [/world's most iconic fragrance/gi, "fragrância mais icônica do mundo"],
+      [/A timeless classic of/gi, "Um clássico atemporal de"],
+      [/that revolutionized perfumery/gi, "que revolucionou a perfumaria"],
+      [/\bfragrance\b/gi, "fragrância"],
+      [/\bfragrances\b/gi, "fragrâncias"],
+      [/\bnotes\b/gi, "notas"],
+      [/\bfresh\b/gi, "fresco"],
+      [/\bsweet\b/gi, "doce"],
+      [/\bwarm\b/gi, "quente"],
+      [/\bwoody\b/gi, "amadeirado"],
+      [/\bfloral\b/gi, "floral"],
+      [/\bcitrus\b/gi, "cítrico"],
+      [/\bspicy\b/gi, "especiado"],
+      [/\bpowdery\b/gi, "atalcado"],
+      [/\bcreamy\b/gi, "cremoso"],
+      [/\belegant\b/gi, "elegante"],
+      [/\bclassic\b/gi, "clássico"],
+      [/\bis a\b/gi, "é uma"],
+      [/\bis an\b/gi, "é uma"],
+      [/\bis the\b/gi, "é a"],
+    ]
+
+    return rules.reduce((acc, [pattern, replacement]) => acc.replace(pattern, replacement), description)
+  }
+
+  const getNoteSlug = (noteName: string) => {
+    const existing = notes.find((item) => item.name.toLowerCase() === noteName.toLowerCase())
+    if (existing) return existing.slug
+
+    return noteName
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .trim()
+      .replace(/\s+/g, "-")
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -161,7 +263,7 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
               <div className="aspect-square bg-card rounded-2xl border border-border p-8 lg:p-12 flex items-center justify-center">
                 <img
                   src={getPerfumeImage(perfume)}
-                  alt={`${perfume.name} by ${perfume.brand}`}
+                  alt={`${perfume.name} de ${perfume.brand}`}
                   className="max-w-full max-h-full object-contain"
                 />
               </div>
@@ -184,7 +286,7 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
                       </span>
                     </div>
                     <span className="text-muted-foreground">
-                      ({perfume.reviewCount.toLocaleString()} reviews)
+                      ({perfume.reviewCount.toLocaleString()} avaliações)
                     </span>
                   </div>
                 </div>
@@ -194,7 +296,7 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
                     {perfume.concentration}
                   </span>
                   <span className="px-3 py-1 text-sm bg-card border border-border rounded-full text-foreground capitalize">
-                    {perfume.gender}
+                    {translateGender(perfume.gender)}
                   </span>
                   <span className="px-3 py-1 text-sm bg-card border border-border rounded-full text-foreground">
                     {perfume.year}
@@ -202,13 +304,13 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
                 </div>
 
                 <p className="mt-6 text-muted-foreground leading-relaxed">
-                  {perfume.description}
+                  {translateDescription(perfume.description)}
                 </p>
 
                 {/* Performance */}
                 <div className="mt-8 grid grid-cols-2 gap-6">
                   <div>
-                    <p className="text-sm text-muted-foreground mb-2">Longevity</p>
+                    <p className="text-sm text-muted-foreground mb-2">Fixação</p>
                     <div className="flex items-center gap-2">
                       <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
                         <div
@@ -222,7 +324,7 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
                     </div>
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground mb-2">Sillage</p>
+                    <p className="text-sm text-muted-foreground mb-2">Projeção</p>
                     <div className="flex items-center gap-2">
                       <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
                         <div
@@ -246,11 +348,11 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
                     onClick={() => setIsLiked(!isLiked)}
                   >
                     <Heart className={`h-5 w-5 ${isLiked ? "fill-current" : ""}`} />
-                    {isLiked ? "In Wishlist" : "Add to Wishlist"}
+                    {isLiked ? "Na lista de desejos" : "Adicionar a lista de desejos"}
                   </Button>
                   <Button size="lg" variant="outline" className="gap-2">
                     <Share2 className="h-5 w-5" />
-                    Share
+                    Compartilhar
                   </Button>
                 </div>
               </div>
@@ -270,7 +372,7 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
                     : "border-transparent text-muted-foreground hover:text-foreground"
                 }`}
               >
-                Details & Notes
+                Detalhes e notas
               </button>
               <button
                 onClick={() => setActiveTab("inspirations")}
@@ -281,7 +383,7 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
                 }`}
               >
                 <Sparkles className="h-4 w-4" />
-                Recommended Inspirations
+                Inspirações recomendadas
                 {inspirations.length > 0 && (
                   <span className="ml-1 px-1.5 py-0.5 text-xs bg-primary/10 text-primary rounded-full">
                     {inspirations.length}
@@ -301,21 +403,21 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
               {/* Notes Pyramid */}
               <div>
                 <h2 className="font-serif text-2xl font-semibold text-foreground">
-                  Fragrance Notes
+                  Notas da fragrância
                 </h2>
                 <div className="mt-6 space-y-6">
                   <div>
                     <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-                      Top Notes
+                      Notas de topo
                     </h3>
                     <div className="mt-2 flex flex-wrap gap-2">
                       {perfume.topNotes.map((note) => (
                         <Link
                           key={note}
-                          href={`/notes/${note.toLowerCase().replace(/\s+/g, "-")}`}
+                          href={`/notes/${getNoteSlug(note)}`}
                           className="px-4 py-2 bg-secondary hover:bg-secondary/80 rounded-full text-sm text-foreground transition-colors"
                         >
-                          {note}
+                          {translateOlfactoryTerm(note)}
                         </Link>
                       ))}
                     </div>
@@ -323,16 +425,16 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
                   {perfume.middleNotes.length > 0 && (
                     <div>
                       <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-                        Middle Notes
+                        Notas de corpo
                       </h3>
                       <div className="mt-2 flex flex-wrap gap-2">
                         {perfume.middleNotes.map((note) => (
                           <Link
                             key={note}
-                            href={`/notes/${note.toLowerCase().replace(/\s+/g, "-")}`}
+                            href={`/notes/${getNoteSlug(note)}`}
                             className="px-4 py-2 bg-secondary hover:bg-secondary/80 rounded-full text-sm text-foreground transition-colors"
                           >
-                            {note}
+                            {translateOlfactoryTerm(note)}
                           </Link>
                         ))}
                       </div>
@@ -341,16 +443,16 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
                   {perfume.baseNotes.length > 0 && (
                     <div>
                       <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-                        Base Notes
+                        Notas de fundo
                       </h3>
                       <div className="mt-2 flex flex-wrap gap-2">
                         {perfume.baseNotes.map((note) => (
                           <Link
                             key={note}
-                            href={`/notes/${note.toLowerCase().replace(/\s+/g, "-")}`}
+                            href={`/notes/${getNoteSlug(note)}`}
                             className="px-4 py-2 bg-secondary hover:bg-secondary/80 rounded-full text-sm text-foreground transition-colors"
                           >
-                            {note}
+                            {translateOlfactoryTerm(note)}
                           </Link>
                         ))}
                       </div>
@@ -362,7 +464,7 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
               {/* Accords */}
               <div>
                 <h2 className="font-serif text-2xl font-semibold text-foreground">
-                  Main Accords
+                  Acordes principais
                 </h2>
                 <div className="mt-6 space-y-3">
                   {perfume.accords.map((accord, index) => (
@@ -373,7 +475,7 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
                           style={{ width: `${100 - index * 15}%` }}
                         >
                           <span className="text-sm font-medium text-primary-foreground">
-                            {accord}
+                            {translateOlfactoryTerm(accord)}
                           </span>
                         </div>
                       </div>
@@ -390,9 +492,9 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between">
               <h2 className="font-serif text-2xl font-semibold text-foreground">
-                Reviews ({reviews.length.toLocaleString()})
+                Avaliações ({reviews.length.toLocaleString()})
               </h2>
-              <Button>Write a Review</Button>
+              <Button>Escrever avaliação</Button>
             </div>
 
             {reviews.length > 0 ? (
@@ -403,8 +505,8 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
               </div>
             ) : (
               <div className="mt-8 text-center py-12 bg-card rounded-xl border border-border">
-                <p className="text-muted-foreground">No reviews yet. Be the first to review this fragrance!</p>
-                <Button className="mt-4">Write a Review</Button>
+                <p className="text-muted-foreground">Ainda não há avaliações. Seja a primeira pessoa a avaliar esta fragrância.</p>
+                <Button className="mt-4">Escrever avaliação</Button>
               </div>
             )}
           </div>
@@ -418,11 +520,11 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
               <div className="flex items-center gap-3 mb-2">
                 <Sparkles className="h-6 w-6 text-primary" />
                 <h2 className="font-serif text-2xl font-semibold text-foreground">
-                  Recommended Inspirations
+                  Inspirações recomendadas
                 </h2>
               </div>
               <p className="text-muted-foreground mb-8 max-w-2xl">
-                Discover fragrances with similar profiles to {perfume.name}. These recommendations are based on shared notes, accords, and olfactory characteristics.
+                Descubra fragrâncias com perfil semelhante ao de {perfume.name}. As recomendações consideram notas, acordes e características olfativas em comum.
               </p>
 
               {inspirations.length > 0 ? (
@@ -434,8 +536,8 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
               ) : (
                 <div className="text-center py-12 bg-card rounded-xl border border-border">
                   <Sparkles className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                  <p className="text-muted-foreground">No similar fragrances found.</p>
-                  <p className="text-sm text-muted-foreground mt-2">This fragrance has a unique profile!</p>
+                  <p className="text-muted-foreground">Nenhuma fragrância parecida foi encontrada.</p>
+                  <p className="text-sm text-muted-foreground mt-2">Esta fragrância tem um perfil único.</p>
                 </div>
               )}
 
@@ -444,18 +546,18 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                   <div>
                     <h3 className="font-serif text-xl font-semibold text-foreground">
-                      Looking for more options?
+                      Procurando mais opções?
                     </h3>
                     <p className="mt-2 text-muted-foreground">
-                      Use our discovery tools to find your perfect scent match.
+                      Use nossas ferramentas de descoberta para encontrar fragrâncias no seu estilo.
                     </p>
                   </div>
                   <div className="flex flex-wrap gap-3">
                     <Button asChild variant="outline">
-                      <Link href="/discover/similar">Find Similar Scents</Link>
+                      <Link href="/discover/similar">Encontrar similares</Link>
                     </Button>
                     <Button asChild>
-                      <Link href="/discover/build">Build by Notes</Link>
+                      <Link href="/discover/build">Montar por notas</Link>
                     </Button>
                   </div>
                 </div>

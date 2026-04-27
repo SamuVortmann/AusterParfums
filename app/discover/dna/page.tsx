@@ -44,12 +44,12 @@ function PerfumeSelector({
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="max-w-2xl max-h-[80vh] overflow-hidden flex flex-col">
         <DialogHeader>
-          <DialogTitle>Add a Perfume You Own or Love</DialogTitle>
+          <DialogTitle>Adicione um perfume que você tem ou ama</DialogTitle>
         </DialogHeader>
         <div className="relative mb-4">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search perfumes..."
+            placeholder="Buscar perfumes..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="pl-9"
@@ -266,10 +266,10 @@ export default function DNAPage() {
             <Dna className="h-8 w-8 text-primary" />
           </div>
           <h1 className="font-serif text-4xl font-bold text-foreground mb-4">
-            Your Fragrance DNA
+            Seu DNA olfativo
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Add the perfumes you own or love, and we&apos;ll analyze your unique fragrance profile to find your signature notes.
+            Adicione perfumes que você tem ou ama para analisarmos seu perfil e identificar suas notas assinatura.
           </p>
         </div>
 
@@ -279,14 +279,14 @@ export default function DNAPage() {
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="font-serif text-lg font-semibold">My Collection</h2>
-                  <span className="text-sm text-muted-foreground">{myCollection.length} fragrances</span>
+                  <h2 className="font-serif text-lg font-semibold">Minha coleção</h2>
+                  <span className="text-sm text-muted-foreground">{myCollection.length} fragrâncias</span>
                 </div>
 
                 {myCollection.length === 0 ? (
                   <div className="text-center py-8">
                     <Heart className="h-10 w-10 mx-auto mb-3 text-muted-foreground/50" />
-                    <p className="text-sm text-muted-foreground mb-4">Add perfumes you own or love</p>
+                    <p className="text-sm text-muted-foreground mb-4">Adicione perfumes que você tem ou ama</p>
                   </div>
                 ) : (
                   <div className="space-y-2 mb-4 max-h-[400px] overflow-y-auto">
@@ -316,7 +316,7 @@ export default function DNAPage() {
                   trigger={
                     <Button variant="outline" className="w-full gap-2">
                       <Plus className="h-4 w-4" />
-                      Add Perfume
+                      Adicionar perfume
                     </Button>
                   }
                 />
@@ -327,7 +327,7 @@ export default function DNAPage() {
                     className="w-full mt-2 text-muted-foreground"
                     onClick={() => setMyCollection([])}
                   >
-                    Clear All
+                    Limpar tudo
                   </Button>
                 )}
               </CardContent>
@@ -336,7 +336,7 @@ export default function DNAPage() {
             {/* Quick Add Suggestions */}
             <Card className="mt-4">
               <CardContent className="p-4">
-                <p className="text-sm font-medium mb-3">Popular to add</p>
+                <p className="text-sm font-medium mb-3">Populares para adicionar</p>
                 <div className="flex flex-wrap gap-2">
                   {perfumes.slice(0, 4).filter(p => !myCollection.find(c => c.id === p.id)).map(perfume => (
                     <button
@@ -358,8 +358,8 @@ export default function DNAPage() {
               <Card>
                 <CardContent className="py-16 text-center">
                   <Sparkles className="h-12 w-12 mx-auto mb-4 text-muted-foreground/50" />
-                  <h2 className="font-serif text-xl font-semibold mb-2">Your DNA Awaits</h2>
-                  <p className="text-muted-foreground">Add at least one perfume to discover your fragrance DNA</p>
+                  <h2 className="font-serif text-xl font-semibold mb-2">Seu DNA te espera</h2>
+                  <p className="text-muted-foreground">Adicione ao menos um perfume para descobrir seu DNA olfativo</p>
                 </CardContent>
               </Card>
             ) : (
@@ -367,7 +367,7 @@ export default function DNAPage() {
                 {/* Scent Profile Radar */}
                 <Card>
                   <CardContent className="p-6">
-                    <h2 className="font-serif text-xl font-semibold mb-6 text-center">Your Scent Profile</h2>
+                    <h2 className="font-serif text-xl font-semibold mb-6 text-center">Seu perfil olfativo</h2>
                     <RadarChart 
                       data={Object.entries(dna.categories).map(([label, value]) => ({ label, value }))} 
                     />
@@ -380,28 +380,28 @@ export default function DNAPage() {
                     <CardContent className="p-4 text-center">
                       <Star className="h-5 w-5 mx-auto mb-2 text-primary" />
                       <p className="text-2xl font-bold">{dna.avgRating}</p>
-                      <p className="text-xs text-muted-foreground">Avg Rating</p>
+                      <p className="text-xs text-muted-foreground">Nota média</p>
                     </CardContent>
                   </Card>
                   <Card>
                     <CardContent className="p-4 text-center">
                       <Clock className="h-5 w-5 mx-auto mb-2 text-primary" />
                       <p className="text-2xl font-bold">{dna.avgLongevity}h</p>
-                      <p className="text-xs text-muted-foreground">Avg Longevity</p>
+                      <p className="text-xs text-muted-foreground">Fixação média</p>
                     </CardContent>
                   </Card>
                   <Card>
                     <CardContent className="p-4 text-center">
                       <Wind className="h-5 w-5 mx-auto mb-2 text-primary" />
                       <p className="text-2xl font-bold">{dna.avgSillage}/10</p>
-                      <p className="text-xs text-muted-foreground">Avg Sillage</p>
+                      <p className="text-xs text-muted-foreground">Projeção média</p>
                     </CardContent>
                   </Card>
                   <Card>
                     <CardContent className="p-4 text-center">
                       <Heart className="h-5 w-5 mx-auto mb-2 text-primary" />
                       <p className="text-2xl font-bold capitalize">{dna.genderPreference}</p>
-                      <p className="text-xs text-muted-foreground">Preference</p>
+                      <p className="text-xs text-muted-foreground">Preferencia</p>
                     </CardContent>
                   </Card>
                 </div>
@@ -409,7 +409,7 @@ export default function DNAPage() {
                 {/* Signature Notes */}
                 <Card>
                   <CardContent className="p-6">
-                    <h2 className="font-serif text-xl font-semibold mb-6">Your Signature Notes</h2>
+                    <h2 className="font-serif text-xl font-semibold mb-6">Suas notas assinatura</h2>
                     <div className="space-y-3">
                       {dna.topNotes.map(({ note, percentage }, index) => (
                         <div key={note} className="flex items-center gap-4">
@@ -431,7 +431,7 @@ export default function DNAPage() {
                 {/* Dominant Accords */}
                 <Card>
                   <CardContent className="p-6">
-                    <h2 className="font-serif text-xl font-semibold mb-6">Dominant Accords</h2>
+                    <h2 className="font-serif text-xl font-semibold mb-6">Acordes dominantes</h2>
                     <div className="flex flex-wrap gap-3">
                       {dna.topAccords.map(({ accord, percentage }) => (
                         <Badge 
@@ -451,10 +451,10 @@ export default function DNAPage() {
                   <CardContent className="p-6">
                     <div className="flex items-center gap-2 mb-4">
                       <Sparkles className="h-5 w-5 text-primary" />
-                      <h2 className="font-serif text-xl font-semibold">Recommended For You</h2>
+                      <h2 className="font-serif text-xl font-semibold">Recomendados para voce</h2>
                     </div>
                     <p className="text-muted-foreground mb-6">
-                      Based on your DNA, these fragrances might be perfect for you
+                      Com base no seu DNA, estas fragrâncias podem combinar com você
                     </p>
                     <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
                       {perfumes
@@ -476,7 +476,7 @@ export default function DNAPage() {
                     </div>
                     <div className="mt-4 text-center">
                       <Link href="/discover/similar">
-                        <Button variant="outline">Find More Matches</Button>
+                        <Button variant="outline">Encontrar mais resultados</Button>
                       </Link>
                     </div>
                   </CardContent>

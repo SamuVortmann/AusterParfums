@@ -60,11 +60,11 @@ function calculateSimilarity(source: Perfume, target: Perfume): SimilarityResult
   score += Math.max(0, 10 - longevityDiff - sillageDiff)
 
   // Determine primary reason for similarity
-  let reason = "Similar scent profile"
+  let reason = "Perfil olfativo parecido"
   if (sharedAccords.length >= 2) {
-    reason = `Both are ${sharedAccords.slice(0, 2).join(" and ")}`
+    reason = `Ambos tem ${sharedAccords.slice(0, 2).join(" e ")}`
   } else if (sharedNotes.length >= 3) {
-    reason = `Share ${sharedNotes.slice(0, 3).join(", ")} notes`
+    reason = `Compartilham notas de ${sharedNotes.slice(0, 3).join(", ")}`
   }
 
   return {
@@ -110,7 +110,7 @@ function PerfumeSearch({
             </div>
           </div>
           <Button variant="ghost" size="sm" onClick={() => onSelect(null)}>
-            Change
+            Trocar
           </Button>
         </div>
       </div>
@@ -122,7 +122,7 @@ function PerfumeSearch({
       <div className="relative">
         <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
         <Input
-          placeholder="Search for a perfume you love..."
+          placeholder="Busque um perfume que voce ama..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setIsFocused(true)}
@@ -153,7 +153,7 @@ function PerfumeSearch({
 
       {/* Popular Options */}
       <div className="mt-4">
-        <p className="text-sm text-muted-foreground mb-2">Popular choices:</p>
+        <p className="text-sm text-muted-foreground mb-2">Escolhas populares:</p>
         <div className="flex flex-wrap gap-2">
           {perfumes.slice(0, 5).map(perfume => (
             <button
@@ -221,17 +221,17 @@ export default function SimilarScentPage() {
             <Target className="h-8 w-8 text-primary" />
           </div>
           <h1 className="font-serif text-4xl font-bold text-foreground mb-4">
-            Find Similar Scents
+            Encontrar similares
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Love a fragrance? Discover alternatives with similar DNA, including hidden gems and affordable dupes.
+            Ama uma fragrância? Descubra alternativas com DNA parecido, incluindo achados escondidos e opções acessíveis.
           </p>
         </div>
 
         {/* Search Section */}
         <Card className="mb-8">
           <CardContent className="p-6">
-            <h2 className="font-serif text-lg font-semibold mb-4">Select Your Reference Fragrance</h2>
+            <h2 className="font-serif text-lg font-semibold mb-4">Selecione sua fragrância de referência</h2>
             <PerfumeSearch 
               selectedPerfume={selectedPerfume}
               onSelect={setSelectedPerfume}
@@ -244,12 +244,12 @@ export default function SimilarScentPage() {
             {/* Filters */}
             <Card className="mb-8">
               <CardContent className="p-6">
-                <h2 className="font-serif text-lg font-semibold mb-6">Refine Results</h2>
+                <h2 className="font-serif text-lg font-semibold mb-6">Refinar resultados</h2>
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Similarity Threshold */}
                   <div>
                     <Label className="text-sm font-medium mb-3 block">
-                      Minimum Similarity: {minSimilarity[0]}%
+                      Similaridade mínima: {minSimilarity[0]}%
                     </Label>
                     <Slider
                       value={minSimilarity}
@@ -260,8 +260,8 @@ export default function SimilarScentPage() {
                       className="w-full"
                     />
                     <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                      <span>Broader</span>
-                      <span>Closer Match</span>
+                      <span>Mais amplo</span>
+                      <span>Mais parecido</span>
                     </div>
                   </div>
 
@@ -269,21 +269,21 @@ export default function SimilarScentPage() {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <Label htmlFor="sameGender" className="text-sm cursor-pointer">
-                        Same gender only
+                        Mesmo gênero
                       </Label>
                       <Switch id="sameGender" checked={sameGender} onCheckedChange={setSameGender} />
                     </div>
                     <div className="flex items-center justify-between">
                       <Label htmlFor="betterPerf" className="text-sm cursor-pointer flex items-center gap-2">
                         <Clock className="h-4 w-4" />
-                        Better performance
+                        Melhor desempenho
                       </Label>
                       <Switch id="betterPerf" checked={betterPerformance} onCheckedChange={setBetterPerformance} />
                     </div>
                     <div className="flex items-center justify-between">
                       <Label htmlFor="lesserKnown" className="text-sm cursor-pointer flex items-center gap-2">
                         <Sparkles className="h-4 w-4" />
-                        Hidden gems only
+                        Apenas achados escondidos
                       </Label>
                       <Switch id="lesserKnown" checked={lesserKnown} onCheckedChange={setLesserKnown} />
                     </div>
@@ -295,18 +295,18 @@ export default function SimilarScentPage() {
             {/* Results */}
             <div className="mb-4 flex items-center justify-between">
               <h2 className="font-serif text-xl font-semibold">
-                {similarPerfumes.length} Similar Fragrances Found
+                {similarPerfumes.length} fragrâncias similares encontradas
               </h2>
               <Button variant="ghost" size="sm" onClick={() => setSelectedPerfume(null)} className="gap-2">
                 <RefreshCw className="h-4 w-4" />
-                Start Over
+                Recomeçar
               </Button>
             </div>
 
             {similarPerfumes.length === 0 ? (
               <Card>
                 <CardContent className="py-12 text-center">
-                  <p className="text-muted-foreground">No matches found with current filters. Try lowering the similarity threshold.</p>
+                  <p className="text-muted-foreground">Nenhum resultado com os filtros atuais. Tente reduzir a similaridade mínima.</p>
                 </CardContent>
               </Card>
             ) : (
@@ -368,12 +368,12 @@ export default function SimilarScentPage() {
                       {/* Footer */}
                       <div className="px-4 py-3 border-t border-border flex items-center justify-between">
                         <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                          <span>Longevity: {perfume.longevity}h</span>
-                          <span>Sillage: {perfume.sillage}/10</span>
+                          <span>Fixação: {perfume.longevity}h</span>
+                          <span>Projeção: {perfume.sillage}/10</span>
                         </div>
                         <Link href={`/perfumes/${perfume.id}`}>
                           <Button size="sm" variant="ghost" className="gap-1">
-                            View <ArrowRight className="h-3 w-3" />
+                            Ver <ArrowRight className="h-3 w-3" />
                           </Button>
                         </Link>
                       </div>
@@ -388,17 +388,17 @@ export default function SimilarScentPage() {
         {/* CTA Section */}
         {!selectedPerfume && (
           <div className="mt-12 text-center">
-            <p className="text-muted-foreground mb-4">Not sure what you&apos;re looking for?</p>
+            <p className="text-muted-foreground mb-4">Não sabe o que procurar?</p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/discover/quiz">
                 <Button variant="outline" className="gap-2">
                   <Sparkles className="h-4 w-4" />
-                  Take the Quiz
+                  Fazer o quiz
                 </Button>
               </Link>
               <Link href="/discover/build">
                 <Button variant="outline" className="gap-2">
-                  Build by Notes
+                  Montar por notas
                 </Button>
               </Link>
             </div>

@@ -214,13 +214,13 @@ export default function ScentTranslatorPage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
               <MessageSquare className="h-4 w-4" />
-              Scent Translator
+              Tradutor de perfume
             </div>
             <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground text-balance">
-              Describe Your Dream Scent
+              Descreva sua fragrância ideal
             </h1>
             <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Tell us what you want to smell like in your own words. We&apos;ll translate your vision into fragrance notes and find perfumes that match.
+              Conte com suas palavras como você quer cheirar. Vamos traduzir isso em notas e encontrar perfumes compatíveis.
             </p>
           </div>
         </section>
@@ -230,17 +230,17 @@ export default function ScentTranslatorPage() {
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-card rounded-2xl border border-border p-6 lg:p-8 shadow-sm">
               <label className="block text-sm font-medium text-foreground mb-3">
-                What do you want to smell like?
+                Como você quer cheirar?
               </label>
               <Textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="E.g., I want to smell like a cozy evening by the fireplace, reading an old book with a glass of whiskey..."
+                placeholder="Ex.: quero cheirar como uma noite aconchegante perto da lareira, lendo um livro com um copo de whisky..."
                 className="min-h-[120px] text-base resize-none"
               />
               <div className="mt-4 flex items-center justify-between gap-4">
                 <p className="text-sm text-muted-foreground">
-                  Be descriptive! Mention places, feelings, materials, or experiences.
+                  Seja descritivo. Cite lugares, sensações, materiais ou experiências.
                 </p>
                 <Button 
                   onClick={handleTranslate}
@@ -252,12 +252,12 @@ export default function ScentTranslatorPage() {
                       <span className="animate-spin">
                         <Sparkles className="h-4 w-4" />
                       </span>
-                      Translating...
+                      Traduzindo...
                     </>
                   ) : (
                     <>
                       <Sparkles className="h-4 w-4" />
-                      Translate to Scent
+                      Traduzir para perfume
                     </>
                   )}
                 </Button>
@@ -269,7 +269,7 @@ export default function ScentTranslatorPage() {
               <div className="mt-8">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
                   <Lightbulb className="h-4 w-4" />
-                  <span>Need inspiration? Try one of these:</span>
+                  <span>Precisa de inspiração? Tente um destes:</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {examplePrompts.map((example, index) => (
@@ -294,14 +294,14 @@ export default function ScentTranslatorPage() {
               {/* Interpretation */}
               <div className="mb-12">
                 <h2 className="font-serif text-2xl font-semibold text-foreground mb-6">
-                  We Interpreted Your Scent As...
+                  Interpretamos sua ideia assim...
                 </h2>
                 
                 {interpretation.matchedKeywords.length > 0 ? (
                   <div className="grid md:grid-cols-3 gap-6">
                     {/* Notes */}
                     <div className="bg-card rounded-xl border border-border p-5">
-                      <h3 className="text-sm font-medium text-muted-foreground mb-3">Fragrance Notes</h3>
+                      <h3 className="text-sm font-medium text-muted-foreground mb-3">Notas olfativas</h3>
                       <div className="flex flex-wrap gap-2">
                         {interpretation.notes.map((note, i) => (
                           <span 
@@ -316,7 +316,7 @@ export default function ScentTranslatorPage() {
                     
                     {/* Accords */}
                     <div className="bg-card rounded-xl border border-border p-5">
-                      <h3 className="text-sm font-medium text-muted-foreground mb-3">Scent Families</h3>
+                      <h3 className="text-sm font-medium text-muted-foreground mb-3">Familias olfativas</h3>
                       <div className="flex flex-wrap gap-2">
                         {interpretation.accords.map((accord, i) => (
                           <span 
@@ -331,7 +331,7 @@ export default function ScentTranslatorPage() {
                     
                     {/* Mood */}
                     <div className="bg-card rounded-xl border border-border p-5">
-                      <h3 className="text-sm font-medium text-muted-foreground mb-3">Mood & Character</h3>
+                      <h3 className="text-sm font-medium text-muted-foreground mb-3">Mood e personalidade</h3>
                       <div className="flex flex-wrap gap-2">
                         {interpretation.moods.map((mood, i) => (
                           <span 
@@ -347,7 +347,7 @@ export default function ScentTranslatorPage() {
                 ) : (
                   <div className="bg-card rounded-xl border border-border p-8 text-center">
                     <p className="text-muted-foreground">
-                      We couldn&apos;t identify specific scent elements from your description. Try adding more details about places, materials, feelings, or experiences.
+                      Não identificamos elementos olfativos específicos no texto. Tente adicionar mais detalhes sobre lugares, materiais e sensações.
                     </p>
                   </div>
                 )}
@@ -357,10 +357,10 @@ export default function ScentTranslatorPage() {
               {matchingPerfumes.length > 0 && (
                 <div>
                   <h2 className="font-serif text-2xl font-semibold text-foreground mb-2">
-                    Perfumes That Match Your Vision
+                    Perfumes que combinam com sua ideia
                   </h2>
                   <p className="text-muted-foreground mb-8">
-                    Based on your description, here are fragrances that capture what you&apos;re looking for.
+                    Com base na sua descrição, estas fragrâncias traduzem o que você está buscando.
                   </p>
                   
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -424,7 +424,7 @@ export default function ScentTranslatorPage() {
                   className="gap-2"
                 >
                   <ArrowRight className="h-4 w-4 rotate-180" />
-                  Try Another Description
+                  Tentar outra descrição
                 </Button>
               </div>
             </div>
@@ -436,7 +436,7 @@ export default function ScentTranslatorPage() {
           <section className="py-12 lg:py-16 border-t border-border">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
               <h2 className="font-serif text-2xl font-semibold text-foreground text-center mb-12">
-                How Scent Translation Works
+                Como funciona a tradução olfativa
               </h2>
               
               <div className="grid md:grid-cols-3 gap-8">
@@ -444,9 +444,9 @@ export default function ScentTranslatorPage() {
                   <div className="w-12 h-12 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4">
                     <MessageSquare className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-medium text-foreground mb-2">1. Describe</h3>
+                  <h3 className="font-medium text-foreground mb-2">1. Descreva</h3>
                   <p className="text-sm text-muted-foreground">
-                    Tell us what you want to smell like using everyday language - places, feelings, materials, or experiences.
+                    Conte como você quer cheirar usando linguagem simples: lugares, sensações, materiais ou experiências.
                   </p>
                 </div>
                 
@@ -454,9 +454,9 @@ export default function ScentTranslatorPage() {
                   <div className="w-12 h-12 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4">
                     <Sparkles className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-medium text-foreground mb-2">2. Translate</h3>
+                  <h3 className="font-medium text-foreground mb-2">2. Traduza</h3>
                   <p className="text-sm text-muted-foreground">
-                    Our system interprets your description into fragrance notes, accords, and scent families.
+                    Nosso sistema interpreta sua descrição em notas, acordes e famílias olfativas.
                   </p>
                 </div>
                 
@@ -464,9 +464,9 @@ export default function ScentTranslatorPage() {
                   <div className="w-12 h-12 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4">
                     <Heart className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-medium text-foreground mb-2">3. Discover</h3>
+                  <h3 className="font-medium text-foreground mb-2">3. Descubra</h3>
                   <p className="text-sm text-muted-foreground">
-                    Get personalized perfume recommendations that match your vision of your ideal scent.
+                    Receba recomendações personalizadas de perfumes que combinam com sua ideia de fragrância ideal.
                   </p>
                 </div>
               </div>

@@ -17,10 +17,10 @@ import Link from "next/link"
 
 const countryFilters = [
   { value: "all", label: "Todos os países" },
-  { value: "France", label: "France" },
-  { value: "Italy", label: "Italy" },
-  { value: "United States", label: "United States" },
-  { value: "Germany", label: "Germany" },
+  { value: "France", label: "Franca" },
+  { value: "Italy", label: "Italia" },
+  { value: "United States", label: "Estados Unidos" },
+  { value: "Germany", label: "Alemanha" },
   { value: "Venezuela", label: "Venezuela" },
 ]
 
@@ -286,7 +286,7 @@ export default function BrandsPage() {
 
           {filteredBrands.length === 0 && (
             <div className="text-center py-16">
-              <p className="text-lg text-muted-foreground">No brands found matching your criteria.</p>
+              <p className="text-lg text-muted-foreground">Nenhuma marca encontrada para esses filtros.</p>
               <Button
                 variant="outline"
                 className="mt-4"
@@ -295,7 +295,7 @@ export default function BrandsPage() {
                   setCountryFilter("all")
                 }}
               >
-                Clear filters
+                Limpar filtros
               </Button>
             </div>
           )}

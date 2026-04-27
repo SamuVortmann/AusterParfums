@@ -10,17 +10,17 @@ import Link from "next/link"
 import { formatCompactNumber, siteStats } from "@/lib/site-stats"
 
 const tabs = [
-  { id: "forum", label: "Forum", icon: MessageSquare },
-  { id: "reviews", label: "Recent Reviews", icon: Star },
-  { id: "collections", label: "Collections", icon: BookOpen },
+  { id: "forum", label: "Fórum", icon: MessageSquare },
+  { id: "reviews", label: "Avaliacoes recentes", icon: Star },
+  { id: "collections", label: "Colecoes", icon: BookOpen },
 ]
 
 const forumCategories = [
-  { name: "Recommendations", count: 1234, color: "bg-blue-100 text-blue-800" },
-  { name: "Discussion", count: 987, color: "bg-green-100 text-green-800" },
-  { name: "Collections", count: 654, color: "bg-purple-100 text-purple-800" },
-  { name: "Education", count: 432, color: "bg-amber-100 text-amber-800" },
-  { name: "News", count: 321, color: "bg-pink-100 text-pink-800" },
+  { name: "Recomendacoes", count: 1234, color: "bg-blue-100 text-blue-800" },
+  { name: "Discussao", count: 987, color: "bg-green-100 text-green-800" },
+  { name: "Colecoes", count: 654, color: "bg-purple-100 text-purple-800" },
+  { name: "Educacao", count: 432, color: "bg-amber-100 text-amber-800" },
+  { name: "Noticias", count: 321, color: "bg-pink-100 text-pink-800" },
 ]
 
 export default function CommunityPage() {
@@ -35,11 +35,11 @@ export default function CommunityPage() {
         <div className="bg-secondary py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground text-balance">
-              Community
+              Comunidade
             </h1>
             <p className="mt-4 text-lg text-muted-foreground max-w-2xl text-pretty">
-              Connect with fellow fragrance enthusiasts. Share reviews, discuss your favorites, 
-              and discover new scents through our passionate community.
+              Conecte-se com outras pessoas apaixonadas por fragrâncias. Compartilhe avaliações,
+              converse sobre seus favoritos e descubra novos perfumes com a comunidade.
             </p>
 
             {/* Stats */}
@@ -105,9 +105,9 @@ export default function CommunityPage() {
               <div className="lg:col-span-3">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="font-serif text-2xl font-semibold text-foreground">
-                    Hot Topics
+                    Topicos em alta
                   </h2>
-                  <Button>Start Discussion</Button>
+                  <Button>Iniciar discussao</Button>
                 </div>
 
                 <div className="space-y-4">
@@ -129,12 +129,12 @@ export default function CommunityPage() {
                                 {post.title}
                               </h3>
                               <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
-                                <span>by {post.author}</span>
+                                <span>por {post.author}</span>
                                 <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                                  post.category === "Recommendations" ? "bg-blue-100 text-blue-800" :
-                                  post.category === "Discussion" ? "bg-green-100 text-green-800" :
-                                  post.category === "Collections" ? "bg-purple-100 text-purple-800" :
-                                  post.category === "Education" ? "bg-amber-100 text-amber-800" :
+                                  post.category === "Recomendacoes" || post.category === "Recommendations" ? "bg-blue-100 text-blue-800" :
+                                  post.category === "Discussao" || post.category === "Discussion" ? "bg-green-100 text-green-800" :
+                                  post.category === "Colecoes" || post.category === "Collections" ? "bg-purple-100 text-purple-800" :
+                                  post.category === "Educacao" || post.category === "Education" ? "bg-amber-100 text-amber-800" :
                                   "bg-muted text-muted-foreground"
                                 }`}>
                                   {post.category}
@@ -148,11 +148,11 @@ export default function CommunityPage() {
                           <div className="mt-4 flex items-center gap-6 text-sm text-muted-foreground">
                             <span className="flex items-center gap-1.5">
                               <MessageSquare className="h-4 w-4" />
-                              {post.replies} replies
+                              {post.replies} respostas
                             </span>
                             <span className="flex items-center gap-1.5">
                               <Eye className="h-4 w-4" />
-                              {post.views.toLocaleString()} views
+                              {post.views.toLocaleString()} visualizacoes
                             </span>
                           </div>
                         </div>
@@ -162,14 +162,14 @@ export default function CommunityPage() {
                 </div>
 
                 <div className="mt-8 text-center">
-                  <Button variant="outline">Load More Topics</Button>
+                  <Button variant="outline">Carregar mais topicos</Button>
                 </div>
               </div>
 
               {/* Sidebar */}
               <div className="lg:col-span-1">
                 <div className="bg-card rounded-xl border border-border p-6">
-                  <h3 className="font-medium text-foreground mb-4">Categories</h3>
+                  <h3 className="font-medium text-foreground mb-4">Categorias</h3>
                   <div className="space-y-3">
                     {forumCategories.map((category) => (
                       <button
@@ -188,12 +188,12 @@ export default function CommunityPage() {
                 </div>
 
                 <div className="mt-6 bg-card rounded-xl border border-border p-6">
-                  <h3 className="font-medium text-foreground mb-4">Community Guidelines</h3>
+                  <h3 className="font-medium text-foreground mb-4">Regras da comunidade</h3>
                   <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li>Be respectful and constructive</li>
-                    <li>Share honest reviews</li>
-                    <li>No spam or self-promotion</li>
-                    <li>Keep discussions on-topic</li>
+                    <li>Seja respeitoso e construtivo</li>
+                    <li>Compartilhe avaliações honestas</li>
+                    <li>Sem spam ou autopromocao</li>
+                    <li>Mantenha a conversa no tema</li>
                   </ul>
                 </div>
               </div>
@@ -204,9 +204,9 @@ export default function CommunityPage() {
             <div>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="font-serif text-2xl font-semibold text-foreground">
-                  Recent Reviews
+                  Avaliacoes recentes
                 </h2>
-                <Button>Write a Review</Button>
+                <Button>Escrever avaliacao</Button>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -230,7 +230,7 @@ export default function CommunityPage() {
                           href={`/perfumes/${review.perfumeId}`}
                           className="mt-1 text-sm text-primary hover:underline"
                         >
-                          {review.perfumeName} by {review.perfumeBrand}
+                          {review.perfumeName} por {review.perfumeBrand}
                         </Link>
                         <div className="flex items-center gap-1 mt-2">
                           {Array.from({ length: 5 }).map((_, i) => (
@@ -249,7 +249,7 @@ export default function CommunityPage() {
                         </p>
                         <button className="mt-4 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
                           <ThumbsUp className="h-4 w-4" />
-                          <span>Helpful ({review.likes})</span>
+                          <span>Util ({review.likes})</span>
                         </button>
                       </div>
                     </div>
@@ -258,7 +258,7 @@ export default function CommunityPage() {
               </div>
 
               <div className="mt-8 text-center">
-                <Button variant="outline">Load More Reviews</Button>
+                <Button variant="outline">Carregar mais avaliações</Button>
               </div>
             </div>
           )}
@@ -267,9 +267,9 @@ export default function CommunityPage() {
             <div>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="font-serif text-2xl font-semibold text-foreground">
-                  Featured Collections
+                  Colecoes em destaque
                 </h2>
-                <Button>Create Collection</Button>
+                <Button>Criar coleção</Button>
               </div>
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -333,7 +333,7 @@ export default function CommunityPage() {
                         {collection.title}
                       </h3>
                       <p className="mt-1 text-sm text-muted-foreground">
-                        by {collection.author}
+                        por {collection.author}
                       </p>
                       <div className="mt-4 flex items-center justify-between text-sm">
                         <span className="text-muted-foreground">{collection.count} perfumes</span>
@@ -348,7 +348,7 @@ export default function CommunityPage() {
               </div>
 
               <div className="mt-8 text-center">
-                <Button variant="outline">Browse All Collections</Button>
+                <Button variant="outline">Ver todas as colecoes</Button>
               </div>
             </div>
           )}

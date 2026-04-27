@@ -16,14 +16,14 @@ import { getPerfumeImage } from "@/lib/perfume-images"
 
 const noteCategories = [
   { id: "floral", label: "Floral", color: "bg-pink-100 text-pink-800 border-pink-200" },
-  { id: "woody", label: "Woody", color: "bg-amber-100 text-amber-800 border-amber-200" },
-  { id: "citrus", label: "Citrus", color: "bg-yellow-100 text-yellow-800 border-yellow-200" },
+  { id: "woody", label: "Amadeirado", color: "bg-amber-100 text-amber-800 border-amber-200" },
+  { id: "citrus", label: "Cítrico", color: "bg-yellow-100 text-yellow-800 border-yellow-200" },
   { id: "oriental", label: "Oriental", color: "bg-orange-100 text-orange-800 border-orange-200" },
-  { id: "fresh", label: "Fresh", color: "bg-cyan-100 text-cyan-800 border-cyan-200" },
-  { id: "spicy", label: "Spicy", color: "bg-red-100 text-red-800 border-red-200" },
-  { id: "fruity", label: "Fruity", color: "bg-purple-100 text-purple-800 border-purple-200" },
-  { id: "green", label: "Green", color: "bg-green-100 text-green-800 border-green-200" },
-  { id: "aquatic", label: "Aquatic", color: "bg-blue-100 text-blue-800 border-blue-200" },
+  { id: "fresh", label: "Fresco", color: "bg-cyan-100 text-cyan-800 border-cyan-200" },
+  { id: "spicy", label: "Especiado", color: "bg-red-100 text-red-800 border-red-200" },
+  { id: "fruity", label: "Frutado", color: "bg-purple-100 text-purple-800 border-purple-200" },
+  { id: "green", label: "Verde", color: "bg-green-100 text-green-800 border-green-200" },
+  { id: "aquatic", label: "Aquático", color: "bg-blue-100 text-blue-800 border-blue-200" },
   { id: "gourmand", label: "Gourmand", color: "bg-rose-100 text-rose-800 border-rose-200" },
 ]
 
@@ -216,10 +216,10 @@ export default function BuildScentPage() {
             <FlaskConical className="h-8 w-8 text-primary" />
           </div>
           <h1 className="font-serif text-4xl font-bold text-foreground mb-4">
-            Build Your Dream Scent
+            Monte sua fragrância ideal
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Select the notes you love, mark the ones you dislike, and we&apos;ll find perfumes that match your unique taste.
+            Selecione as notas que você ama, marque as que não gosta e vamos encontrar perfumes com seu perfil.
           </p>
         </div>
 
@@ -230,13 +230,13 @@ export default function BuildScentPage() {
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="font-serif text-xl font-semibold">Your Selection</h2>
-                  <span className="text-sm text-muted-foreground">{selectedNotes.length}/8 notes</span>
+                  <h2 className="font-serif text-xl font-semibold">Sua seleção</h2>
+                  <span className="text-sm text-muted-foreground">{selectedNotes.length}/8 notas</span>
                 </div>
                 {selectedNotes.length === 0 ? (
                   <div className="text-center py-8 text-muted-foreground">
                     <Plus className="h-8 w-8 mx-auto mb-2 opacity-50" />
-                    <p>Click on notes below to add them to your selection</p>
+                    <p>Clique nas notas abaixo para adicionar à sua seleção</p>
                   </div>
                 ) : (
                   <div className="flex flex-wrap gap-2">
@@ -263,7 +263,7 @@ export default function BuildScentPage() {
                   <div className="mt-6 pt-6 border-t border-border grid sm:grid-cols-2 gap-4">
                     {noteLiked.length > 0 && (
                       <div>
-                        <p className="text-sm font-medium text-green-700 mb-2">Must Have</p>
+                        <p className="text-sm font-medium text-green-700 mb-2">Essenciais</p>
                         <div className="flex flex-wrap gap-1">
                           {noteLiked.map(note => (
                             <Badge key={note} className="bg-green-100 text-green-800 text-xs">
@@ -275,7 +275,7 @@ export default function BuildScentPage() {
                     )}
                     {noteDisliked.length > 0 && (
                       <div>
-                        <p className="text-sm font-medium text-red-700 mb-2">Avoid</p>
+                        <p className="text-sm font-medium text-red-700 mb-2">Evitar</p>
                         <div className="flex flex-wrap gap-1">
                           {noteDisliked.map(note => (
                             <Badge key={note} className="bg-red-100 text-red-800 text-xs">
@@ -297,7 +297,7 @@ export default function BuildScentPage() {
                 <div className="relative mb-6">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
-                    placeholder="Search notes..."
+                    placeholder="Buscar notas..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="pl-9"
@@ -307,7 +307,7 @@ export default function BuildScentPage() {
                 {/* Category Tabs */}
                 <Tabs value={activeCategory} onValueChange={setActiveCategory}>
                   <TabsList className="flex flex-wrap h-auto gap-1 mb-6 bg-transparent">
-                    <TabsTrigger value="all" className="text-xs">All</TabsTrigger>
+                    <TabsTrigger value="all" className="text-xs">Todas</TabsTrigger>
                     {noteCategories.map(cat => (
                       <TabsTrigger key={cat.id} value={cat.id} className="text-xs">
                         {cat.label}
@@ -372,16 +372,16 @@ export default function BuildScentPage() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <Sparkles className="h-5 w-5 text-primary" />
-                  <h2 className="font-serif text-xl font-semibold">Matching Perfumes</h2>
+                  <h2 className="font-serif text-xl font-semibold">Perfumes compatíveis</h2>
                 </div>
 
                 {selectedNotes.length === 0 ? (
                   <div className="text-center py-12 text-muted-foreground">
-                    <p className="text-sm">Select notes to see matching perfumes</p>
+                    <p className="text-sm">Selecione notas para ver perfumes compatíveis</p>
                   </div>
                 ) : matchingPerfumes.length === 0 ? (
                   <div className="text-center py-12 text-muted-foreground">
-                    <p className="text-sm">No exact matches found. Try different notes!</p>
+                    <p className="text-sm">Nenhum resultado exato encontrado. Tente outras notas.</p>
                   </div>
                 ) : (
                   <div className="space-y-3">
@@ -399,7 +399,7 @@ export default function BuildScentPage() {
                           <div className="flex-1 min-w-0">
                             <p className="text-xs text-muted-foreground truncate">{perfume.brand}</p>
                             <p className="font-medium text-sm text-foreground truncate">{perfume.name}</p>
-                            <p className="text-xs text-muted-foreground">{matchCount} matching notes</p>
+                            <p className="text-xs text-muted-foreground">{matchCount} notas em comum</p>
                           </div>
                           <div className="flex-shrink-0">
                             <div className={`px-2 py-1 rounded-full text-xs font-medium ${
@@ -419,7 +419,7 @@ export default function BuildScentPage() {
                 {selectedNotes.length > 0 && (
                   <div className="mt-6 pt-6 border-t border-border">
                     <Button variant="outline" className="w-full" onClick={() => setSelectedNotes([])}>
-                      Clear Selection
+                      Limpar seleção
                     </Button>
                   </div>
                 )}

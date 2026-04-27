@@ -23,6 +23,143 @@ const categoryColors: { [key: string]: string } = {
   gourmand: "bg-amber-100 text-amber-800",
 }
 
+const noteTermMap: Record<string, string> = {
+  rose: "Rosa",
+  jasmine: "Jasmim",
+  iris: "Íris",
+  tuberose: "Tuberosa",
+  violet: "Violeta",
+  lily: "Lírio",
+  peony: "Peônia",
+  sandalwood: "Sândalo",
+  cedar: "Cedro",
+  bergamot: "Bergamota",
+  lemon: "Limão",
+  grapefruit: "Toranja",
+  orange: "Laranja",
+  mandarin: "Mandarina",
+  vanilla: "Baunilha",
+  amber: "Âmbar",
+  musk: "Almíscar",
+  mint: "Hortelã",
+  cinnamon: "Canela",
+  ginger: "Gengibre",
+  saffron: "Açafrão",
+  pear: "Pera",
+  peach: "Pêssego",
+  pineapple: "Abacaxi",
+  cherry: "Cereja",
+  plum: "Ameixa",
+  grass: "Grama",
+  ocean: "Oceano",
+  rain: "Chuva",
+  seaweed: "Algas marinhas",
+  coffee: "Café",
+  chocolate: "Chocolate",
+  caramel: "Caramelo",
+  honey: "Mel",
+  almond: "Amêndoa",
+  coconut: "Coco",
+}
+
+const translateNoteName = (name: string) => {
+  const direct = noteTermMap[name.toLowerCase()]
+  if (direct) return direct
+  return name
+    .split(" ")
+    .map((word) => noteTermMap[word.toLowerCase()] ?? word)
+    .join(" ")
+}
+const descriptionTermMap: Record<string, string> = {
+  the: "a",
+  queen: "rainha",
+  of: "de",
+  flowers: "flores",
+  brings: "traz",
+  rich: "rico",
+  sweet: "doce",
+  sensual: "sensual",
+  elegant: "elegante",
+  powdery: "atalcado",
+  intense: "intenso",
+  creamy: "cremoso",
+  fresh: "fresco",
+  bright: "vibrante",
+  warm: "quente",
+  dry: "seco",
+  dark: "escuro",
+  soft: "suave",
+  light: "leve",
+  cool: "refrescante",
+  clean: "limpo",
+  airy: "aéreo",
+  sparkling: "cintilante",
+  zesty: "vivo",
+  tart: "ácido",
+  juicy: "suculento",
+  bitter: "amargo",
+  uplifting: "revigorante",
+  comforting: "aconchegante",
+  enveloping: "envolvente",
+  woody: "amadeirado",
+  floral: "floral",
+  citrus: "cítrico",
+  spicy: "especiado",
+  fruity: "frutado",
+  earthy: "terroso",
+  resinous: "resinoso",
+  aromatic: "aromático",
+  animalic: "animálico",
+  medicinal: "medicinal",
+  smoky: "defumado",
+  leathery: "couroso",
+  balsamic: "balsâmico",
+  marine: "marinho",
+  aquatic: "aquático",
+  ozonic: "ozônico",
+  green: "verde",
+  dewy: "orvalhado",
+  delicate: "delicado",
+  innocent: "inocente",
+  romantic: "romântico",
+  exotic: "exótico",
+  mysterious: "misterioso",
+  honeyed: "melado",
+  milky: "lácteo",
+  buttery: "amanteigado",
+  peppery: "apimentado",
+  metallic: "metálico",
+  watery: "aquoso",
+  refreshing: "refrescante",
+  soapy: "ensaboado",
+  qualities: "qualidades",
+  quality: "qualidade",
+  facets: "facetas",
+  undertones: "subtons",
+  nuances: "nuances",
+  notes: "notas",
+  note: "nota",
+  resin: "resina",
+  wood: "madeira",
+  root: "raiz",
+  blossom: "flor",
+  leaves: "folhas",
+  orange: "laranja",
+  bitterorange: "laranja-amarga",
+  and: "e",
+  with: "com",
+  like: "semelhante",
+  slightly: "levemente",
+}
+
+const translateNoteDescription = (description: string) => {
+  return description.replace(/\b[a-zA-Z-]+\b/g, (token) => {
+    const normalized = token.toLowerCase()
+    const compact = normalized.replace(/-/g, "")
+    return descriptionTermMap[normalized] ?? descriptionTermMap[compact] ?? token
+  })
+}
+
 export default function NoteDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params)
   
@@ -55,7 +192,7 @@ export default function NoteDetailPage({ params }: { params: Promise<{ slug: str
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <nav className="flex items-center gap-2 text-sm text-muted-foreground">
               <Link href="/notes" className="hover:text-foreground transition-colors">
-                Notes
+                Notas
               </Link>
               <ChevronRight className="h-4 w-4" />
               <Link
@@ -65,7 +202,7 @@ export default function NoteDetailPage({ params }: { params: Promise<{ slug: str
                 {note.category}
               </Link>
               <ChevronRight className="h-4 w-4" />
-              <span className="text-foreground">{note.name}</span>
+              <span className="text-foreground">{translateNoteName(note.name)}</span>
             </nav>
           </div>
         </div>
@@ -82,13 +219,13 @@ export default function NoteDetailPage({ params }: { params: Promise<{ slug: str
                 {note.category}
               </span>
               <h1 className="mt-4 font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground">
-                {note.name}
+                {translateNoteName(note.name)}
               </h1>
               <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-                {note.description}
+                {translateNoteDescription(note.description)}
               </p>
               <p className="mt-4 text-foreground font-medium">
-                Found in {note.perfumeCount.toLocaleString()} perfumes
+                Presente em {note.perfumeCount.toLocaleString()} perfumes
               </p>
             </div>
           </div>
@@ -98,7 +235,7 @@ export default function NoteDetailPage({ params }: { params: Promise<{ slug: str
         <section className="py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="font-serif text-2xl font-semibold text-foreground">
-              Perfumes with {note.name}
+              Perfumes com {translateNoteName(note.name)}
             </h2>
 
             {relatedPerfumes.length > 0 ? (
@@ -119,7 +256,7 @@ export default function NoteDetailPage({ params }: { params: Promise<{ slug: str
               </div>
             ) : (
               <div className="mt-8 text-center py-16 bg-card rounded-xl border border-border">
-                <p className="text-muted-foreground">No perfumes found with this note in our database yet.</p>
+                <p className="text-muted-foreground">Ainda não encontramos perfumes com essa nota na base.</p>
               </div>
             )}
           </div>
@@ -130,7 +267,7 @@ export default function NoteDetailPage({ params }: { params: Promise<{ slug: str
           <section className="py-12 lg:py-16 bg-secondary">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <h2 className="font-serif text-2xl font-semibold text-foreground">
-                Related {note.category} Notes
+                Notas relacionadas de {note.category}
               </h2>
               <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {relatedNotes.map((relatedNote) => (
@@ -140,10 +277,10 @@ export default function NoteDetailPage({ params }: { params: Promise<{ slug: str
                     className="group bg-card rounded-xl border border-border p-5 hover:shadow-lg transition-all duration-300"
                   >
                     <h3 className="font-serif text-lg font-medium text-foreground group-hover:text-primary transition-colors">
-                      {relatedNote.name}
+                      {translateNoteName(relatedNote.name)}
                     </h3>
                     <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
-                      {relatedNote.description}
+                      {translateNoteDescription(relatedNote.description)}
                     </p>
                     <p className="mt-3 text-sm font-medium text-foreground">
                       {relatedNote.perfumeCount.toLocaleString()} perfumes

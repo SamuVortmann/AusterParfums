@@ -31,7 +31,7 @@ export default function BrandDetailPage({ params }: { params: Promise<{ slug: st
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <nav className="flex items-center gap-2 text-sm text-muted-foreground">
               <Link href="/brands" className="hover:text-foreground transition-colors">
-                Brands
+                Marcas
               </Link>
               <ChevronRight className="h-4 w-4" />
               <span className="text-foreground">{brand.name}</span>
@@ -64,7 +64,7 @@ export default function BrandDetailPage({ params }: { params: Promise<{ slug: st
                   </span>
                   <span className="flex items-center gap-2">
                     <Calendar className="h-5 w-5" />
-                    Founded {brand.founded}
+                    Fundada em {brand.founded}
                   </span>
                   <span className="text-foreground font-medium">
                     {brand.perfumeCount} perfumes
@@ -82,7 +82,7 @@ export default function BrandDetailPage({ params }: { params: Promise<{ slug: st
         <section className="py-12 lg:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="font-serif text-2xl font-semibold text-foreground">
-              Perfumes by {brand.name}
+              Perfumes de {brand.name}
             </h2>
 
             {brandPerfumes.length > 0 ? (
@@ -103,7 +103,7 @@ export default function BrandDetailPage({ params }: { params: Promise<{ slug: st
               </div>
             ) : (
               <div className="mt-8 text-center py-16 bg-card rounded-xl border border-border">
-                <p className="text-muted-foreground">No perfumes found for this brand in our database yet.</p>
+                <p className="text-muted-foreground">Ainda nao encontramos perfumes dessa marca na base.</p>
               </div>
             )}
           </div>

@@ -44,12 +44,12 @@ function PerfumeSelector({
       </DialogTrigger>
       <DialogContent className="max-w-2xl max-h-[80vh] overflow-hidden flex flex-col">
         <DialogHeader>
-          <DialogTitle>Select a Perfume</DialogTitle>
+          <DialogTitle>Selecione um perfume</DialogTitle>
         </DialogHeader>
         <div className="relative mb-4">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search perfumes..."
+            placeholder="Buscar perfumes..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="pl-9"
@@ -127,7 +127,7 @@ function NoteComparison({ perfumes: selectedPerfumes }: { perfumes: Perfume[] })
     <div className="space-y-6">
       {sharedNotes.length > 0 && (
         <div>
-          <h3 className="text-sm font-medium text-muted-foreground mb-3">Shared Notes ({sharedNotes.length})</h3>
+          <h3 className="text-sm font-medium text-muted-foreground mb-3">Notas em comum ({sharedNotes.length})</h3>
           <div className="flex flex-wrap gap-2">
             {sharedNotes.map(({ note, perfumeIds }) => (
               <Badge key={note} className="bg-green-100 text-green-800 border-green-200">
@@ -140,7 +140,7 @@ function NoteComparison({ perfumes: selectedPerfumes }: { perfumes: Perfume[] })
       )}
       {uniqueNotes.length > 0 && (
         <div>
-          <h3 className="text-sm font-medium text-muted-foreground mb-3">Unique Notes</h3>
+          <h3 className="text-sm font-medium text-muted-foreground mb-3">Notas únicas</h3>
           <div className="flex flex-wrap gap-2">
             {uniqueNotes.map(({ note }) => (
               <Badge key={note} variant="outline">
@@ -179,10 +179,10 @@ export default function ComparePage() {
             <ArrowLeftRight className="h-8 w-8 text-primary" />
           </div>
           <h1 className="font-serif text-4xl font-bold text-foreground mb-4">
-            Compare Fragrances
+            Comparar fragrâncias
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Compare up to 4 fragrances side by side. Analyze notes, performance, and find the perfect match.
+            Compare até 4 fragrâncias lado a lado. Analise notas e desempenho para achar a melhor combinação.
           </p>
         </div>
 
@@ -191,15 +191,15 @@ export default function ComparePage() {
           <Card className="mb-8">
             <CardContent className="py-16 text-center">
               <ArrowLeftRight className="h-12 w-12 mx-auto mb-4 text-muted-foreground/50" />
-              <h2 className="font-serif text-xl font-semibold mb-2">Start Comparing</h2>
-              <p className="text-muted-foreground mb-6">Add fragrances to compare their notes, longevity, and more</p>
+              <h2 className="font-serif text-xl font-semibold mb-2">Comece a comparar</h2>
+              <p className="text-muted-foreground mb-6">Adicione fragrâncias para comparar notas, fixação e muito mais</p>
               <PerfumeSelector 
                 onSelect={addPerfume} 
                 excludeIds={excludeIds}
                 trigger={
                   <Button size="lg" className="gap-2">
                     <Plus className="h-5 w-5" />
-                    Add First Perfume
+                    Adicionar primeiro perfume
                   </Button>
                 }
               />
@@ -235,9 +235,9 @@ export default function ComparePage() {
                         <span className="text-xs text-muted-foreground">({perfume.reviewCount.toLocaleString()})</span>
                       </div>
                       <div className="space-y-1 text-xs">
-                        <p><span className="text-muted-foreground">Year:</span> {perfume.year}</p>
-                        <p><span className="text-muted-foreground">Gender:</span> <span className="capitalize">{perfume.gender}</span></p>
-                        <p><span className="text-muted-foreground">Type:</span> {perfume.concentration}</p>
+                        <p><span className="text-muted-foreground">Ano:</span> {perfume.year}</p>
+                        <p><span className="text-muted-foreground">Gênero:</span> <span className="capitalize">{perfume.gender}</span></p>
+                        <p><span className="text-muted-foreground">Tipo:</span> {perfume.concentration}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -254,8 +254,8 @@ export default function ComparePage() {
                           <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-3">
                             <Plus className="h-6 w-6 text-muted-foreground" />
                           </div>
-                          <p className="text-sm font-medium text-muted-foreground">Add Perfume</p>
-                          <p className="text-xs text-muted-foreground">{MAX_COMPARE - selectedPerfumes.length} slots remaining</p>
+                          <p className="text-sm font-medium text-muted-foreground">Adicionar perfume</p>
+                          <p className="text-xs text-muted-foreground">{MAX_COMPARE - selectedPerfumes.length} vagas restantes</p>
                         </CardContent>
                       </Card>
                     }
@@ -272,12 +272,12 @@ export default function ComparePage() {
                   <CardContent className="p-6">
                     <h2 className="font-serif text-xl font-semibold mb-6 flex items-center gap-2">
                       <Clock className="h-5 w-5 text-primary" />
-                      Performance Comparison
+                      Comparação de desempenho
                     </h2>
                     <div className="space-y-6">
                       {/* Longevity */}
                       <div>
-                        <h3 className="text-sm font-medium text-muted-foreground mb-4">Longevity (hours)</h3>
+                        <h3 className="text-sm font-medium text-muted-foreground mb-4">Fixação (horas)</h3>
                         <div className="space-y-3">
                           {selectedPerfumes.map(perfume => (
                             <div key={perfume.id} className="flex items-center gap-4">
@@ -292,7 +292,7 @@ export default function ComparePage() {
                       <div>
                         <h3 className="text-sm font-medium text-muted-foreground mb-4 flex items-center gap-2">
                           <Wind className="h-4 w-4" />
-                          Sillage (projection)
+                          Projeção (sillage)
                         </h3>
                         <div className="space-y-3">
                           {selectedPerfumes.map(perfume => (
@@ -310,7 +310,7 @@ export default function ComparePage() {
                 {/* Notes Comparison */}
                 <Card>
                   <CardContent className="p-6">
-                    <h2 className="font-serif text-xl font-semibold mb-6">Notes Comparison</h2>
+                    <h2 className="font-serif text-xl font-semibold mb-6">Comparação de notas</h2>
                     
                     {/* Individual Notes */}
                     <div className={`grid gap-6 mb-8 ${
@@ -323,7 +323,7 @@ export default function ComparePage() {
                           <h3 className="font-medium text-sm mb-4 truncate">{perfume.name}</h3>
                           <div className="space-y-3">
                             <div>
-                              <p className="text-xs text-muted-foreground mb-1">Top</p>
+                              <p className="text-xs text-muted-foreground mb-1">Topo</p>
                               <div className="flex flex-wrap gap-1">
                                 {perfume.topNotes.map(note => (
                                   <Badge key={note} variant="outline" className="text-xs bg-amber-50 border-amber-200">
@@ -333,7 +333,7 @@ export default function ComparePage() {
                               </div>
                             </div>
                             <div>
-                              <p className="text-xs text-muted-foreground mb-1">Heart</p>
+                              <p className="text-xs text-muted-foreground mb-1">Corpo</p>
                               <div className="flex flex-wrap gap-1">
                                 {perfume.middleNotes.map(note => (
                                   <Badge key={note} variant="outline" className="text-xs bg-rose-50 border-rose-200">
@@ -343,7 +343,7 @@ export default function ComparePage() {
                               </div>
                             </div>
                             <div>
-                              <p className="text-xs text-muted-foreground mb-1">Base</p>
+                              <p className="text-xs text-muted-foreground mb-1">Fundo</p>
                               <div className="flex flex-wrap gap-1">
                                 {perfume.baseNotes.map(note => (
                                   <Badge key={note} variant="outline" className="text-xs bg-stone-100 border-stone-200">
@@ -367,7 +367,7 @@ export default function ComparePage() {
                 {/* Accords Comparison */}
                 <Card>
                   <CardContent className="p-6">
-                    <h2 className="font-serif text-xl font-semibold mb-6">Accords</h2>
+                    <h2 className="font-serif text-xl font-semibold mb-6">Acordes</h2>
                     <div className={`grid gap-6 ${
                       selectedPerfumes.length === 2 ? "grid-cols-2" :
                       selectedPerfumes.length === 3 ? "grid-cols-3" :
@@ -392,8 +392,8 @@ export default function ComparePage() {
                 {/* Quick Verdict */}
                 <Card className="bg-primary/5 border-primary/20">
                   <CardContent className="p-6 text-center">
-                    <h2 className="font-serif text-xl font-semibold mb-2">Quick Verdict</h2>
-                    <p className="text-muted-foreground mb-4">Based on performance and popularity</p>
+                    <h2 className="font-serif text-xl font-semibold mb-2">Veredito rápido</h2>
+                    <p className="text-muted-foreground mb-4">Com base em desempenho e popularidade</p>
                     <div className="inline-flex items-center gap-4 bg-card rounded-lg p-4">
                       {(() => {
                         const winner = [...selectedPerfumes].sort((a, b) => {
@@ -409,7 +409,7 @@ export default function ComparePage() {
                             <div className="text-left">
                               <p className="text-sm text-muted-foreground">{winner.brand}</p>
                               <p className="font-serif font-semibold">{winner.name}</p>
-                              <p className="text-xs text-primary">Best overall performer</p>
+                              <p className="text-xs text-primary">Melhor resultado geral</p>
                             </div>
                           </>
                         )
@@ -423,10 +423,10 @@ export default function ComparePage() {
             {/* Actions */}
             <div className="flex justify-center gap-4 mt-8">
               <Button variant="outline" onClick={() => setSelectedPerfumes([])}>
-                Clear All
+                Limpar tudo
               </Button>
               <Link href="/perfumes">
-                <Button variant="outline">Browse More</Button>
+                <Button variant="outline">Explorar mais</Button>
               </Link>
             </div>
           </>
