@@ -6,32 +6,32 @@ const noteCategories = [
   {
     name: "Floral",
     color: "bg-rose-100 text-rose-700 hover:bg-rose-200",
-    notes: ["Rose", "Jasmine", "Lily", "Peony", "Violet", "Iris"],
+    notes: ["Rosa", "Jasmim", "Lírio", "Peônia", "Violeta", "Íris"],
   },
   {
     name: "Amadeirado",
     color: "bg-amber-100 text-amber-700 hover:bg-amber-200",
-    notes: ["Sandalwood", "Cedar", "Oud", "Vetiver", "Patchouli", "Birch"],
+    notes: ["Sândalo", "Cedro", "Oud", "Vetiver", "Patchouli", "Bétula"],
   },
   {
-    name: "Citrico",
+    name: "Cítrico",
     color: "bg-yellow-100 text-yellow-700 hover:bg-yellow-200",
-    notes: ["Bergamot", "Lemon", "Orange", "Grapefruit", "Lime", "Mandarin"],
+    notes: ["Bergamota", "Limão", "Laranja", "Toranja", "Lima", "Mandarina"],
   },
   {
     name: "Oriental",
     color: "bg-orange-100 text-orange-700 hover:bg-orange-200",
-    notes: ["Vanilla", "Amber", "Musk", "Incense", "Benzoin", "Labdanum"],
+    notes: ["Baunilha", "Âmbar", "Almíscar", "Incenso", "Benjoim", "Labdanum"],
   },
   {
     name: "Fresco",
     color: "bg-cyan-100 text-cyan-700 hover:bg-cyan-200",
-    notes: ["Aquatic", "Green", "Ozonic", "Mint", "Cucumber", "Tea"],
+    notes: ["Aquático", "Verde", "Ozônico", "Hortelã", "Pepino", "Chá"],
   },
   {
     name: "Especiado",
     color: "bg-red-100 text-red-700 hover:bg-red-200",
-    notes: ["Cinnamon", "Cardamom", "Pepper", "Saffron", "Nutmeg", "Clove"],
+    notes: ["Canela", "Cardamomo", "Pimenta", "Açafrão", "Noz-moscada", "Cravo"],
   },
 ]
 
@@ -45,7 +45,7 @@ export function NotesExplorer() {
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="font-serif text-3xl font-semibold text-foreground">Explore por notas</h2>
           <p className="mt-3 text-muted-foreground">
-            Descubra perfumes com base nas notas olfativas que voce mais gosta
+            Descubra perfumes com base nas notas olfativas que você mais gosta
           </p>
         </div>
 
@@ -82,7 +82,7 @@ export function NotesExplorer() {
         {/* Discover More */}
         <div className="mt-12 text-center">
           <p className="text-muted-foreground">
-            Nao sabe exatamente o que procura?{" "}
+            Não sabe exatamente o que procura?{" "}
             <button className="text-primary hover:underline font-medium">
               Teste nosso buscador de perfumes
             </button>

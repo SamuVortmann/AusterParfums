@@ -348,7 +348,7 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
                     onClick={() => setIsLiked(!isLiked)}
                   >
                     <Heart className={`h-5 w-5 ${isLiked ? "fill-current" : ""}`} />
-                    {isLiked ? "Na lista de desejos" : "Adicionar a lista de desejos"}
+                    {isLiked ? "Na lista de desejos" : "Adicionar à lista de desejos"}
                   </Button>
                   <Button size="lg" variant="outline" className="gap-2">
                     <Share2 className="h-5 w-5" />

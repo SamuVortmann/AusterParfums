@@ -103,7 +103,7 @@ export default function BrandDetailPage({ params }: { params: Promise<{ slug: st
               </div>
             ) : (
               <div className="mt-8 text-center py-16 bg-card rounded-xl border border-border">
-                <p className="text-muted-foreground">Ainda nao encontramos perfumes dessa marca na base.</p>
+                <p className="text-muted-foreground">Ainda não encontramos perfumes dessa marca na base.</p>
               </div>
             )}
           </div>

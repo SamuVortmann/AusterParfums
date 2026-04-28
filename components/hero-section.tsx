@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { formatCompactNumber, siteStats } from "@/lib/site-stats"
 
-const popularSearches = ["Rose", "Oud", "Vanilla", "Musk", "Citrus", "Woody"]
+const popularSearches = ["Rosa", "Oud", "Baunilha", "Almíscar", "Cítrico", "Amadeirado"]
 
 export function HeroSection() {
   const [searchQuery, setSearchQuery] = useState("")

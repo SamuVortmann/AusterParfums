@@ -9,29 +9,29 @@ const stats = [
   { value: formatCompactNumber(siteStats.perfumes), label: "Perfumes" },
   { value: formatCompactNumber(siteStats.brands), label: "Marcas" },
   { value: formatCompactNumber(siteStats.reviews), label: "Avaliações" },
-  { value: formatCompactNumber(siteStats.forumPosts), label: "Tópicos" },
+  { value: formatCompactNumber(siteStats.forumPosts), label: "Tópicos no fórum" },
 ]
 
 const values = [
   {
     icon: Search,
     title: "Descoberta",
-    description: "Acreditamos que toda pessoa merece encontrar sua fragrancia ideal. Nossas ferramentas tornam essa busca simples e prazerosa."
+    description: "Acreditamos que toda pessoa merece encontrar sua fragrância ideal. Nossas ferramentas tornam essa busca simples e prazerosa."
   },
   {
     icon: Users,
     title: "Comunidade",
-    description: "Fragrancia e pessoal, mas a jornada pode ser coletiva. Nossa comunidade se ajuda a descobrir novos favoritos."
+    description: "Fragrância é pessoal, mas a jornada pode ser coletiva. Nossa comunidade se ajuda a descobrir novos favoritos."
   },
   {
     icon: Heart,
-    title: "Paixao",
-    description: "Tambem somos apaixonados por perfumaria. Cada recurso nasce de um interesse real pela arte das fragrancias."
+    title: "Paixão",
+    description: "Também somos apaixonados por perfumaria. Cada recurso nasce de um interesse real pela arte das fragrâncias."
   },
   {
     icon: Sparkles,
-    title: "Inovacao",
-    description: "De recomendacoes inteligentes ao perfil olfativo, usamos tecnologia para melhorar sua experiencia de descoberta."
+    title: "Inovação",
+    description: "De recomendações inteligentes ao perfil olfativo, usamos tecnologia para melhorar sua experiência de descoberta."
   },
 ]
 
@@ -40,25 +40,25 @@ const team = [
     name: "Alexandra Chen",
     role: "Fundadora e CEO",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop",
-    bio: "Ex-perfumista com 15 anos de experiencia na industria de fragrancias."
+    bio: "Ex-perfumista com 15 anos de experiência na indústria de fragrâncias."
   },
   {
     name: "Marcus Thompson",
-    role: "Lider de Produto",
+    role: "Líder de Produto",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop",
-    bio: "Focado em tornar a descoberta de fragrancias intuitiva."
+    bio: "Focado em tornar a descoberta de fragrâncias intuitiva."
   },
   {
     name: "Sofia Rodriguez",
-    role: "Lider de Comunidade",
+    role: "Líder de Comunidade",
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop",
-    bio: "Conectando entusiastas de fragrancias do mundo inteiro."
+    bio: "Conectando entusiastas de fragrâncias do mundo inteiro."
   },
   {
     name: "David Kim",
     role: "Desenvolvedor Principal",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop",
-    bio: "Construindo o futuro da tecnologia para fragrancias."
+    bio: "Construindo o futuro da tecnologia para fragrâncias."
   },
 ]
 
@@ -73,10 +73,10 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-foreground text-balance">
-                Ajudando voce a encontrar seu perfume assinatura
+                Ajudando você a encontrar seu perfume assinatura
               </h1>
               <p className="mt-6 text-lg text-muted-foreground text-pretty">
-                A Verdara e uma plataforma completa para descoberta de fragrancias. Combinamos conhecimento especializado, experiencias da comunidade e tecnologia para ajudar voce a explorar o universo da perfumaria.
+                A Verdara é uma plataforma completa para descoberta de fragrâncias. Combinamos conhecimento especializado, experiências da comunidade e tecnologia para ajudar você a explorar o universo da perfumaria.
               </p>
             </div>
           </div>
@@ -98,23 +98,23 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Nossa historia */}
+        {/* Nossa história */}
         <section className="py-16 lg:py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="font-serif text-3xl lg:text-4xl font-semibold text-foreground">
-                  Nossa historia
+                  Nossa história
                 </h2>
                 <div className="mt-6 space-y-4 text-muted-foreground">
                   <p>
-                    A Verdara nasceu de uma frustracao simples: encontrar a fragrancia ideal nao deveria ser tao dificil. Como entusiastas, passamos horas pesquisando, testando e comparando perfumes em varias fontes.
+                    A Verdara nasceu de uma frustração simples: encontrar a fragrância ideal não deveria ser tão difícil. Como entusiastas, passamos horas pesquisando, testando e comparando perfumes em várias fontes.
                   </p>
                   <p>
-                    Fundamos a Verdara em 2024 com a missao de criar uma plataforma de descoberta realmente util. Um lugar em que qualquer pessoa, de iniciante a colecionador experiente, pudesse explorar, aprender e encontrar o perfume certo.
+                    Fundamos a Verdara em 2024 com a missão de criar uma plataforma de descoberta realmente útil. Um lugar em que qualquer pessoa, de iniciante a colecionador experiente, pudesse explorar, aprender e encontrar o perfume certo.
                   </p>
                   <p>
-                    Hoje, temos orgulho de atender uma comunidade global de apaixonados por fragrancias. Nossa plataforma combina uma base robusta de perfumes com ferramentas de descoberta para ajudar pessoas a encontrar aromas com os quais se identificam.
+                    Hoje, temos orgulho de atender uma comunidade global de apaixonados por fragrâncias. Nossa plataforma combina uma base robusta de perfumes com ferramentas de descoberta para ajudar pessoas a encontrar aromas com os quais se identificam.
                   </p>
                 </div>
               </div>
@@ -122,13 +122,13 @@ export default function AboutPage() {
                 <div className="aspect-square rounded-2xl overflow-hidden">
                   <img
                     src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&h=800&fit=crop"
-                    alt="Colecao de frascos de perfume de luxo"
+                    alt="Coleção de frascos de perfume de luxo"
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="absolute -bottom-6 -left-6 bg-card p-6 rounded-xl shadow-lg border border-border">
                   <p className="font-serif text-2xl font-semibold text-primary">Desde 2024</p>
-                  <p className="text-sm text-muted-foreground">Ajudando voce a descobrir fragrancias</p>
+                  <p className="text-sm text-muted-foreground">Ajudando você a descobrir fragrâncias</p>
                 </div>
               </div>
             </div>

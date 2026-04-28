@@ -17,8 +17,8 @@ import Link from "next/link"
 
 const countryFilters = [
   { value: "all", label: "Todos os países" },
-  { value: "France", label: "Franca" },
-  { value: "Italy", label: "Italia" },
+  { value: "France", label: "França" },
+  { value: "Italy", label: "Itália" },
   { value: "United States", label: "Estados Unidos" },
   { value: "Germany", label: "Alemanha" },
   { value: "Venezuela", label: "Venezuela" },

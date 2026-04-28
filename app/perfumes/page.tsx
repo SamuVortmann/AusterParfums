@@ -18,10 +18,10 @@ import Link from "next/link"
 import { getPerfumeImage } from "@/lib/perfume-images"
 
 const genderFilters = [
-  { value: "all", label: "Todos os generos" },
+  { value: "all", label: "Todos os gêneros" },
   { value: "men", label: "Masculino" },
   { value: "women", label: "Feminino" },
-  { value: "unisex", label: "Unisex" },
+  { value: "unisex", label: "Unissex" },
 ]
 
 const sortOptions = [
@@ -95,7 +95,7 @@ export default function PerfumesPage() {
               Explorar perfumes
             </h1>
             <p className="mt-4 text-lg text-muted-foreground max-w-2xl text-pretty">
-              Descubra seu proximo perfume assinatura na nossa colecao com mais de 80.000 fragrancias.
+              Descubra seu próximo perfume assinatura na nossa coleção com mais de 80.000 fragrâncias.
             </p>
           </div>
         </div>

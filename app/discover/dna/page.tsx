@@ -400,8 +400,8 @@ export default function DNAPage() {
                   <Card>
                     <CardContent className="p-4 text-center">
                       <Heart className="h-5 w-5 mx-auto mb-2 text-primary" />
-                      <p className="text-2xl font-bold capitalize">{dna.genderPreference}</p>
-                      <p className="text-xs text-muted-foreground">Preferencia</p>
+                      <p className="text-2xl font-bold">{dna.genderPreference === 'men' ? 'Masculino' : dna.genderPreference === 'women' ? 'Feminino' : 'Unissex'}</p>
+                      <p className="text-xs text-muted-foreground">Preferência</p>
                     </CardContent>
                   </Card>
                 </div>
@@ -451,7 +451,7 @@ export default function DNAPage() {
                   <CardContent className="p-6">
                     <div className="flex items-center gap-2 mb-4">
                       <Sparkles className="h-5 w-5 text-primary" />
-                      <h2 className="font-serif text-xl font-semibold">Recomendados para voce</h2>
+                      <h2 className="font-serif text-xl font-semibold">Recomendados para você</h2>
                     </div>
                     <p className="text-muted-foreground mb-6">
                       Com base no seu DNA, estas fragrâncias podem combinar com você

@@ -122,7 +122,7 @@ function PerfumeSearch({
       <div className="relative">
         <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
         <Input
-          placeholder="Busque um perfume que voce ama..."
+          placeholder="Busque um perfume que você ama..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setIsFocused(true)}
@@ -343,7 +343,7 @@ export default function SimilarScentPage() {
                               <span>{perfume.rating}</span>
                             </div>
                             <span className="text-muted-foreground">|</span>
-                            <span className="text-muted-foreground capitalize">{perfume.gender}</span>
+                            <span className="text-muted-foreground">{perfume.gender === 'men' ? 'Masculino' : perfume.gender === 'women' ? 'Feminino' : 'Unissex'}</span>
                           </div>
 
                           {/* Reason */}

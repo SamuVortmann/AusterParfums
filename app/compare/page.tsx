@@ -236,7 +236,7 @@ export default function ComparePage() {
                       </div>
                       <div className="space-y-1 text-xs">
                         <p><span className="text-muted-foreground">Ano:</span> {perfume.year}</p>
-                        <p><span className="text-muted-foreground">Gênero:</span> <span className="capitalize">{perfume.gender}</span></p>
+                        <p><span className="text-muted-foreground">Gênero:</span> <span className="capitalize">{perfume.gender === 'men' ? 'Masculino' : perfume.gender === 'women' ? 'Feminino' : 'Unissex'}</span></p>
                         <p><span className="text-muted-foreground">Tipo:</span> {perfume.concentration}</p>
                       </div>
                     </CardContent>

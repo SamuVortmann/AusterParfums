@@ -219,7 +219,7 @@ export default function BuildScentPage() {
             Monte sua fragrância ideal
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Selecione as notas que você ama, marque as que não gosta e vamos encontrar perfumes com seu perfil.
+            Selecione as notas que você ama, marque as que não gosta e encontraremos perfumes com seu perfil.
           </p>
         </div>
 
@@ -230,7 +230,7 @@ export default function BuildScentPage() {
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="font-serif text-xl font-semibold">Sua seleção</h2>
+                  <h2 className="font-serif text-xl font-semibold">Sua Seleção</h2>
                   <span className="text-sm text-muted-foreground">{selectedNotes.length}/8 notas</span>
                 </div>
                 {selectedNotes.length === 0 ? (
@@ -372,7 +372,7 @@ export default function BuildScentPage() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <Sparkles className="h-5 w-5 text-primary" />
-                  <h2 className="font-serif text-xl font-semibold">Perfumes compatíveis</h2>
+                  <h2 className="font-serif text-xl font-semibold">Perfumes Compatíveis</h2>
                 </div>
 
                 {selectedNotes.length === 0 ? (
@@ -419,7 +419,7 @@ export default function BuildScentPage() {
                 {selectedNotes.length > 0 && (
                   <div className="mt-6 pt-6 border-t border-border">
                     <Button variant="outline" className="w-full" onClick={() => setSelectedNotes([])}>
-                      Limpar seleção
+                      Limpar Seleção
                     </Button>
                   </div>
                 )}

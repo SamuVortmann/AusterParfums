@@ -11,16 +11,16 @@ import { formatCompactNumber, siteStats } from "@/lib/site-stats"
 
 const tabs = [
   { id: "forum", label: "Fórum", icon: MessageSquare },
-  { id: "reviews", label: "Avaliacoes recentes", icon: Star },
-  { id: "collections", label: "Colecoes", icon: BookOpen },
+  { id: "reviews", label: "Avaliações recentes", icon: Star },
+  { id: "collections", label: "Coleções", icon: BookOpen },
 ]
 
 const forumCategories = [
-  { name: "Recomendacoes", count: 1234, color: "bg-blue-100 text-blue-800" },
-  { name: "Discussao", count: 987, color: "bg-green-100 text-green-800" },
-  { name: "Colecoes", count: 654, color: "bg-purple-100 text-purple-800" },
-  { name: "Educacao", count: 432, color: "bg-amber-100 text-amber-800" },
-  { name: "Noticias", count: 321, color: "bg-pink-100 text-pink-800" },
+  { name: "Recomendações", count: 1234, color: "bg-blue-100 text-blue-800" },
+  { name: "Discussão", count: 987, color: "bg-green-100 text-green-800" },
+  { name: "Coleções", count: 654, color: "bg-purple-100 text-purple-800" },
+  { name: "Educação", count: 432, color: "bg-amber-100 text-amber-800" },
+  { name: "Notícias", count: 321, color: "bg-pink-100 text-pink-800" },
 ]
 
 export default function CommunityPage() {
@@ -105,9 +105,9 @@ export default function CommunityPage() {
               <div className="lg:col-span-3">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="font-serif text-2xl font-semibold text-foreground">
-                    Topicos em alta
+                    Tópicos em alta
                   </h2>
-                  <Button>Iniciar discussao</Button>
+                  <Button>Iniciar discussão</Button>
                 </div>
 
                 <div className="space-y-4">
@@ -152,7 +152,7 @@ export default function CommunityPage() {
                             </span>
                             <span className="flex items-center gap-1.5">
                               <Eye className="h-4 w-4" />
-                              {post.views.toLocaleString()} visualizacoes
+                              {post.views.toLocaleString()} visualizações
                             </span>
                           </div>
                         </div>
@@ -162,7 +162,7 @@ export default function CommunityPage() {
                 </div>
 
                 <div className="mt-8 text-center">
-                  <Button variant="outline">Carregar mais topicos</Button>
+                  <Button variant="outline">Carregar mais tópicos</Button>
                 </div>
               </div>
 
@@ -192,7 +192,7 @@ export default function CommunityPage() {
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     <li>Seja respeitoso e construtivo</li>
                     <li>Compartilhe avaliações honestas</li>
-                    <li>Sem spam ou autopromocao</li>
+                    <li>Sem spam ou autopromoção</li>
                     <li>Mantenha a conversa no tema</li>
                   </ul>
                 </div>
@@ -204,9 +204,9 @@ export default function CommunityPage() {
             <div>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="font-serif text-2xl font-semibold text-foreground">
-                  Avaliacoes recentes
+                  Avaliações recentes
                 </h2>
-                <Button>Escrever avaliacao</Button>
+                <Button>Escrever avaliação</Button>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -249,7 +249,7 @@ export default function CommunityPage() {
                         </p>
                         <button className="mt-4 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
                           <ThumbsUp className="h-4 w-4" />
-                          <span>Util ({review.likes})</span>
+                          <span>Útil ({review.likes})</span>
                         </button>
                       </div>
                     </div>
@@ -267,9 +267,9 @@ export default function CommunityPage() {
             <div>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="font-serif text-2xl font-semibold text-foreground">
-                  Colecoes em destaque
+                  Coleções em destaque
                 </h2>
-                <Button>Criar coleção</Button>
+                <Button>Criar Coleção</Button>
               </div>
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -348,7 +348,7 @@ export default function CommunityPage() {
               </div>
 
               <div className="mt-8 text-center">
-                <Button variant="outline">Ver todas as colecoes</Button>
+                <Button variant="outline">Ver todas as coleções</Button>
               </div>
             </div>
           )}

@@ -108,16 +108,16 @@ const scentMappings: Record<string, { notes: string[], accords: string[], mood: 
   "heavy": { notes: ["Oud", "Patchouli", "Amber"], accords: ["Oriental", "Heavy"], mood: "intense" },
 }
 
-// Example prompts for inspiration
+// Prompts de exemplo para inspiração
 const examplePrompts = [
-  "I want to smell like a new car interior",
-  "Walking through a forest after rain",
-  "Cozy evening by the fireplace with a book",
-  "Fresh morning at the beach",
-  "A sophisticated gentleman at a jazz bar",
-  "Mysterious night in an exotic bazaar",
-  "Clean linen drying in the summer sun",
-  "An old library full of leather-bound books",
+  "Quero cheirar como o interior de um carro novo",
+  "Caminhando por uma floresta depois da chuva",
+  "Noite aconchegante perto da lareira com um livro",
+  "Manhã fresca na praia",
+  "Um cavalheiro sofisticado em um bar de jazz",
+  "Noite misteriosa em um bazar exótico",
+  "Lençóis limpos secando ao sol de verão",
+  "Uma biblioteca antiga cheia de livros encadernados em couro",
 ]
 
 interface InterpretedScent {
@@ -316,7 +316,7 @@ export default function ScentTranslatorPage() {
                     
                     {/* Accords */}
                     <div className="bg-card rounded-xl border border-border p-5">
-                      <h3 className="text-sm font-medium text-muted-foreground mb-3">Familias olfativas</h3>
+                      <h3 className="text-sm font-medium text-muted-foreground mb-3">Famílias olfativas</h3>
                       <div className="flex flex-wrap gap-2">
                         {interpretation.accords.map((accord, i) => (
                           <span 
