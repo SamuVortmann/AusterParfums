@@ -1,7 +1,7 @@
 import { PerfumeCard } from "@/components/perfume-card"
 import { Button } from "@/components/ui/button"
+import { perfumes } from "@/lib/data"
 import { ArrowRight } from "lucide-react"
-import { getReviewsByPerfume, perfumes } from "@/lib/data"
 
 const featuredPerfumes = [...perfumes]
   .sort((a, b) => b.rating - a.rating)
@@ -11,7 +11,6 @@ const featuredPerfumes = [...perfumes]
     brand: p.brand,
     image: p.image,
     rating: p.rating,
-    reviewCount: getReviewsByPerfume(p.id).length,
     topNotes: p.topNotes,
     year: p.year,
   }))
@@ -35,7 +34,7 @@ export function FeaturedSection() {
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {featuredPerfumes.map((perfume) => (
-            <PerfumeCard key={perfume.name} {...perfume} />
+            <PerfumeCard reviewCount={0} key={perfume.name} {...perfume} />
           ))}
         </div>
 
