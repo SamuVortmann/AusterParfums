@@ -630,10 +630,10 @@ export const brands: Brand[] = [
     name: "Chanel",
     slug: "chanel",
     logo: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=200&h=200&fit=crop",
-    country: "France",
+    country: "França",
     founded: 1910,
-    description: "Chanel is a French luxury fashion house that focuses on women's high fashion and ready-to-wear clothes, luxury goods, and accessories.",
-    perfumeCount: 156,
+    description: "Chanel é uma casa de moda de luxo francesa focada em alta costura feminina, pronto-a-vestir, artigos de luxo e acessórios.",
+    perfumeCount: 3,
     featured: true
   },
   {
@@ -641,10 +641,10 @@ export const brands: Brand[] = [
     name: "Dior",
     slug: "dior",
     logo: "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=200&h=200&fit=crop",
-    country: "France",
+    country: "França",
     founded: 1946,
-    description: "Dior, is a French luxury fashion house controlled and chaired by French businessman Bernard Arnault, who also heads LVMH.",
-    perfumeCount: 213,
+    description: "Dior é uma casa de moda de luxo francesa controlada e presidida pelo empresário francês Bernard Arnault, que também chefia a LVMH.",
+    perfumeCount: 3,
     featured: true
   },
   {
@@ -652,10 +652,10 @@ export const brands: Brand[] = [
     name: "Tom Ford",
     slug: "tom-ford",
     logo: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=200&h=200&fit=crop",
-    country: "United States",
+    country: "Estados Unidos",
     founded: 2006,
-    description: "Tom Ford Beauty is known for luxury cosmetics and fragrances. The Private Blend collection features some of the most sought-after scents.",
-    perfumeCount: 98,
+    description: "Tom Ford Beauty é conhecida por seus cosméticos e fragrâncias de luxo. A coleção Private Blend apresenta alguns dos aromas mais cobiçados do mundo.",
+    perfumeCount: 3,
     featured: true
   },
   {
@@ -663,10 +663,10 @@ export const brands: Brand[] = [
     name: "Creed",
     slug: "creed",
     logo: "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=200&h=200&fit=crop",
-    country: "France",
+    country: "França",
     founded: 1760,
-    description: "Creed is a French-based fragrance house, which has served a number of royal houses and celebrities.",
-    perfumeCount: 67,
+    description: "Creed é uma casa de fragrâncias baseada na França que serviu a diversas casas reais e celebridades ao longo da história.",
+    perfumeCount: 1,
     featured: true
   },
   {
@@ -674,10 +674,10 @@ export const brands: Brand[] = [
     name: "Le Labo",
     slug: "le-labo",
     logo: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=200&h=200&fit=crop",
-    country: "United States",
+    country: "Estados Unidos",
     founded: 2006,
-    description: "Le Labo is known for its hand-mixed perfumes with simple labeling. Each fragrance is named after its main ingredient and the number of ingredients in the formula.",
-    perfumeCount: 32,
+    description: "Le Labo é conhecida por seus perfumes misturados à mão com rotulagem minimalista. Cada fragrância é nomeada de acordo com seu ingrediente principal.",
+    perfumeCount: 1,
     featured: true
   },
   {
@@ -685,10 +685,10 @@ export const brands: Brand[] = [
     name: "Maison Francis Kurkdjian",
     slug: "maison-francis-kurkdjian",
     logo: "https://images.unsplash.com/photo-1557170334-a9632e77c6e4?w=200&h=200&fit=crop",
-    country: "France",
+    country: "França",
     founded: 2009,
-    description: "Maison Francis Kurkdjian is a French perfume house founded by master perfumer Francis Kurkdjian and Marc Chaya.",
-    perfumeCount: 45,
+    description: "Maison Francis Kurkdjian é uma casa de perfumes francesa fundada pelo mestre perfumista Francis Kurkdjian e por Marc Chaya.",
+    perfumeCount: 1,
     featured: true
   },
   {
@@ -696,10 +696,10 @@ export const brands: Brand[] = [
     name: "Giorgio Armani",
     slug: "giorgio-armani",
     logo: "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=200&h=200&fit=crop",
-    country: "Italy",
+    country: "Itália",
     founded: 1975,
-    description: "Giorgio Armani Beauty produces luxury cosmetics and fragrances, including the iconic Acqua di Gio line.",
-    perfumeCount: 124,
+    description: "Giorgio Armani Beauty produz cosméticos e fragrâncias de luxo, incluindo a icônica linha Acqua di Gio.",
+    perfumeCount: 2,
     featured: true
   },
   {
@@ -707,9 +707,9 @@ export const brands: Brand[] = [
     name: "Yves Saint Laurent",
     slug: "yves-saint-laurent",
     logo: "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=200&h=200&fit=crop",
-    country: "France",
+    country: "França",
     founded: 1961,
-    description: "Yves Saint Laurent Beauté creates bold, iconic fragrances that embody Parisian style and couture heritage.",
+    description: "Yves Saint Laurent Beauté cria fragrâncias ousadas e icônicas que incorporam o estilo parisiense e a herança da alta costura.",
     perfumeCount: 178,
     featured: true
   },
@@ -718,10 +718,10 @@ export const brands: Brand[] = [
     name: "Frederic Malle",
     slug: "frederic-malle",
     logo: "https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=200&h=200&fit=crop",
-    country: "France",
+    country: "França",
     founded: 2000,
-    description: "Editions de Parfums Frederic Malle is a niche perfume house that gives complete creative freedom to world-renowned perfumers.",
-    perfumeCount: 38,
+    description: "Editions de Parfums Frederic Malle é uma casa de perfumes de nicho que concede liberdade criativa total a perfumistas de renome mundial.",
+    perfumeCount: 1,
     featured: false
   },
   {
@@ -729,21 +729,21 @@ export const brands: Brand[] = [
     name: "Escentric Molecules",
     slug: "escentric-molecules",
     logo: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=200&h=200&fit=crop",
-    country: "Germany",
+    country: "Alemanha",
     founded: 2006,
-    description: "Escentric Molecules creates innovative fragrances that celebrate the beauty of single molecules and synthetic ingredients.",
-    perfumeCount: 12,
+    description: "Escentric Molecules cria fragrâncias inovadoras que celebram a beleza de moléculas únicas e ingredientes sintéticos.",
+    perfumeCount: 1,
     featured: false
   },
   {
     id: "11",
-    name: "Lancome",
+    name: "Lancôme",
     slug: "lancome",
     logo: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=200&h=200&fit=crop",
-    country: "France",
+    country: "França",
     founded: 1935,
-    description: "Lancome is a French luxury perfumes and cosmetics house that distributes products internationally.",
-    perfumeCount: 189,
+    description: "Lancôme é uma casa francesa de perfumes e cosméticos de luxo que distribui produtos internacionalmente.",
+    perfumeCount: 1,
     featured: true
   },
   {
@@ -753,8 +753,8 @@ export const brands: Brand[] = [
     logo: "https://images.unsplash.com/photo-1557170334-a9632e77c6e4?w=200&h=200&fit=crop",
     country: "Venezuela",
     founded: 1981,
-    description: "Carolina Herrera is a luxury fashion and fragrance house known for elegant, sophisticated designs and iconic scents.",
-    perfumeCount: 87,
+    description: "Carolina Herrera é uma casa de moda e fragrâncias de luxo conhecida por seus designs elegantes e sofisticados e aromas icônicos.",
+    perfumeCount: 1,
     featured: false
   },
   {
@@ -762,10 +762,10 @@ export const brands: Brand[] = [
     name: "Parfums de Marly",
     slug: "parfums-de-marly",
     logo: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=200&h=200&fit=crop",
-    country: "France",
+    country: "França",
     founded: 2009,
-    description: "Parfums de Marly revives the spirit of the lavish festivities held at the Château de Marly, combining 18th-century elegance with modern flair.",
-    perfumeCount: 35,
+    description: "Parfums de Marly revive o espírito das festividades suntuosas realizadas no Château de Marly, unindo a elegância do século XVIII ao estilo moderno.",
+    perfumeCount: 2,
     featured: true
   },
   {
@@ -773,10 +773,10 @@ export const brands: Brand[] = [
     name: "Maison Margiela",
     slug: "maison-margiela",
     logo: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=200&h=200&fit=crop",
-    country: "France",
+    country: "França",
     founded: 1988,
-    description: "Known for its 'Replica' collection, Maison Margiela creates scents that evoke universal memories and specific moments in time.",
-    perfumeCount: 31,
+    description: "Conhecida por sua coleção 'Replica', a Maison Margiela cria aromas que evocam memórias universais e momentos específicos no tempo.",
+    perfumeCount: 1,
     featured: false
   },
   {
@@ -784,10 +784,10 @@ export const brands: Brand[] = [
     name: "Dolce & Gabbana",
     slug: "dolce-gabbana",
     logo: "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=200&h=200&fit=crop",
-    country: "Italy",
+    country: "Itália",
     founded: 1985,
-    description: "Dolce & Gabbana fragrances embody Mediterranean glamour and Italian tradition, ranging from fresh aquatics to deep orientals.",
-    perfumeCount: 102,
+    description: "As fragrâncias Dolce & Gabbana incorporam o glamour mediterrâneo e a tradição italiana, variando de aquáticos frescos a orientais profundos.",
+    perfumeCount: 3,
     featured: true
   },
   {
@@ -795,10 +795,10 @@ export const brands: Brand[] = [
     name: "Versace",
     slug: "versace",
     logo: "https://images.unsplash.com/photo-1557170334-a9632e77c6e4?w=200&h=200&fit=crop",
-    country: "Italy",
+    country: "Itália",
     founded: 1978,
-    description: "Versace is the definition of bold luxury. Its fragrances are designed for those who want to express their strength and sensuality.",
-    perfumeCount: 76,
+    description: "Versace é a definição de luxo audacioso. Suas fragrâncias são projetadas para aqueles que desejam expressar sua força e sensualidade.",
+    perfumeCount: 1,
     featured: false
   },
   {
@@ -806,10 +806,10 @@ export const brands: Brand[] = [
     name: "Paco Rabanne",
     slug: "paco-rabanne",
     logo: "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=200&h=200&fit=crop",
-    country: "Spain",
+    country: "Espanha",
     founded: 1966,
-    description: "Paco Rabanne is a pioneer of avant-garde fashion and disruptive scents, creating modern classics that define contemporary seduction.",
-    perfumeCount: 112,
+    description: "Paco Rabanne é pioneira na moda de vanguarda e em aromas disruptivos, criando clássicos modernos que definem a sedução contemporânea.",
+    perfumeCount: 1,
     featured: false
   }
 ]

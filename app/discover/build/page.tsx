@@ -16,98 +16,107 @@ import { getPerfumeImage } from "@/lib/perfume-images"
 
 const noteCategories = [
   { id: "floral", label: "Floral", color: "bg-pink-100 text-pink-800 border-pink-200" },
-  { id: "woody", label: "Amadeirado", color: "bg-amber-100 text-amber-800 border-amber-200" },
-  { id: "citrus", label: "Cítrico", color: "bg-yellow-100 text-yellow-800 border-yellow-200" },
+  { id: "amadeirado", label: "Amadeirado", color: "bg-amber-100 text-amber-800 border-amber-200" },
+  { id: "citrico", label: "Cítrico", color: "bg-yellow-100 text-yellow-800 border-yellow-200" },
   { id: "oriental", label: "Oriental", color: "bg-orange-100 text-orange-800 border-orange-200" },
-  { id: "fresh", label: "Fresco", color: "bg-cyan-100 text-cyan-800 border-cyan-200" },
-  { id: "spicy", label: "Especiado", color: "bg-red-100 text-red-800 border-red-200" },
-  { id: "fruity", label: "Frutado", color: "bg-purple-100 text-purple-800 border-purple-200" },
-  { id: "green", label: "Verde", color: "bg-green-100 text-green-800 border-green-200" },
-  { id: "aquatic", label: "Aquático", color: "bg-blue-100 text-blue-800 border-blue-200" },
+  { id: "fresco", label: "Fresco", color: "bg-cyan-100 text-cyan-800 border-cyan-200" },
+  { id: "especiado", label: "Especiado", color: "bg-red-100 text-red-800 border-red-200" },
+  { id: "frutado", label: "Frutado", color: "bg-purple-100 text-purple-800 border-purple-200" },
+  { id: "verde", label: "Verde", color: "bg-green-100 text-green-800 border-green-200" },
+  { id: "aquatico", label: "Aquático", color: "bg-blue-100 text-blue-800 border-blue-200" },
   { id: "gourmand", label: "Gourmand", color: "bg-rose-100 text-rose-800 border-rose-200" },
 ]
 
 // Extended notes for the builder
+// Notas estendidas para o construtor (Traduzidas)
 const allNotes = [
   // Floral
-  { name: "Rose", category: "floral" },
-  { name: "Jasmine", category: "floral" },
-  { name: "Iris", category: "floral" },
-  { name: "Tuberose", category: "floral" },
-  { name: "Orange Blossom", category: "floral" },
-  { name: "Violet", category: "floral" },
-  { name: "Lily", category: "floral" },
-  { name: "Peony", category: "floral" },
-  { name: "Magnolia", category: "floral" },
+  { name: "Rosa", category: "floral" },
+  { name: "Jasmim", category: "floral" },
+  { name: "Íris", category: "floral" },
+  { name: "Tuberosa", category: "floral" },
+  { name: "Flor de Laranjeira", category: "floral" },
+  { name: "Violeta", category: "floral" },
+  { name: "Lírio", category: "floral" },
+  { name: "Peônia", category: "floral" },
+  { name: "Magnólia", category: "floral" },
   { name: "Ylang-Ylang", category: "floral" },
-  // Woody
-  { name: "Sandalwood", category: "woody" },
-  { name: "Cedar", category: "woody" },
-  { name: "Oud", category: "woody" },
-  { name: "Vetiver", category: "woody" },
-  { name: "Patchouli", category: "woody" },
-  { name: "Birch", category: "woody" },
-  { name: "Rosewood", category: "woody" },
-  { name: "Guaiac Wood", category: "woody" },
-  // Citrus
-  { name: "Bergamot", category: "citrus" },
-  { name: "Lemon", category: "citrus" },
-  { name: "Grapefruit", category: "citrus" },
-  { name: "Orange", category: "citrus" },
-  { name: "Lime", category: "citrus" },
-  { name: "Mandarin", category: "citrus" },
-  { name: "Yuzu", category: "citrus" },
+  
+  // Amadeirado
+  { name: "Sândalo", category: "amadeirado" },
+  { name: "Cedro", category: "amadeirado" },
+  { name: "Oud", category: "amadeirado" },
+  { name: "Vetiver", category: "amadeirado" },
+  { name: "Patchouli", category: "amadeirado" },
+  { name: "Bétula", category: "amadeirado" },
+  { name: "Jacarandá", category: "amadeirado" },
+  { name: "Madeira Guaiac", category: "amadeirado" },
+  
+  // Cítrico
+  { name: "Bergamota", category: "citrico" },
+  { name: "Limão", category: "citrico" },
+  { name: "Toranja", category: "citrico" },
+  { name: "Laranja", category: "citrico" },
+  { name: "Lima", category: "citrico" },
+  { name: "Mandarina", category: "citrico" },
+  { name: "Yuzu", category: "citrico" },
+  
   // Oriental
-  { name: "Vanilla", category: "oriental" },
-  { name: "Amber", category: "oriental" },
-  { name: "Musk", category: "oriental" },
-  { name: "Tonka Bean", category: "oriental" },
-  { name: "Benzoin", category: "oriental" },
-  { name: "Incense", category: "oriental" },
-  { name: "Labdanum", category: "oriental" },
-  // Fresh
-  { name: "Sea Notes", category: "fresh" },
-  { name: "Mint", category: "fresh" },
-  { name: "Lavender", category: "fresh" },
-  { name: "Eucalyptus", category: "fresh" },
-  { name: "Cucumber", category: "fresh" },
-  // Spicy
-  { name: "Cardamom", category: "spicy" },
-  { name: "Pepper", category: "spicy" },
-  { name: "Cinnamon", category: "spicy" },
-  { name: "Saffron", category: "spicy" },
-  { name: "Ginger", category: "spicy" },
-  { name: "Nutmeg", category: "spicy" },
-  { name: "Clove", category: "spicy" },
-  { name: "Pink Pepper", category: "spicy" },
-  // Fruity
-  { name: "Apple", category: "fruity" },
-  { name: "Pear", category: "fruity" },
-  { name: "Peach", category: "fruity" },
-  { name: "Blackcurrant", category: "fruity" },
-  { name: "Raspberry", category: "fruity" },
-  { name: "Pineapple", category: "fruity" },
-  { name: "Coconut", category: "fruity" },
-  // Green
-  { name: "Basil", category: "green" },
-  { name: "Fig Leaf", category: "green" },
-  { name: "Galbanum", category: "green" },
-  { name: "Green Tea", category: "green" },
-  { name: "Bamboo", category: "green" },
-  // Aquatic
-  { name: "Aquatic Notes", category: "aquatic" },
-  { name: "Rain", category: "aquatic" },
-  { name: "Seaweed", category: "aquatic" },
-  { name: "Ozonic Notes", category: "aquatic" },
+  { name: "Baunilha", category: "oriental" },
+  { name: "Âmbar", category: "oriental" },
+  { name: "Almíscar", category: "oriental" },
+  { name: "Fava Tonka", category: "oriental" },
+  { name: "Benzoíno", category: "oriental" },
+  { name: "Incenso", category: "oriental" },
+  { name: "Ládano", category: "oriental" },
+  
+  // Fresco
+  { name: "Notas Marinhas", category: "fresco" },
+  { name: "Hortelã", category: "fresco" },
+  { name: "Lavanda", category: "fresco" },
+  { name: "Eucalipto", category: "fresco" },
+  { name: "Pepino", category: "fresco" },
+  
+  // Especiado
+  { name: "Cardamomo", category: "especiado" },
+  { name: "Pimenta", category: "especiado" },
+  { name: "Canela", category: "especiado" },
+  { name: "Açafrão", category: "especiado" },
+  { name: "Gengibre", category: "especiado" },
+  { name: "Noz-moscada", category: "especiado" },
+  { name: "Cravo", category: "especiado" },
+  { name: "Pimenta Rosa", category: "especiado" },
+  
+  // Frutado
+  { name: "Maçã", category: "frutado" },
+  { name: "Pera", category: "frutado" },
+  { name: "Pêssego", category: "frutado" },
+  { name: "Groselha Preta", category: "frutado" },
+  { name: "Framboesa", category: "frutado" },
+  { name: "Abacaxi", category: "frutado" },
+  { name: "Coco", category: "frutado" },
+  
+  // Verde
+  { name: "Manjericão", category: "verde" },
+  { name: "Folha de Figo", category: "verde" },
+  { name: "Gálbano", category: "verde" },
+  { name: "Chá Verde", category: "verde" },
+  { name: "Bambu", category: "verde" },
+  
+  // Aquático
+  { name: "Notas Aquáticas", category: "aquatico" },
+  { name: "Chuva", category: "aquatico" },
+  { name: "Algas", category: "aquatico" },
+  { name: "Notas Ozônicas", category: "aquatico" },
+  
   // Gourmand
-  { name: "Coffee", category: "gourmand" },
+  { name: "Café", category: "gourmand" },
   { name: "Chocolate", category: "gourmand" },
-  { name: "Caramel", category: "gourmand" },
-  { name: "Praline", category: "gourmand" },
-  { name: "Honey", category: "gourmand" },
-  { name: "Almond", category: "gourmand" },
+  { name: "Caramelo", category: "gourmand" },
+  { name: "Pralinê", category: "gourmand" },
+  { name: "Mel", category: "gourmand" },
+  { name: "Amêndoa", category: "gourmand" },
 ]
-
 export default function BuildScentPage() {
   const [selectedNotes, setSelectedNotes] = useState<string[]>([])
   const [searchQuery, setSearchQuery] = useState("")

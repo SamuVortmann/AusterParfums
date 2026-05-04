@@ -79,9 +79,9 @@ function PerfumeSelector({
 }
 
 function RadarChart({ data }: { data: { label: string; value: number }[] }) {
-  const size = 200
+  const size = 300
   const center = size / 2
-  const radius = 80
+  const radius = 100
   const angleStep = (2 * Math.PI) / data.length
 
   const points = data.map((d, i) => {
@@ -90,8 +90,8 @@ function RadarChart({ data }: { data: { label: string; value: number }[] }) {
     return {
       x: center + r * Math.cos(angle),
       y: center + r * Math.sin(angle),
-      labelX: center + (radius + 25) * Math.cos(angle),
-      labelY: center + (radius + 25) * Math.sin(angle),
+      labelX: center + (radius + 35) * Math.cos(angle),
+      labelY: center + (radius + 35) * Math.sin(angle),
       label: d.label,
       value: d.value
     }
@@ -100,76 +100,79 @@ function RadarChart({ data }: { data: { label: string; value: number }[] }) {
   const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ') + ' Z'
 
   return (
-    <svg viewBox={`0 0 ${size} ${size}`} className="w-full max-w-[300px] mx-auto">
-      {/* Grid circles */}
-      {[25, 50, 75, 100].map(level => (
-        <circle
-          key={level}
-          cx={center}
-          cy={center}
-          r={(level / 100) * radius}
-          fill="none"
-          stroke="currentColor"
-          strokeOpacity={0.1}
-          strokeWidth={1}
-        />
-      ))}
-      
-      {/* Axis lines */}
-      {points.map((p, i) => (
-        <line
-          key={i}
-          x1={center}
-          y1={center}
-          x2={center + radius * Math.cos(i * angleStep - Math.PI / 2)}
-          y2={center + radius * Math.sin(i * angleStep - Math.PI / 2)}
-          stroke="currentColor"
-          strokeOpacity={0.1}
-          strokeWidth={1}
-        />
-      ))}
+    <div className="flex justify-center items-center py-4">
+      <svg viewBox={`0 0 ${size} ${size}`} className="w-full max-w-[350px] overflow-visible">
+        {/* Grid circles */}
+        {[25, 50, 75, 100].map(level => (
+          <circle
+            key={level}
+            cx={center}
+            cy={center}
+            r={(level / 100) * radius}
+            fill="none"
+            stroke="currentColor"
+            strokeOpacity={0.1}
+            strokeWidth={1}
+          />
+        ))}
+        
+        {/* Axis lines */}
+        {points.map((p, i) => (
+          <line
+            key={i}
+            x1={center}
+            y1={center}
+            x2={center + radius * Math.cos(i * angleStep - Math.PI / 2)}
+            y2={center + radius * Math.sin(i * angleStep - Math.PI / 2)}
+            stroke="currentColor"
+            strokeOpacity={0.1}
+            strokeWidth={1}
+          />
+        ))}
 
-      {/* Data polygon */}
-      <path
-        d={pathD}
-        fill="hsl(var(--primary))"
-        fillOpacity={0.2}
-        stroke="hsl(var(--primary))"
-        strokeWidth={2}
-      />
-
-      {/* Data points */}
-      {points.map((p, i) => (
-        <circle
-          key={i}
-          cx={p.x}
-          cy={p.y}
-          r={4}
+        {/* Data polygon */}
+        <path
+          d={pathD}
           fill="hsl(var(--primary))"
+          fillOpacity={0.15}
+          stroke="hsl(var(--primary))"
+          strokeWidth={2}
+          className="transition-all duration-500 ease-in-out"
         />
-      ))}
 
-      {/* Labels */}
-      {points.map((p, i) => (
-        <text
-          key={i}
-          x={p.labelX}
-          y={p.labelY}
-          textAnchor="middle"
-          dominantBaseline="middle"
-          className="fill-foreground text-[10px] font-medium"
-        >
-          {p.label}
-        </text>
-      ))}
-    </svg>
+        {/* Data points */}
+        {points.map((p, i) => (
+          <circle
+            key={i}
+            cx={p.x}
+            cy={p.y}
+            r={4}
+            fill="hsl(var(--primary))"
+            className="transition-all duration-500 ease-in-out"
+          />
+        ))}
+
+        {/* Labels */}
+        {points.map((p, i) => (
+          <text
+            key={i}
+            x={p.labelX}
+            y={p.labelY}
+            textAnchor="middle"
+            dominantBaseline="middle"
+            className="fill-foreground text-[11px] font-semibold uppercase tracking-wider"
+          >
+            {p.label}
+          </text>
+        ))}
+      </svg>
+    </div>
   )
 }
 
 function calculateDNA(collection: Perfume[]) {
   if (collection.length === 0) return null
 
-  // Analyze notes
   const noteFrequency: Record<string, number> = {}
   const accordFrequency: Record<string, number> = {}
   let totalLongevity = 0
@@ -190,7 +193,6 @@ function calculateDNA(collection: Perfume[]) {
     genderCount[perfume.gender]++
   })
 
-  // Sort notes and accords by frequency
   const topNotes = Object.entries(noteFrequency)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 8)
@@ -201,33 +203,34 @@ function calculateDNA(collection: Perfume[]) {
     .slice(0, 6)
     .map(([accord, count]) => ({ accord, count, percentage: Math.round((count / collection.length) * 100) }))
 
-  // Calculate scent profile categories
   const categories = {
-    Woody: 0,
+    Amadeirado: 0,
     Floral: 0,
-    Fresh: 0,
+    Fresco: 0,
     Oriental: 0,
-    Spicy: 0,
-    Sweet: 0,
+    Especiado: 0,
+    Doce: 0,
   }
 
   collection.forEach(perfume => {
     perfume.accords.forEach(accord => {
       const lower = accord.toLowerCase()
-      if (lower.includes('woody') || lower.includes('oud')) categories.Woody += 15
-      if (lower.includes('floral') || lower.includes('rose')) categories.Floral += 15
-      if (lower.includes('fresh') || lower.includes('citrus') || lower.includes('aquatic')) categories.Fresh += 15
-      if (lower.includes('oriental') || lower.includes('amber')) categories.Oriental += 15
-      if (lower.includes('spicy') || lower.includes('warm')) categories.Spicy += 15
-      if (lower.includes('sweet') || lower.includes('gourmand') || lower.includes('vanilla')) categories.Sweet += 15
+      if (lower.includes('woody') || lower.includes('oud') || lower.includes('amadeirado')) categories.Amadeirado += 15
+      if (lower.includes('floral') || lower.includes('rose') || lower.includes('rosa')) categories.Floral += 15
+      if (lower.includes('fresh') || lower.includes('citrus') || lower.includes('aquatic') || lower.includes('fresco')) categories.Fresco += 15
+      if (lower.includes('oriental') || lower.includes('amber') || lower.includes('âmbar')) categories.Oriental += 15
+      if (lower.includes('spicy') || lower.includes('warm') || lower.includes('especiado')) categories.Especiado += 15
+      if (lower.includes('sweet') || lower.includes('gourmand') || lower.includes('vanilla') || lower.includes('doce')) categories.Doce += 15
     })
   })
 
-  // Normalize to 100
   const maxCategory = Math.max(...Object.values(categories))
   Object.keys(categories).forEach(key => {
     categories[key as keyof typeof categories] = Math.round((categories[key as keyof typeof categories] / maxCategory) * 100) || 0
   })
+
+  const genderLabels: Record<string, string> = { men: "Masculino", women: "Feminino", unisex: "Unissex" }
+  const topGender = Object.entries(genderCount).sort((a, b) => b[1] - a[1])[0][0]
 
   return {
     topNotes,
@@ -235,7 +238,7 @@ function calculateDNA(collection: Perfume[]) {
     avgLongevity: Math.round((totalLongevity / collection.length) * 10) / 10,
     avgSillage: Math.round((totalSillage / collection.length) * 10) / 10,
     avgRating: Math.round((totalRating / collection.length) * 10) / 10,
-    genderPreference: Object.entries(genderCount).sort((a, b) => b[1] - a[1])[0][0],
+    genderPreference: genderLabels[topGender],
     categories,
     totalPerfumes: collection.length
   }
@@ -266,7 +269,7 @@ export default function DNAPage() {
             <Dna className="h-8 w-8 text-primary" />
           </div>
           <h1 className="font-serif text-4xl font-bold text-foreground mb-4">
-            Seu DNA olfativo
+            Seu DNA Olfativo
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Adicione perfumes que você tem ou ama para analisarmos seu perfil e identificar suas notas assinatura.
@@ -279,8 +282,8 @@ export default function DNAPage() {
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="font-serif text-lg font-semibold">Minha coleção</h2>
-                  <span className="text-sm text-muted-foreground">{myCollection.length} fragrâncias</span>
+                  <h2 className="font-serif text-lg font-semibold">Minha Coleção</h2>
+                  <span className="text-sm text-muted-foreground">{myCollection.length} {myCollection.length === 1 ? 'fragrância' : 'fragrâncias'}</span>
                 </div>
 
                 {myCollection.length === 0 ? (
@@ -289,7 +292,7 @@ export default function DNAPage() {
                     <p className="text-sm text-muted-foreground mb-4">Adicione perfumes que você tem ou ama</p>
                   </div>
                 ) : (
-                  <div className="space-y-2 mb-4 max-h-[400px] overflow-y-auto">
+                  <div className="space-y-2 mb-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                     {myCollection.map(perfume => (
                       <div key={perfume.id} className="flex items-center gap-3 p-2 rounded-lg bg-muted/50 group">
                         <div className="relative w-10 h-10 rounded overflow-hidden flex-shrink-0">
@@ -316,7 +319,7 @@ export default function DNAPage() {
                   trigger={
                     <Button variant="outline" className="w-full gap-2">
                       <Plus className="h-4 w-4" />
-                      Adicionar perfume
+                      Adicionar Perfume
                     </Button>
                   }
                 />
@@ -327,7 +330,7 @@ export default function DNAPage() {
                     className="w-full mt-2 text-muted-foreground"
                     onClick={() => setMyCollection([])}
                   >
-                    Limpar tudo
+                    Limpar Tudo
                   </Button>
                 )}
               </CardContent>
@@ -338,11 +341,11 @@ export default function DNAPage() {
               <CardContent className="p-4">
                 <p className="text-sm font-medium mb-3">Populares para adicionar</p>
                 <div className="flex flex-wrap gap-2">
-                  {perfumes.slice(0, 4).filter(p => !myCollection.find(c => c.id === p.id)).map(perfume => (
+                  {perfumes.slice(0, 6).filter(p => !myCollection.find(c => c.id === p.id)).map(perfume => (
                     <button
                       key={perfume.id}
                       onClick={() => addToCollection(perfume)}
-                      className="text-xs px-2 py-1 rounded-full bg-muted hover:bg-primary/10 hover:text-primary transition-colors"
+                      className="text-[11px] px-2.5 py-1 rounded-full bg-muted hover:bg-primary/10 hover:text-primary transition-all border border-transparent hover:border-primary/20"
                     >
                       + {perfume.name}
                     </button>
@@ -356,18 +359,18 @@ export default function DNAPage() {
           <div className="lg:col-span-2 space-y-6">
             {!dna ? (
               <Card>
-                <CardContent className="py-16 text-center">
-                  <Sparkles className="h-12 w-12 mx-auto mb-4 text-muted-foreground/50" />
-                  <h2 className="font-serif text-xl font-semibold mb-2">Seu DNA te espera</h2>
-                  <p className="text-muted-foreground">Adicione ao menos um perfume para descobrir seu DNA olfativo</p>
+                <CardContent className="py-24 text-center">
+                  <Sparkles className="h-12 w-12 mx-auto mb-4 text-muted-foreground/50 animate-pulse" />
+                  <h2 className="font-serif text-xl font-semibold mb-2">Seu DNA Te Espera</h2>
+                  <p className="text-muted-foreground">Adicione ao menos uma fragrância para descobrir seu perfil olfativo</p>
                 </CardContent>
               </Card>
             ) : (
               <>
                 {/* Scent Profile Radar */}
-                <Card>
-                  <CardContent className="p-6">
-                    <h2 className="font-serif text-xl font-semibold mb-6 text-center">Seu perfil olfativo</h2>
+                <Card className="overflow-hidden">
+                  <CardContent className="p-8">
+                    <h2 className="font-serif text-2xl font-semibold mb-8 text-center">Seu Perfil Olfativo</h2>
                     <RadarChart 
                       data={Object.entries(dna.categories).map(([label, value]) => ({ label, value }))} 
                     />
@@ -380,28 +383,28 @@ export default function DNAPage() {
                     <CardContent className="p-4 text-center">
                       <Star className="h-5 w-5 mx-auto mb-2 text-primary" />
                       <p className="text-2xl font-bold">{dna.avgRating}</p>
-                      <p className="text-xs text-muted-foreground">Nota média</p>
+                      <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Nota Média</p>
                     </CardContent>
                   </Card>
                   <Card>
                     <CardContent className="p-4 text-center">
                       <Clock className="h-5 w-5 mx-auto mb-2 text-primary" />
                       <p className="text-2xl font-bold">{dna.avgLongevity}h</p>
-                      <p className="text-xs text-muted-foreground">Fixação média</p>
+                      <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Fixação Média</p>
                     </CardContent>
                   </Card>
                   <Card>
                     <CardContent className="p-4 text-center">
                       <Wind className="h-5 w-5 mx-auto mb-2 text-primary" />
                       <p className="text-2xl font-bold">{dna.avgSillage}/10</p>
-                      <p className="text-xs text-muted-foreground">Projeção média</p>
+                      <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Projeção Média</p>
                     </CardContent>
                   </Card>
                   <Card>
                     <CardContent className="p-4 text-center">
                       <Heart className="h-5 w-5 mx-auto mb-2 text-primary" />
-                      <p className="text-2xl font-bold capitalize">{dna.genderPreference}</p>
-                      <p className="text-xs text-muted-foreground">Preferencia</p>
+                      <p className="text-2xl font-bold">{dna.genderPreference}</p>
+                      <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Preferência</p>
                     </CardContent>
                   </Card>
                 </div>
@@ -409,19 +412,19 @@ export default function DNAPage() {
                 {/* Signature Notes */}
                 <Card>
                   <CardContent className="p-6">
-                    <h2 className="font-serif text-xl font-semibold mb-6">Suas notas assinatura</h2>
-                    <div className="space-y-3">
+                    <h2 className="font-serif text-xl font-semibold mb-6">Suas Notas Assinatura</h2>
+                    <div className="space-y-4">
                       {dna.topNotes.map(({ note, percentage }, index) => (
-                        <div key={note} className="flex items-center gap-4">
-                          <span className="w-6 text-center font-bold text-primary">{index + 1}</span>
+                        <div key={note} className="flex items-center gap-4 group">
+                          <span className="w-6 text-center font-bold text-primary/40 group-hover:text-primary transition-colors">{index + 1}</span>
                           <span className="flex-1 font-medium">{note}</span>
-                          <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
+                          <div className="w-32 md:w-48 h-2 bg-muted rounded-full overflow-hidden">
                             <div 
-                              className="h-full bg-primary rounded-full"
+                              className="h-full bg-primary rounded-full transition-all duration-1000 ease-out"
                               style={{ width: `${percentage}%` }}
                             />
                           </div>
-                          <span className="text-sm text-muted-foreground w-12 text-right">{percentage}%</span>
+                          <span className="text-sm text-muted-foreground w-12 text-right font-mono">{percentage}%</span>
                         </div>
                       ))}
                     </div>
@@ -431,30 +434,30 @@ export default function DNAPage() {
                 {/* Dominant Accords */}
                 <Card>
                   <CardContent className="p-6">
-                    <h2 className="font-serif text-xl font-semibold mb-6">Acordes dominantes</h2>
+                    <h2 className="font-serif text-xl font-semibold mb-6">Acordes Dominantes</h2>
                     <div className="flex flex-wrap gap-3">
                       {dna.topAccords.map(({ accord, percentage }) => (
                         <Badge 
                           key={accord} 
-                          className="px-4 py-2 text-sm bg-primary/10 text-primary border-primary/20"
+                          className="px-4 py-2 text-sm bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-colors"
                         >
                           {accord}
-                          <span className="ml-2 opacity-70">{percentage}%</span>
+                          <span className="ml-2 opacity-60 font-mono">{percentage}%</span>
                         </Badge>
                       ))}
                     </div>
                   </CardContent>
                 </Card>
 
-                {/* Recommendations based on DNA */}
+                {/* Recommendations */}
                 <Card className="bg-primary/5 border-primary/20">
                   <CardContent className="p-6">
                     <div className="flex items-center gap-2 mb-4">
                       <Sparkles className="h-5 w-5 text-primary" />
-                      <h2 className="font-serif text-xl font-semibold">Recomendados para voce</h2>
+                      <h2 className="font-serif text-xl font-semibold">Recomendados Para Você</h2>
                     </div>
-                    <p className="text-muted-foreground mb-6">
-                      Com base no seu DNA, estas fragrâncias podem combinar com você
+                    <p className="text-muted-foreground mb-6 text-sm">
+                      Com base no seu DNA, estas fragrâncias podem combinar perfeitamente com seu gosto.
                     </p>
                     <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
                       {perfumes
@@ -462,21 +465,21 @@ export default function DNAPage() {
                         .slice(0, 3)
                         .map(perfume => (
                           <Link key={perfume.id} href={`/perfumes/${perfume.id}`}>
-                            <div className="flex items-center gap-3 p-3 rounded-lg bg-card hover:shadow-md transition-all">
+                            <div className="flex items-center gap-3 p-3 rounded-xl bg-card hover:shadow-lg transition-all border border-border/50 hover:border-primary/30 group">
                               <div className="relative w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
-                                <Image src={getPerfumeImage(perfume)} alt={perfume.name} fill className="object-cover" />
+                                <Image src={getPerfumeImage(perfume)} alt={perfume.name} fill className="object-cover group-hover:scale-110 transition-transform" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-xs text-muted-foreground truncate">{perfume.brand}</p>
-                                <p className="text-sm font-medium truncate">{perfume.name}</p>
+                                <p className="text-[10px] text-muted-foreground truncate uppercase">{perfume.brand}</p>
+                                <p className="text-sm font-semibold truncate group-hover:text-primary transition-colors">{perfume.name}</p>
                               </div>
                             </div>
                           </Link>
                         ))}
                     </div>
-                    <div className="mt-4 text-center">
+                    <div className="mt-6 text-center">
                       <Link href="/discover/similar">
-                        <Button variant="outline">Encontrar mais resultados</Button>
+                        <Button variant="outline" className="rounded-full px-8">Explorar Mais Resultados</Button>
                       </Link>
                     </div>
                   </CardContent>

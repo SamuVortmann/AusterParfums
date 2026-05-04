@@ -6,32 +6,32 @@ const noteCategories = [
   {
     name: "Floral",
     color: "bg-rose-100 text-rose-700 hover:bg-rose-200",
-    notes: ["Rose", "Jasmine", "Lily", "Peony", "Violet", "Iris"],
+    notes: ["Rosa", "Jasmim", "Lírio", "Peônia", "Violeta", "Íris"],
   },
   {
     name: "Amadeirado",
     color: "bg-amber-100 text-amber-700 hover:bg-amber-200",
-    notes: ["Sandalwood", "Cedar", "Oud", "Vetiver", "Patchouli", "Birch"],
+    notes: ["Sândalo", "Cedro", "Oud", "Vetiver", "Patchouli", "Bétula"],
   },
   {
-    name: "Citrico",
+    name: "Cítrico",
     color: "bg-yellow-100 text-yellow-700 hover:bg-yellow-200",
-    notes: ["Bergamot", "Lemon", "Orange", "Grapefruit", "Lime", "Mandarin"],
+    notes: ["Bergamota", "Limão", "Laranja", "Toranja", "Lima", "Mandarina"],
   },
   {
     name: "Oriental",
     color: "bg-orange-100 text-orange-700 hover:bg-orange-200",
-    notes: ["Vanilla", "Amber", "Musk", "Incense", "Benzoin", "Labdanum"],
+    notes: ["Baunilha", "Âmbar", "Almíscar", "Incenso", "Benzoíno", "Ládano"],
   },
   {
     name: "Fresco",
     color: "bg-cyan-100 text-cyan-700 hover:bg-cyan-200",
-    notes: ["Aquatic", "Green", "Ozonic", "Mint", "Cucumber", "Tea"],
+    notes: ["Aquático", "Verde", "Ozônico", "Hortelã", "Pepino", "Chá"],
   },
   {
     name: "Especiado",
     color: "bg-red-100 text-red-700 hover:bg-red-200",
-    notes: ["Cinnamon", "Cardamom", "Pepper", "Saffron", "Nutmeg", "Clove"],
+    notes: ["Canela", "Cardamomo", "Pimenta", "Açafrão", "Noz-moscada", "Cravo-da-Índia"],
   },
 ]
 
@@ -74,7 +74,6 @@ export function NotesExplorer() {
               className={`p-6 rounded-xl text-center transition-all hover:scale-105 ${activeCategory.color}`}
             >
               <span className="font-medium">{note}</span>
-              <p className="text-xs mt-1 opacity-70">Ver perfumes</p>
             </button>
           ))}
         </div>

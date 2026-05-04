@@ -100,7 +100,6 @@ function InspirationCard({ inspiration }: { inspiration: Inspiration }) {
               key={note}
               className="px-2 py-0.5 text-xs bg-secondary rounded-full text-muted-foreground"
             >
-              {translateOlfactoryTerm(note)}
             </span>
           ))}
         </div>
