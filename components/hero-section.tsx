@@ -5,11 +5,22 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { formatCompactNumber, siteStats } from "@/lib/site-stats"
+import { useRouter } from "next/navigation"
 
 const popularSearches = ["Rose", "Oud", "Vanilla", "Musk", "Citrus", "Woody"]
 
 export function HeroSection() {
   const [searchQuery, setSearchQuery] = useState("")
+  const router = useRouter()
+
+  const handleSearch = () => {
+    const query = searchQuery.trim()
+    if (!query) {
+      router.push("/perfumes")
+      return
+    }
+    router.push(`/perfumes?q=${encodeURIComponent(query)}`)
+  }
 
   return (
     <section className="relative overflow-hidden bg-secondary py-20 lg:py-32">
@@ -41,9 +52,18 @@ export function HeroSection() {
                   className="pl-12 h-14 bg-card border-border text-base rounded-xl shadow-sm"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleSearch()
+                    }
+                  }}
                 />
               </div>
-              <Button size="lg" className="h-14 px-8 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90">
+              <Button
+                size="lg"
+                className="h-14 px-8 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90"
+                onClick={handleSearch}
+              >
                 Buscar
               </Button>
             </div>
@@ -54,7 +74,10 @@ export function HeroSection() {
               {popularSearches.map((term) => (
                 <button
                   key={term}
-                  onClick={() => setSearchQuery(term)}
+                  onClick={() => {
+                    setSearchQuery(term)
+                    router.push(`/perfumes?q=${encodeURIComponent(term)}`)
+                  }}
                   className="px-3 py-1 text-sm bg-card hover:bg-muted rounded-full border border-border text-foreground transition-colors"
                 >
                   {term}

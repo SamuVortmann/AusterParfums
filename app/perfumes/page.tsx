@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { PerfumeCard } from "@/components/perfume-card"
@@ -38,6 +38,11 @@ export default function PerfumesPage() {
   const [genderFilter, setGenderFilter] = useState("all")
   const [sortBy, setSortBy] = useState("popular")
   const [showFilters, setShowFilters] = useState(false)
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    setSearchQuery(params.get("q") ?? "")
+  }, [])
 
   const filteredPerfumes = useMemo(() => {
     let result = [...perfumes]
@@ -184,6 +189,7 @@ export default function PerfumesPage() {
               {filteredPerfumes.map((perfume) => (
                 <Link key={perfume.id} href={`/perfumes/${perfume.id}`}>
                   <PerfumeCard
+                      id={perfume.id}
                     name={perfume.name}
                     brand={perfume.brand}
                     image={getPerfumeImage(perfume)}

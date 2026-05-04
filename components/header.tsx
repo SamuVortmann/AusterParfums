@@ -40,17 +40,23 @@ export function Header() {
 
           {/* Right Actions */}
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
+            <Button asChild variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
+              <Link href="/perfumes">
               <Search className="h-5 w-5" />
               <span className="sr-only">Buscar</span>
+              </Link>
             </Button>
-            <Button variant="ghost" size="icon" className="hidden sm:flex text-muted-foreground hover:text-foreground">
+            <Button asChild variant="ghost" size="icon" className="hidden sm:flex text-muted-foreground hover:text-foreground">
+              <Link href="/favoritos">
               <Heart className="h-5 w-5" />
               <span className="sr-only">Lista de desejos</span>
+              </Link>
             </Button>
-            <Button variant="ghost" size="icon" className="hidden sm:flex text-muted-foreground hover:text-foreground">
+            <Button asChild variant="ghost" size="icon" className="hidden sm:flex text-muted-foreground hover:text-foreground">
+              <Link href="/perfil">
               <User className="h-5 w-5" />
               <span className="sr-only">Conta</span>
+              </Link>
             </Button>
             <Button 
               variant="ghost" 
@@ -85,6 +91,12 @@ export function Header() {
               </Link>
               <Link href="/compare" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
                 Comparar
+              </Link>
+              <Link href="/favoritos" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                Favoritos
+              </Link>
+              <Link href="/perfil" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                Perfil
               </Link>
             </div>
           </nav>

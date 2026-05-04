@@ -2,9 +2,11 @@
 
 import { Heart, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { isFavorite, toggleFavorite } from "@/lib/user-store"
 
 interface PerfumeCardProps {
+  id: string
   name: string
   brand: string
   image: string
@@ -14,8 +16,12 @@ interface PerfumeCardProps {
   year?: number
 }
 
-export function PerfumeCard({ name, brand, image, rating, reviewCount, topNotes, year }: PerfumeCardProps) {
+export function PerfumeCard({ id, name, brand, image, rating, reviewCount, topNotes, year }: PerfumeCardProps) {
   const [isLiked, setIsLiked] = useState(false)
+
+  useEffect(() => {
+    setIsLiked(isFavorite(id))
+  }, [id])
 
   return (
     <article className="group bg-card rounded-2xl border border-border overflow-hidden hover:shadow-lg transition-all duration-300">
@@ -32,7 +38,12 @@ export function PerfumeCard({ name, brand, image, rating, reviewCount, topNotes,
           className={`absolute top-3 right-3 h-9 w-9 rounded-full bg-card/80 backdrop-blur-sm hover:bg-card ${
             isLiked ? "text-red-500" : "text-muted-foreground"
           }`}
-          onClick={() => setIsLiked(!isLiked)}
+          onClick={(event) => {
+            event.preventDefault()
+            event.stopPropagation()
+            const nextFavorites = toggleFavorite(id)
+            setIsLiked(nextFavorites.includes(id))
+          }}
         >
           <Heart className={`h-4 w-4 ${isLiked ? "fill-current" : ""}`} />
           <span className="sr-only">Adicionar à lista de desejos</span>

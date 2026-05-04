@@ -7,6 +7,7 @@ const featuredPerfumes = [...perfumes]
   .sort((a, b) => b.rating - a.rating)
   .slice(0, 4)
   .map((p) => ({
+    id: p.id,
     name: p.name,
     brand: p.brand,
     image: p.image,
@@ -34,7 +35,7 @@ export function FeaturedSection() {
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {featuredPerfumes.map((perfume) => (
-            <PerfumeCard reviewCount={0} key={perfume.name} {...perfume} />
+            <PerfumeCard reviewCount={0} key={perfume.id} {...perfume} />
           ))}
         </div>
 

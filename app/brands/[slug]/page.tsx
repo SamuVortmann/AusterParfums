@@ -90,6 +90,7 @@ export default function BrandDetailPage({ params }: { params: Promise<{ slug: st
                 {brandPerfumes.map((perfume) => (
                   <Link key={perfume.id} href={`/perfumes/${perfume.id}`}>
                     <PerfumeCard
+                      id={perfume.id}
                       name={perfume.name}
                       brand={perfume.brand}
                       image={getPerfumeImage(perfume)}
