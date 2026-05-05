@@ -215,7 +215,9 @@ export default function BrandsPage() {
                             <img
                               src={brand.logo}
                               alt={brand.name}
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-contain p-1"
+                              loading="lazy"
+                              referrerPolicy="no-referrer"
                             />
                           </div>
                           <div className="flex-1 min-w-0">
@@ -257,7 +259,9 @@ export default function BrandsPage() {
                       <img
                         src={brand.logo}
                         alt={brand.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain p-1"
+                        loading="lazy"
+                        referrerPolicy="no-referrer"
                       />
                     </div>
                     <div className="flex-1 min-w-0">

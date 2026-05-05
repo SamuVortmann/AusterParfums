@@ -4,7 +4,7 @@ import { use } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { PerfumeCard } from "@/components/perfume-card"
-import { notes, perfumes } from "@/lib/data"
+import { notes, getPerfumesWithNote, getCatalogPerfumeCountForNote } from "@/lib/data"
 import { ChevronRight } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -12,15 +12,28 @@ import { getPerfumeImage } from "@/lib/perfume-images"
 
 const categoryColors: { [key: string]: string } = {
   floral: "bg-pink-100 text-pink-800",
-  woody: "bg-amber-100 text-amber-800",
-  citrus: "bg-yellow-100 text-yellow-800",
+  amadeirado: "bg-amber-100 text-amber-800",
+  citrico: "bg-yellow-100 text-yellow-800",
   oriental: "bg-orange-100 text-orange-800",
-  fresh: "bg-cyan-100 text-cyan-800",
-  spicy: "bg-red-100 text-red-800",
-  fruity: "bg-rose-100 text-rose-800",
-  green: "bg-emerald-100 text-emerald-800",
-  aquatic: "bg-blue-100 text-blue-800",
+  fresco: "bg-cyan-100 text-cyan-800",
+  especiado: "bg-red-100 text-red-800",
+  frutado: "bg-rose-100 text-rose-800",
+  verde: "bg-emerald-100 text-emerald-800",
+  aquatico: "bg-blue-100 text-blue-800",
   gourmand: "bg-amber-100 text-amber-800",
+}
+
+const categoryLabels: Record<string, string> = {
+  floral: "Floral",
+  amadeirado: "Amadeirado",
+  citrico: "Cítrico",
+  oriental: "Oriental",
+  fresco: "Fresco",
+  especiado: "Especiado",
+  frutado: "Frutado",
+  verde: "Verde",
+  aquatico: "Aquático",
+  gourmand: "Gourmand",
 }
 
 const noteTermMap: Record<string, string> = {
@@ -169,13 +182,8 @@ export default function NoteDetailPage({ params }: { params: Promise<{ slug: str
     notFound()
   }
 
-  // Find perfumes that contain this note
-  const relatedPerfumes = perfumes.filter(
-    (p) =>
-      p.topNotes.some((n) => n.toLowerCase().includes(note.name.toLowerCase())) ||
-      p.middleNotes.some((n) => n.toLowerCase().includes(note.name.toLowerCase())) ||
-      p.baseNotes.some((n) => n.toLowerCase().includes(note.name.toLowerCase()))
-  )
+  const relatedPerfumes = getPerfumesWithNote(note)
+  const catalogCount = relatedPerfumes.length
 
   // Find related notes in the same category
   const relatedNotes = notes.filter(
@@ -197,9 +205,9 @@ export default function NoteDetailPage({ params }: { params: Promise<{ slug: str
               <ChevronRight className="h-4 w-4" />
               <Link
                 href={`/notes?category=${note.category}`}
-                className="hover:text-foreground transition-colors capitalize"
+                className="hover:text-foreground transition-colors"
               >
-                {note.category}
+                {categoryLabels[note.category] ?? note.category}
               </Link>
               <ChevronRight className="h-4 w-4" />
               <span className="text-foreground">{translateNoteName(note.name)}</span>
@@ -212,11 +220,11 @@ export default function NoteDetailPage({ params }: { params: Promise<{ slug: str
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
               <span
-                className={`inline-block px-3 py-1 rounded-full text-sm font-medium capitalize ${
+                className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
                   categoryColors[note.category] || "bg-muted text-muted-foreground"
                 }`}
               >
-                {note.category}
+                {categoryLabels[note.category] ?? note.category}
               </span>
               <h1 className="mt-4 font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground">
                 {translateNoteName(note.name)}
@@ -225,7 +233,9 @@ export default function NoteDetailPage({ params }: { params: Promise<{ slug: str
                 {translateNoteDescription(note.description)}
               </p>
               <p className="mt-4 text-foreground font-medium">
-                Presente em {note.perfumeCount.toLocaleString()} perfumes
+                {catalogCount === 0
+                  ? "Nenhum perfume no catálogo lista essa nota ainda"
+                  : `Presente em ${catalogCount.toLocaleString()} perfume${catalogCount === 1 ? "" : "s"} no catálogo`}
               </p>
             </div>
           </div>
@@ -268,7 +278,7 @@ export default function NoteDetailPage({ params }: { params: Promise<{ slug: str
           <section className="py-12 lg:py-16 bg-secondary">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <h2 className="font-serif text-2xl font-semibold text-foreground">
-                Notas relacionadas de {note.category}
+                Notas relacionadas — {categoryLabels[note.category] ?? note.category}
               </h2>
               <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {relatedNotes.map((relatedNote) => (
@@ -284,7 +294,7 @@ export default function NoteDetailPage({ params }: { params: Promise<{ slug: str
                       {translateNoteDescription(relatedNote.description)}
                     </p>
                     <p className="mt-3 text-sm font-medium text-foreground">
-                      {relatedNote.perfumeCount.toLocaleString()} perfumes
+                      {getCatalogPerfumeCountForNote(relatedNote).toLocaleString()} perfumes no catálogo
                     </p>
                   </Link>
                 ))}

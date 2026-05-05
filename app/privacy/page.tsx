@@ -3,88 +3,88 @@ import { Footer } from "@/components/footer"
 
 const sections = [
   {
-    title: "Informacoes que coletamos",
-    content: `Coletamos informacoes fornecidas diretamente por voce, como ao criar conta, publicar avaliacoes ou entrar em contato:
+    title: "Informações que coletamos",
+    content: `Coletamos informações fornecidas diretamente por você, como ao criar uma conta, publicar avaliações ou entrar em contato:
 
-- Nome e endereco de e-mail
-- Informacoes de perfil e preferencias
-- Avaliacoes e notas de fragrancias
-- Dados de colecao e lista de desejos
-- Comunicacoes com nossa equipe
+- Nome e endereço de e-mail
+- Informações de perfil e preferências
+- Avaliações e notas de fragrâncias
+- Dados de coleção e lista de desejos
+- Comunicações com nossa equipe
 
-Tambem coletamos automaticamente dados de uso, como dispositivo, IP e navegacao, por meio de cookies e tecnologias semelhantes.`
+Também coletamos automaticamente dados de uso, como dispositivo, IP e navegação, por meio de cookies e tecnologias semelhantes.`
   },
   {
-    title: "Como usamos suas informacoes",
+    title: "Como usamos suas informações",
     content: `Usamos os dados coletados para:
 
-- Fornecer, manter e melhorar os servicos
-- Personalizar recomendacoes de fragrancias
+- Fornecer, manter e melhorar os serviços
+- Personalizar recomendações de fragrâncias
 - Gerenciar sua conta e perfil
-- Enviar novidades e comunicacoes de marketing (com consentimento)
-- Responder a comentarios, duvidas e solicitacoes
-- Monitorar e analisar uso da plataforma
+- Enviar novidades e comunicações de marketing (com consentimento)
+- Responder a comentários, dúvidas e solicitações
+- Monitorar e analisar o uso da plataforma
 - Detectar e prevenir fraudes e atividades ilegais
-- Cumprir obrigacoes legais`
+- Cumprir obrigações legais`
   },
   {
-    title: "Compartilhamento de informacoes",
-    content: `Nao vendemos seus dados pessoais. Podemos compartilhar informacoes nas seguintes situacoes:
+    title: "Compartilhamento de informações",
+    content: `Não vendemos seus dados pessoais. Podemos compartilhar informações nas seguintes situações:
 
-- Com seu consentimento ou por sua solicitacao
-- Com prestadores de servico que atuam em nosso nome
-- Para cumprimento de obrigacoes legais
-- Para proteger direitos, privacidade e seguranca da Verdara, de voce ou de terceiros
-- Em operacoes societarias (fusão, aquisicao ou venda de ativos)
+- Com seu consentimento ou por sua solicitação
+- Com prestadores de serviço que atuam em nosso nome
+- Para cumprimento de obrigações legais
+- Para proteger direitos, privacidade e segurança da Verdara, de você ou de terceiros
+- Em operações societárias (fusão, aquisição ou venda de ativos)
 
-Informacoes publicas de perfil, avaliacoes e notas podem ser visiveis para outros usuarios.`
+Informações públicas de perfil, avaliações e notas podem ser visíveis para outros usuários.`
   },
   {
-    title: "Seguranca de dados",
-    content: `Aplicamos medidas tecnicas e organizacionais para proteger seus dados contra acesso, alteracao, divulgacao ou destruicao nao autorizados.
+    title: "Segurança de dados",
+    content: `Aplicamos medidas técnicas e organizacionais para proteger seus dados contra acesso, alteração, divulgação ou destruição não autorizados.
 
-Usamos criptografia, servidores seguros e revisoes periodicas. Ainda assim, nenhum metodo de transmissao ou armazenamento e 100% seguro.`
+Usamos criptografia, servidores seguros e revisões periódicas. Ainda assim, nenhum método de transmissão ou armazenamento é 100% seguro.`
   },
   {
     title: "Seus direitos e escolhas",
-    content: `Voce possui direitos sobre seus dados pessoais:
+    content: `Você possui direitos sobre seus dados pessoais:
 
-- Acesso: solicitar quais dados mantemos sobre voce
-- Correcao: atualizar dados nas configuracoes da conta
-- Exclusao: solicitar remocao da conta e dados relacionados
-- Opt-out: deixar de receber comunicacoes de marketing
-- Portabilidade: solicitar copia dos dados em formato portavel
+- Acesso: solicitar quais dados mantemos sobre você
+- Correção: atualizar dados nas configurações da conta
+- Exclusão: solicitar remoção da conta e dados relacionados
+- Opt-out: deixar de receber comunicações de marketing
+- Portabilidade: solicitar cópia dos dados em formato portável
 
 Para exercer esses direitos, escreva para privacy@verdara.com.`
   },
   {
     title: "Cookies e rastreamento",
-    content: `Usamos cookies e tecnologias similares para entender sua navegacao. Voce pode gerenciar preferencias no seu navegador.
+    content: `Usamos cookies e tecnologias similares para entender sua navegação. Você pode gerenciar preferências no seu navegador.
 
 Tipos de cookies:
-- Essenciais: funcionamento basico do site
-- Analiticos: entendimento de uso da plataforma
-- Preferencias: memorizacao de configuracoes
-- Marketing: exibicao de comunicacoes relevantes`
+- Essenciais: funcionamento básico do site
+- Analíticos: entendimento de uso da plataforma
+- Preferências: memorização de configurações
+- Marketing: exibição de comunicações relevantes`
   },
   {
-    title: "Privacidade de criancas",
-    content: `Nossos servicos nao sao destinados a menores de 13 anos. Nao coletamos intencionalmente dados pessoais de criancas. Se identificarmos coleta indevida, removeremos as informacoes.`
+    title: "Privacidade de crianças",
+    content: `Nossos serviços não são destinados a menores de 13 anos. Não coletamos intencionalmente dados pessoais de crianças. Se identificarmos coleta indevida, removeremos as informações.`
   },
   {
-    title: "Transferencias internacionais",
-    content: `Seus dados podem ser transferidos e processados em outros paises, cujas leis de protecao podem ser diferentes das do seu pais. Adotamos salvaguardas apropriadas para manter a protecao dos dados.`
+    title: "Transferências internacionais",
+    content: `Seus dados podem ser transferidos e processados em outros países, cujas leis de proteção podem ser diferentes das do seu país. Adotamos salvaguardas apropriadas para manter a proteção dos dados.`
   },
   {
-    title: "Alteracoes nesta politica",
-    content: `Podemos atualizar esta Politica de Privacidade periodicamente. As mudancas serao publicadas nesta pagina com a data de ultima atualizacao revisada.`
+    title: "Alterações nesta política",
+    content: `Podemos atualizar esta Política de Privacidade periodicamente. As mudanças serão publicadas nesta página com a data de última atualização revisada.`
   },
   {
     title: "Contato",
-    content: `Se tiver duvidas sobre esta Politica de Privacidade, fale com a gente:
+    content: `Se tiver dúvidas sobre esta Política de Privacidade, fale com a gente:
 
-Email: privacy@verdara.com
-Endereco: 123 Fragrance Way, San Francisco, CA 94102`
+E-mail: privacy@verdara.com
+Endereço: 123 Fragrance Way, San Francisco, CA 94102`
   },
 ]
 
@@ -98,13 +98,13 @@ export default function PrivacyPage() {
         <section className="bg-secondary py-12 lg:py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-foreground">
-              Politica de privacidade
+              Política de Privacidade
             </h1>
             <p className="mt-4 text-muted-foreground">
-              Ultima atualizacao: 26 de abril de 2026
+              Última atualização: 26 de abril de 2026
             </p>
             <p className="mt-6 text-lg text-muted-foreground text-pretty">
-              Na Verdara, levamos sua privacidade a serio. Esta politica explica como coletamos, usamos, compartilhamos e protegemos suas informacoes.
+              Na Verdara, levamos sua privacidade a sério. Esta política explica como coletamos, usamos, compartilhamos e protegemos suas informações.
             </p>
           </div>
         </section>

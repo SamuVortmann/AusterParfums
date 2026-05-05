@@ -18,7 +18,7 @@ import Link from "next/link"
 import { getPerfumeImage } from "@/lib/perfume-images"
 
 const genderFilters = [
-  { value: "all", label: "Todos os generos" },
+  { value: "all", label: "Todos os gêneros" },
   { value: "men", label: "Masculino" },
   { value: "women", label: "Feminino" },
   { value: "unisex", label: "Unisex" },

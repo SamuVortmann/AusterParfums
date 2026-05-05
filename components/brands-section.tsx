@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { BrandLogoThumb } from "@/components/brand-logo-thumb"
 import { brands as allBrands, getPerfumesByBrand } from "@/lib/data"
 import { formatCompactNumber, siteStats } from "@/lib/site-stats"
 
@@ -27,10 +28,8 @@ export function BrandsSection() {
               href={`/brands/${brand.brand.slug}`}
               className="group flex flex-col items-center p-6 bg-card rounded-xl border border-border hover:border-primary/30 hover:shadow-md transition-all"
             >
-              <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                <span className="font-serif font-semibold text-lg">
-                  {brand.brand.name.slice(0, 2).toUpperCase()}
-                </span>
+              <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center mb-3 overflow-hidden p-2 ring-1 ring-border/50 group-hover:ring-primary/35 transition-all">
+                <BrandLogoThumb name={brand.brand.name} logoUrl={brand.brand.logo} size={44} className="max-h-10 max-w-10" />
               </div>
               <span className="font-medium text-sm text-foreground text-center">{brand.brand.name}</span>
               <span className="text-xs text-muted-foreground mt-1">{brand.perfumeCount} perfumes</span>

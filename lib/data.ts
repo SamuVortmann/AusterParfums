@@ -710,7 +710,7 @@ export const brands: Brand[] = [
     country: "França",
     founded: 1961,
     description: "Yves Saint Laurent Beauté cria fragrâncias ousadas e icônicas que incorporam o estilo parisiense e a herança da alta costura.",
-    perfumeCount: 178,
+    perfumeCount: 3,
     featured: true
   },
   {
@@ -1083,6 +1083,21 @@ export function getNoteBySlug(slug: string): Note | undefined {
   return notes.find(n => n.slug === slug)
 }
 
+/** Whether any pyramid layer of the perfume mentions this catalog note name (substring match). */
+export function perfumeMatchesNoteName(perfume: Perfume, noteName: string): boolean {
+  const needle = noteName.toLowerCase()
+  const layers = [...perfume.topNotes, ...perfume.middleNotes, ...perfume.baseNotes]
+  return layers.some((n) => n.toLowerCase().includes(needle))
+}
+
+export function getPerfumesWithNote(note: Pick<Note, "name">): Perfume[] {
+  return perfumes.filter((p) => perfumeMatchesNoteName(p, note.name))
+}
+
+export function getCatalogPerfumeCountForNote(note: Pick<Note, "name">): number {
+  return getPerfumesWithNote(note).length
+}
+
 
 export function getReviewsByPerfume(perfumeId: string): Review[] {
   return reviews.filter(r => r.perfumeId === perfumeId)
@@ -1121,8 +1136,7 @@ export function getSimilarPerfumes(perfumeId: string): Inspiration[] {
         perfumeId: p.id,
         name: p.name,
         brand: p.brand,
-        description: `Similar ${sharedAccords.length > 0 ? sharedAccords.slice(0, 2).join(" & ") : "profile"} character with ${sharedNotes.length > 0 ? "shared notes of " + sharedNotes.slice(0, 2).join(", ") : "complementary notes"}.`,
-        priceRange: ["Creed", "Tom Ford", "Maison Francis Kurkdjian", "Frederic Malle"].includes(p.brand) ? "luxury" : ["Dior", "Chanel", "Le Labo", "Yves Saint Laurent"].includes(p.brand) ? "mid" : "budget",
+        description: `Perfil ${sharedAccords.length > 0 ? sharedAccords.slice(0, 2).join(" e ") : "olfativo"} semelhante, com ${sharedNotes.length > 0 ? "notas compartilhadas de " + sharedNotes.slice(0, 2).join(", ") : "notas complementares"}.`,        priceRange: ["Creed", "Tom Ford", "Maison Francis Kurkdjian", "Frederic Malle"].includes(p.brand) ? "luxury" : ["Dior", "Chanel", "Le Labo", "Yves Saint Laurent"].includes(p.brand) ? "mid" : "budget",
         similarity,
         notes: sharedNotes.slice(0, 4)
       } as Inspiration

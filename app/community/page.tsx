@@ -1,9 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { Star, MessageSquare, Eye, Users, TrendingUp, BookOpen, ThumbsUp } from "lucide-react"
+import { Star, MessageSquare, Eye, Users, TrendingUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { formatCompactNumber, siteStats } from "@/lib/site-stats"
@@ -12,12 +13,11 @@ import type { ReviewDTO } from "@/lib/reviews-serialize"
 import { ForumNewThreadDialog, type ForumThreadListItem } from "@/components/forum-new-thread-dialog"
 import { usePublicStats } from "@/components/public-stats-provider"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { categoryBadgeClass, FORUM_CATEGORY_VALUES } from "@/lib/forum-categories"
+import { categoryBadgeClass, FORUM_CATEGORY_VALUES, isForumCategory } from "@/lib/forum-categories"
 
 const tabs = [
   { id: "forum", label: "Fórum", icon: MessageSquare },
   { id: "reviews", label: "Avaliações recentes", icon: Star },
-  { id: "collections", label: "Coleções", icon: BookOpen },
 ]
 
 function forumAuthorInitials(name: string) {
@@ -32,6 +32,9 @@ function forumAuthorInitials(name: string) {
 }
 
 export default function CommunityPage() {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
   const { loaded: statsLoaded, totalReviews, forumThreadCount, refresh } = usePublicStats()
   const [activeTab, setActiveTab] = useState("forum")
   const [feedReviews, setFeedReviews] = useState<ReviewDTO[]>([])
@@ -42,6 +45,28 @@ export default function CommunityPage() {
   const [categoryCounts, setCategoryCounts] = useState<Record<string, number>>({})
   const [filterCategory, setFilterCategory] = useState<string | null>(null)
   const [newThreadOpen, setNewThreadOpen] = useState(false)
+
+  const replaceCommunityQuery = useCallback(
+    (mutate: (p: URLSearchParams) => void) => {
+      const p = new URLSearchParams(searchParams.toString())
+      mutate(p)
+      const qs = p.toString()
+      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false })
+    },
+    [pathname, router, searchParams],
+  )
+
+  useEffect(() => {
+    const t = searchParams.get("tab")
+    if (t === "collections") {
+      replaceCommunityQuery((p) => p.delete("tab"))
+      setActiveTab("forum")
+    } else if (t === "forum" || t === "reviews") {
+      setActiveTab(t)
+    }
+    const fc = searchParams.get("forumCategory")
+    if (fc && isForumCategory(fc)) setFilterCategory(fc)
+  }, [searchParams, replaceCommunityQuery])
 
   useEffect(() => {
     void (async () => {
@@ -149,7 +174,14 @@ export default function CommunityPage() {
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  type="button"
+                  onClick={() => {
+                    setActiveTab(tab.id)
+                    replaceCommunityQuery((p) => {
+                      p.set("tab", tab.id)
+                      if (tab.id !== "forum") p.delete("forumCategory")
+                    })
+                  }}
                   className={`flex items-center gap-2 px-4 py-4 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
                     activeTab === tab.id
                       ? "border-primary text-primary"
@@ -242,7 +274,13 @@ export default function CommunityPage() {
                   <div className="space-y-3">
                     <button
                       type="button"
-                      onClick={() => setFilterCategory(null)}
+                      onClick={() => {
+                        setFilterCategory(null)
+                        replaceCommunityQuery((p) => {
+                          p.set("tab", "forum")
+                          p.delete("forumCategory")
+                        })
+                      }}
                       className={`w-full flex items-center justify-between p-3 rounded-lg hover:bg-secondary transition-colors text-left ${
                         filterCategory === null ? "bg-secondary" : ""
                       }`}
@@ -256,7 +294,13 @@ export default function CommunityPage() {
                       <button
                         key={name}
                         type="button"
-                        onClick={() => setFilterCategory(name)}
+                        onClick={() => {
+                          setFilterCategory(name)
+                          replaceCommunityQuery((p) => {
+                            p.set("tab", "forum")
+                            p.set("forumCategory", name)
+                          })
+                        }}
                         className={`w-full flex items-center justify-between p-3 rounded-lg hover:bg-secondary transition-colors ${
                           filterCategory === name ? "bg-secondary" : ""
                         }`}
@@ -343,96 +387,6 @@ export default function CommunityPage() {
                   </Button>
                 </div>
               )}
-            </div>
-          )}
-
-          {activeTab === "collections" && (
-            <div>
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="font-serif text-2xl font-semibold text-foreground">
-                  Coleções em destaque
-                </h2>
-                <Button>Criar coleção</Button>
-              </div>
-
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[
-                  {
-                    title: "Best Office Fragrances 2026",
-                    author: "FragranceExpert",
-                    count: 24,
-                    likes: 456,
-                    image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400&h=300&fit=crop",
-                  },
-                  {
-                    title: "Summer Date Night Picks",
-                    author: "ScentLover",
-                    count: 18,
-                    likes: 312,
-                    image: "https://images.unsplash.com/photo-1557170334-a9632e77c6e4?w=400&h=300&fit=crop",
-                  },
-                  {
-                    title: "Under $50 Hidden Gems",
-                    author: "BudgetScenter",
-                    count: 32,
-                    likes: 567,
-                    image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=400&h=300&fit=crop",
-                  },
-                  {
-                    title: "Niche House Essentials",
-                    author: "NicheCollector",
-                    count: 15,
-                    likes: 234,
-                    image: "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400&h=300&fit=crop",
-                  },
-                  {
-                    title: "Cozy Fall Scents",
-                    author: "SeasonalScenter",
-                    count: 21,
-                    likes: 189,
-                    image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&h=300&fit=crop",
-                  },
-                  {
-                    title: "Oud For Beginners",
-                    author: "OudExplorer",
-                    count: 12,
-                    likes: 298,
-                    image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=300&fit=crop",
-                  },
-                ].map((collection, index) => (
-                  <article
-                    key={index}
-                    className="group bg-card rounded-xl border border-border overflow-hidden hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="aspect-video overflow-hidden">
-                      <img
-                        src={collection.image}
-                        alt={collection.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="p-5">
-                      <h3 className="font-serif text-lg font-medium text-foreground group-hover:text-primary transition-colors">
-                        {collection.title}
-                      </h3>
-                      <p className="mt-1 text-sm text-muted-foreground">
-                        por {collection.author}
-                      </p>
-                      <div className="mt-4 flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">{collection.count} perfumes</span>
-                        <span className="flex items-center gap-1 text-muted-foreground">
-                          <ThumbsUp className="h-4 w-4" />
-                          {collection.likes}
-                        </span>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-
-              <div className="mt-8 text-center">
-                <Button variant="outline">Ver todas as coleções</Button>
-              </div>
             </div>
           )}
         </div>

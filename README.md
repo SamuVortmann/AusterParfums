@@ -1,64 +1,73 @@
 # Auster Parfums
 
-Site sobre perfumes e fragrâncias: catálogo, marcas, notas olfativas, ferramentas de descoberta e comunidade. Interface em Next.js com tema claro/escuro.
+Plataforma web para descobrir e comparar perfumes: catálogo, marcas, notas olfativas, ferramentas em **Descobrir** e **Comunidade** (fórum e feed de avaliações). A interface usa a marca **Verdara** no produto. Stack em **Next.js** (App Router), **React 19**, **TypeScript** e **Tailwind CSS**; tema claro/escuro.
+
+O **catálogo** (perfumes, marcas, notas) vive em dados mock em `lib/data.ts`. **Usuários, avaliações e tópicos do fórum** são persistidos em **PostgreSQL** via **Prisma**.
+
+## Funcionalidades
+
+- **Catálogo**: listagem, detalhe do perfume, marcas, página de notas com contagens dinâmicas no catálogo.
+- **Descobrir**: tradutor de perfume (texto → sugestões por notas/acordes), quiz, montagem por notas, DNA olfativo, similares e outras rotas em `app/discover/`.
+- **Comparar**: comparação lado a lado (`/compare`).
+- **Comunidade**: fórum por categorias e feed de avaliações recentes (`/community`).
+- **Conta**: registro, login, edição de perfil e exclusão de conta (`/perfil`).
+- **Lista de desejos**: preferências guardadas no navegador (sem login obrigatório).
 
 ## Requisitos
 
-- **Node.js** 18 ou superior (recomendado LTS)
-- **PostgreSQL** acessível via URL de conexão
+- **Node.js** 18.18+ ou 20+ (LTS recomendado)
+- **PostgreSQL** para autenticação, avaliações e fórum
 
-## Começando
+## Instalação
 
-### 1. Instalar dependências
+### 1. Dependências
 
 ```bash
 npm install
 ```
 
-O script `postinstall` executa `prisma generate` e gera o cliente Prisma em `lib/generated/prisma` (pasta ignorada pelo Git).
+O `postinstall` roda `prisma generate`. O cliente é gerado em `lib/generated/prisma` (pastas geradas podem estar no `.gitignore`).
 
 ### 2. Variáveis de ambiente
 
-Copie o exemplo e ajuste os valores:
+Copie o exemplo e edite os valores:
 
 ```bash
+# Windows (cmd/PowerShell)
 copy .env.example .env
 ```
 
-No Linux ou macOS:
-
 ```bash
+# macOS / Linux
 cp .env.example .env
 ```
 
-Edite `.env`:
-
-| Variável | Descrição |
-|----------|-----------|
-| `DATABASE_URL` | Connection string do PostgreSQL (usuário, senha, host, porta e nome do banco) |
-| `AUTH_SECRET` | Segredo para assinar cookies de sessão (JWT). Use uma string aleatória longa — **mínimo 32 caracteres** |
+| Variável        | Descrição |
+|-----------------|-----------|
+| `DATABASE_URL`  | URL do PostgreSQL (`postgresql://…`) |
+| `AUTH_SECRET`   | Segredo para JWT em cookie HTTP-only; **mínimo 32 caracteres**, aleatório em produção |
 
 ### 3. Banco de dados
 
-Com o Postgres em execução e `DATABASE_URL` correto:
+Com o Postgres acessível:
 
 ```bash
 npm run db:migrate
 ```
 
-Isso aplica as migrações em `prisma/migrations`. Em ambientes de CI ou produção sem modo interativo, use:
+CI/produção sem prompt interativo:
 
 ```bash
 npx prisma migrate deploy
 ```
 
-Para inspecionar dados no navegador:
+Inspeção visual dos dados:
 
 ```bash
 npm run db:studio
 ```
 
-### 4. Servidor de desenvolvimento
+### 4. Desenvolvimento
 
 ```bash
 npm run dev
@@ -66,7 +75,7 @@ npm run dev
 
 Abra [http://localhost:3000](http://localhost:3000).
 
-### Build de produção
+### Produção
 
 ```bash
 npm run build
@@ -75,44 +84,62 @@ npm start
 
 ## Scripts npm
 
-| Comando | Função |
-|---------|--------|
-| `npm run dev` | Servidor de desenvolvimento Next.js |
-| `npm run build` | Build otimizado |
-| `npm start` | Sobe a app após `build` |
-| `npm run lint` | ESLint (Next.js) |
-| `npm run db:migrate` | Cria/aplica migrações Prisma em desenvolvimento |
-| `npm run db:push` | Sincroniza o schema ao banco sem migração nomeada (útil em protótipos) |
-| `npm run db:studio` | Interface visual do Prisma para o banco |
+| Comando               | Descrição |
+|-----------------------|-----------|
+| `npm run dev`         | Servidor de desenvolvimento |
+| `npm run build`       | Build de produção |
+| `npm start`           | Servidor após `build` |
+| `npm run lint`        | ESLint (`eslint-config-next`) |
+| `npm run db:migrate`  | Migrações Prisma (dev) |
+| `npm run db:push`     | Sincroniza schema sem nova migração (prototipação) |
+| `npm run db:studio`   | Prisma Studio |
 
 ## Autenticação e perfil
 
-- Registro e login na rota **`/perfil`**, com dados persistidos no PostgreSQL.
-- Senhas armazenadas com hash (**bcrypt**). Sessão via cookie HTTP-only (**JWT** com a biblioteca `jose`).
-- Perfil: edição de nome, e-mail e senha; exclusão de conta. Para alterar **e-mail** ou **senha**, é necessário informar a senha atual.
+- Rotas em **`/perfil`**: cadastro, login, edição de nome/e-mail/senha, exclusão de conta.
+- Senhas com **bcrypt**; sessão com **JWT** (`jose`) em cookie HTTP-only.
+- Alterar **e-mail** ou **senha** exige informar a senha atual.
 
-Rotas de API principais:
+### API (usuário e auth)
 
-- `POST /api/auth/register` — cadastro
-- `POST /api/auth/login` — login
-- `POST /api/auth/logout` — sair
-- `GET /api/auth/me` — usuário da sessão atual
-- `PATCH /api/user` — atualizar perfil
-- `DELETE /api/user` — excluir conta
+| Método | Rota | Uso |
+|--------|------|-----|
+| `POST` | `/api/auth/register` | Cadastro |
+| `POST` | `/api/auth/login` | Login |
+| `POST` | `/api/auth/logout` | Encerrar sessão |
+| `GET`  | `/api/auth/me` | Sessão atual |
+| `PATCH` | `/api/user` | Atualizar perfil |
+| `DELETE` | `/api/user` | Excluir conta |
 
-## Stack técnica
+### API (conteúdo social)
 
-- **Next.js** (App Router), **React**, **TypeScript**
-- **Tailwind CSS** e componentes estilo **shadcn/ui** (Radix)
-- **Prisma** com PostgreSQL (`@prisma/adapter-pg` e driver `pg`)
+| Área | Rotas (resumo) |
+|------|----------------|
+| Avaliações | `GET/POST /api/reviews`, `GET/PATCH/DELETE /api/reviews/[reviewId]`, `POST /api/reviews/[reviewId]/helpful` |
+| Fórum | `GET/POST /api/forum/threads`, `GET/PATCH/DELETE /api/forum/threads/[threadId]`, `GET/POST …/replies` |
+| Estatísticas agregadas | `GET /api/public-stats` |
 
-## Estrutura (resumo)
+## Stack
 
-- `app/` — páginas e rotas da API
-- `components/` — componentes React e UI
-- `lib/` — utilitários, cliente Prisma, sessão e favoritos no navegador
-- `prisma/` — schema e migrações
+- **Next.js** 16 (App Router), **React** 19  
+- **Tailwind CSS** 4, componentes **Radix** / estilo shadcn  
+- **Prisma** 7 + **PostgreSQL** (`pg`, `@prisma/adapter-pg`)  
+- **Zod**, **react-hook-form** (formulários e validação onde aplicável)
+
+## Estrutura do repositório
+
+```
+app/           # Páginas, layouts e rotas em app/api/*
+components/    # UI React reutilizável
+lib/           # Prisma client, dados mock, sessão, utilitários (ex.: perfume-images)
+prisma/        # schema.prisma e migrations/
+public/        # Assets estáticos
+```
+
+## Modelo de dados (Prisma)
+
+Entidades persistidas incluem **User**, **PerfumeReview** (referência a `perfumeId` no mock de `lib/data.ts`), **ReviewHelpfulVote**, **ForumThread** e **ForumReply**. Detalhes em `prisma/schema.prisma`.
 
 ---
 
-Licença e detalhes do produto seguem as decisões do repositório.
+Licença e políticas de produto ficam à escolha do mantenedor deste repositório.

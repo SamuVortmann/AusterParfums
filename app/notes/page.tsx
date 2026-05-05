@@ -1,9 +1,10 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { notes } from "@/lib/data"
+import { notes, getCatalogPerfumeCountForNote } from "@/lib/data"
 import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -12,27 +13,42 @@ import Link from "next/link"
 const categories = [
   { value: "all", label: "Todas as notas", color: "bg-muted" },
   { value: "floral", label: "Floral", color: "bg-pink-100 dark:bg-pink-950" },
-  { value: "woody", label: "Amadeirado", color: "bg-amber-100 dark:bg-amber-950" },
-  { value: "citrus", label: "Cítrico", color: "bg-yellow-100 dark:bg-yellow-950" },
+  { value: "amadeirado", label: "Amadeirado", color: "bg-amber-100 dark:bg-amber-950" },
+  { value: "citrico", label: "Cítrico", color: "bg-yellow-100 dark:bg-yellow-950" },
   { value: "oriental", label: "Oriental", color: "bg-orange-100 dark:bg-orange-950" },
-  { value: "fresh", label: "Fresco", color: "bg-cyan-100 dark:bg-cyan-950" },
-  { value: "spicy", label: "Especiado", color: "bg-red-100 dark:bg-red-950" },
-  { value: "fruity", label: "Frutado", color: "bg-rose-100 dark:bg-rose-950" },
-  { value: "green", label: "Verde", color: "bg-emerald-100 dark:bg-emerald-950" },
-  { value: "aquatic", label: "Aquático", color: "bg-blue-100 dark:bg-blue-950" },
+  { value: "fresco", label: "Fresco", color: "bg-cyan-100 dark:bg-cyan-950" },
+  { value: "especiado", label: "Especiado", color: "bg-red-100 dark:bg-red-950" },
+  { value: "frutado", label: "Frutado", color: "bg-rose-100 dark:bg-rose-950" },
+  { value: "verde", label: "Verde", color: "bg-emerald-100 dark:bg-emerald-950" },
+  { value: "aquatico", label: "Aquático", color: "bg-blue-100 dark:bg-blue-950" },
   { value: "gourmand", label: "Gourmand", color: "bg-amber-100 dark:bg-amber-950" },
-]
+] as const
+
+type NotesCategoryFilter = (typeof categories)[number]["value"]
+
+const categoryLabels: Record<string, string> = {
+  floral: "Floral",
+  amadeirado: "Amadeirado",
+  citrico: "Cítrico",
+  oriental: "Oriental",
+  fresco: "Fresco",
+  especiado: "Especiado",
+  frutado: "Frutado",
+  verde: "Verde",
+  aquatico: "Aquático",
+  gourmand: "Gourmand",
+}
 
 const categoryColors: { [key: string]: string } = {
   floral: "bg-pink-50 border-pink-200 hover:bg-pink-100",
-  woody: "bg-amber-50 border-amber-200 hover:bg-amber-100",
-  citrus: "bg-yellow-50 border-yellow-200 hover:bg-yellow-100",
+  amadeirado: "bg-amber-50 border-amber-200 hover:bg-amber-100",
+  citrico: "bg-yellow-50 border-yellow-200 hover:bg-yellow-100",
   oriental: "bg-orange-50 border-orange-200 hover:bg-orange-100",
-  fresh: "bg-cyan-50 border-cyan-200 hover:bg-cyan-100",
-  spicy: "bg-red-50 border-red-200 hover:bg-red-100",
-  fruity: "bg-rose-50 border-rose-200 hover:bg-rose-100",
-  green: "bg-emerald-50 border-emerald-200 hover:bg-emerald-100",
-  aquatic: "bg-blue-50 border-blue-200 hover:bg-blue-100",
+  fresco: "bg-cyan-50 border-cyan-200 hover:bg-cyan-100",
+  especiado: "bg-red-50 border-red-200 hover:bg-red-100",
+  frutado: "bg-rose-50 border-rose-200 hover:bg-rose-100",
+  verde: "bg-emerald-50 border-emerald-200 hover:bg-emerald-100",
+  aquatico: "bg-blue-50 border-blue-200 hover:bg-blue-100",
   gourmand: "bg-amber-50 border-amber-200 hover:bg-amber-100",
 }
 
@@ -175,8 +191,32 @@ const translateNoteDescription = (description: string) => {
 }
 
 export default function NotesPage() {
+  const searchParams = useSearchParams()
   const [searchQuery, setSearchQuery] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("all")
+  const [selectedCategory, setSelectedCategory] = useState<NotesCategoryFilter>("all")
+
+  const validCategoryValues = useMemo(
+    () =>
+      new Set<string>(
+        categories.filter((c) => c.value !== "all").map((c) => c.value),
+      ),
+    [],
+  )
+
+  useEffect(() => {
+    const cat = searchParams.get("category")
+    if (cat !== null && validCategoryValues.has(cat)) {
+      setSelectedCategory(cat as NotesCategoryFilter)
+    }
+  }, [searchParams, validCategoryValues])
+
+  const noteCatalogCounts = useMemo(() => {
+    const map = new Map<string, number>()
+    for (const n of notes) {
+      map.set(n.id, getCatalogPerfumeCountForNote(n))
+    }
+    return map
+  }, [])
 
   const filteredNotes = useMemo(() => {
     let result = [...notes]
@@ -196,11 +236,13 @@ export default function NotesPage() {
       result = result.filter((n) => n.category === selectedCategory)
     }
 
-    // Sort by perfume count
-    result.sort((a, b) => b.perfumeCount - a.perfumeCount)
+    result.sort(
+      (a, b) =>
+        (noteCatalogCounts.get(b.id) ?? 0) - (noteCatalogCounts.get(a.id) ?? 0),
+    )
 
     return result
-  }, [searchQuery, selectedCategory])
+  }, [searchQuery, selectedCategory, noteCatalogCounts])
 
   // Group notes by category
   const groupedNotes = useMemo(() => {
@@ -283,7 +325,7 @@ export default function NotesPage() {
                 <div key={category}>
                   {selectedCategory === "all" && (
                     <h2 className="font-serif text-2xl font-semibold text-foreground mb-6 capitalize">
-                      {category}
+                      {categoryLabels[category] ?? category}
                     </h2>
                   )}
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -302,7 +344,7 @@ export default function NotesPage() {
                           {translateNoteDescription(note.description)}
                         </p>
                         <p className="mt-3 text-sm font-medium text-foreground">
-                          {note.perfumeCount.toLocaleString()} perfumes
+                          {(noteCatalogCounts.get(note.id) ?? 0).toLocaleString()} Perfumes
                         </p>
                       </Link>
                     ))}
