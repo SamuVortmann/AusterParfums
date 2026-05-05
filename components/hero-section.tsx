@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { formatCompactNumber, siteStats } from "@/lib/site-stats"
+import { usePublicStats } from "@/components/public-stats-provider"
 import { useRouter } from "next/navigation"
 
 const popularSearches = ["Rose", "Oud", "Vanilla", "Musk", "Citrus", "Woody"]
@@ -12,6 +13,8 @@ const popularSearches = ["Rose", "Oud", "Vanilla", "Musk", "Citrus", "Woody"]
 export function HeroSection() {
   const [searchQuery, setSearchQuery] = useState("")
   const router = useRouter()
+  const { loaded, totalReviews } = usePublicStats()
+  const reviewDisplay = loaded ? totalReviews : siteStats.reviews
 
   const handleSearch = () => {
     const query = searchQuery.trim()
@@ -97,7 +100,7 @@ export function HeroSection() {
               <p className="text-sm text-muted-foreground mt-1">Marcas</p>
             </div>
             <div>
-              <p className="font-serif text-3xl font-semibold text-foreground">{formatCompactNumber(siteStats.reviews)}</p>
+              <p className="font-serif text-3xl font-semibold text-foreground">{formatCompactNumber(reviewDisplay)}</p>
               <p className="text-sm text-muted-foreground mt-1">Avaliações</p>
             </div>
           </div>

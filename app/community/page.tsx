@@ -1,13 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { reviews, forumPosts } from "@/lib/data"
-import { Star, MessageSquare, Eye, ThumbsUp, Users, TrendingUp, BookOpen } from "lucide-react"
+import { Star, MessageSquare, Eye, Users, TrendingUp, BookOpen, ThumbsUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { formatCompactNumber, siteStats } from "@/lib/site-stats"
+import { PerfumeReviewCard } from "@/components/perfume-review-card"
+import type { ReviewDTO } from "@/lib/reviews-serialize"
+import { ForumNewThreadDialog, type ForumThreadListItem } from "@/components/forum-new-thread-dialog"
+import { usePublicStats } from "@/components/public-stats-provider"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { categoryBadgeClass, FORUM_CATEGORY_VALUES } from "@/lib/forum-categories"
 
 const tabs = [
   { id: "forum", label: "Fórum", icon: MessageSquare },
@@ -15,16 +20,78 @@ const tabs = [
   { id: "collections", label: "Coleções", icon: BookOpen },
 ]
 
-const forumCategories = [
-  { name: "Recomendacoes", count: 1234, color: "bg-blue-100 text-blue-800" },
-  { name: "Discussao", count: 987, color: "bg-green-100 text-green-800" },
-  { name: "Colecoes", count: 654, color: "bg-purple-100 text-purple-800" },
-  { name: "Educacao", count: 432, color: "bg-amber-100 text-amber-800" },
-  { name: "Noticias", count: 321, color: "bg-pink-100 text-pink-800" },
-]
+function forumAuthorInitials(name: string) {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2)
+}
 
 export default function CommunityPage() {
+  const { loaded: statsLoaded, totalReviews, forumThreadCount, refresh } = usePublicStats()
   const [activeTab, setActiveTab] = useState("forum")
+  const [feedReviews, setFeedReviews] = useState<ReviewDTO[]>([])
+  const [reviewsLoading, setReviewsLoading] = useState(true)
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null)
+  const [forumThreads, setForumThreads] = useState<ForumThreadListItem[]>([])
+  const [forumLoading, setForumLoading] = useState(true)
+  const [categoryCounts, setCategoryCounts] = useState<Record<string, number>>({})
+  const [filterCategory, setFilterCategory] = useState<string | null>(null)
+  const [newThreadOpen, setNewThreadOpen] = useState(false)
+
+  useEffect(() => {
+    void (async () => {
+      try {
+        const res = await fetch("/api/reviews?recent=1&take=40", { credentials: "include" })
+        const data = await res.json()
+        if (res.ok) {
+          setFeedReviews(data.reviews ?? [])
+        }
+      } catch {
+        /* ignore */
+      } finally {
+        setReviewsLoading(false)
+      }
+    })()
+  }, [])
+
+  useEffect(() => {
+    void (async () => {
+      try {
+        const res = await fetch("/api/auth/me", { credentials: "include" })
+        const data = await res.json()
+        setCurrentUserId(data.user?.id ?? null)
+      } catch {
+        setCurrentUserId(null)
+      }
+    })()
+  }, [])
+
+  useEffect(() => {
+    void (async () => {
+      setForumLoading(true)
+      try {
+        const q = filterCategory ? `&category=${encodeURIComponent(filterCategory)}` : ""
+        const res = await fetch(`/api/forum/threads?take=40${q}`)
+        const data = await res.json()
+        if (res.ok) {
+          setForumThreads(data.threads ?? [])
+          setCategoryCounts(data.categoryCounts ?? {})
+        }
+      } catch {
+        /* ignore */
+      } finally {
+        setForumLoading(false)
+      }
+    })()
+  }, [filterCategory])
+
+  const headerReviewCount = statsLoaded ? totalReviews : siteStats.reviews
+  const headerForumCount = statsLoaded ? forumThreadCount : siteStats.forumPosts
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -49,7 +116,7 @@ export default function CommunityPage() {
                   <Users className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xl font-semibold text-foreground">{formatCompactNumber(siteStats.forumPosts)}</p>
+                  <p className="text-xl font-semibold text-foreground">{formatCompactNumber(headerForumCount)}</p>
                   <p className="text-sm text-muted-foreground">Tópicos</p>
                 </div>
               </div>
@@ -58,7 +125,7 @@ export default function CommunityPage() {
                   <Star className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xl font-semibold text-foreground">{formatCompactNumber(siteStats.reviews)}</p>
+                  <p className="text-xl font-semibold text-foreground">{formatCompactNumber(headerReviewCount)}</p>
                   <p className="text-sm text-muted-foreground">Avaliações</p>
                 </div>
               </div>
@@ -101,87 +168,105 @@ export default function CommunityPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
           {activeTab === "forum" && (
             <div className="grid lg:grid-cols-4 gap-8">
-              {/* Forum Posts */}
               <div className="lg:col-span-3">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="font-serif text-2xl font-semibold text-foreground">
-                    Tópicos em alta
-                  </h2>
-                  <Button>Iniciar discussão</Button>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                  <h2 className="font-serif text-2xl font-semibold text-foreground">Discussões</h2>
+                  <Button type="button" onClick={() => setNewThreadOpen(true)}>
+                    Iniciar discussão
+                  </Button>
                 </div>
 
-                <div className="space-y-4">
-                  {forumPosts.map((post) => (
-                    <article
-                      key={post.id}
-                      className="bg-card rounded-xl border border-border p-6 hover:shadow-md transition-shadow"
-                    >
-                      <div className="flex items-start gap-4">
-                        <img
-                          src={post.authorAvatar}
-                          alt={post.author}
-                          className="w-10 h-10 rounded-full object-cover flex-shrink-0"
-                        />
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-start justify-between gap-4">
-                            <div>
-                              <h3 className="font-medium text-foreground hover:text-primary transition-colors cursor-pointer">
-                                {post.title}
-                              </h3>
-                              <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
-                                <span>por {post.author}</span>
-                                <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                                  post.category === "Recomendacoes" || post.category === "Recomendações" ? "bg-blue-100 text-blue-800" :
-                                  post.category === "Discussao" || post.category === "Discussão" ? "bg-green-100 text-green-800" :
-                                  post.category === "Colecoes" || post.category === "Coleções" ? "bg-purple-100 text-purple-800" :
-                                  post.category === "Educacao" || post.category === "Educação" ? "bg-amber-100 text-amber-800" :
-                                  "bg-muted text-muted-foreground"
-                                }`}>
-                                  {post.category}
+                {forumLoading ? (
+                  <p className="text-sm text-muted-foreground">Carregando tópicos…</p>
+                ) : forumThreads.length === 0 ? (
+                  <div className="text-center py-16 bg-card rounded-xl border border-border">
+                    <p className="text-muted-foreground">
+                      Nenhum tópico ainda. Inicie a primeira discussão da comunidade.
+                    </p>
+                    <Button type="button" className="mt-4" onClick={() => setNewThreadOpen(true)}>
+                      Criar tópico
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {forumThreads.map((post) => (
+                      <Link key={post.id} href={`/community/thread/${post.id}`}>
+                        <article className="bg-card rounded-xl border border-border p-6 hover:shadow-md transition-shadow">
+                          <div className="flex items-start gap-4">
+                            <Avatar className="h-10 w-10 flex-shrink-0">
+                              <AvatarFallback className="bg-primary/10 text-primary text-sm">
+                                {forumAuthorInitials(post.author)}
+                              </AvatarFallback>
+                            </Avatar>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-start justify-between gap-4">
+                                <div>
+                                  <h3 className="font-medium text-foreground hover:text-primary transition-colors">
+                                    {post.title}
+                                  </h3>
+                                  <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
+                                    <span>por {post.author}</span>
+                                    <span
+                                      className={`px-2 py-0.5 rounded-full text-xs font-medium ${categoryBadgeClass(post.category)}`}
+                                    >
+                                      {post.category}
+                                    </span>
+                                  </div>
+                                </div>
+                                <span className="text-sm text-muted-foreground whitespace-nowrap">
+                                  {post.lastActivity}
+                                </span>
+                              </div>
+                              <div className="mt-4 flex items-center gap-6 text-sm text-muted-foreground">
+                                <span className="flex items-center gap-1.5">
+                                  <MessageSquare className="h-4 w-4" />
+                                  {post.replies} respostas
+                                </span>
+                                <span className="flex items-center gap-1.5">
+                                  <Eye className="h-4 w-4" />
+                                  {post.views.toLocaleString()} visualizações
                                 </span>
                               </div>
                             </div>
-                            <span className="text-sm text-muted-foreground whitespace-nowrap">
-                              {post.lastActivity}
-                            </span>
                           </div>
-                          <div className="mt-4 flex items-center gap-6 text-sm text-muted-foreground">
-                            <span className="flex items-center gap-1.5">
-                              <MessageSquare className="h-4 w-4" />
-                              {post.replies} respostas
-                            </span>
-                            <span className="flex items-center gap-1.5">
-                              <Eye className="h-4 w-4" />
-                              {post.views.toLocaleString()} visualizações
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-
-                <div className="mt-8 text-center">
-                  <Button variant="outline">Carregar mais tópicos</Button>
-                </div>
+                        </article>
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
 
-              {/* Sidebar */}
               <div className="lg:col-span-1">
                 <div className="bg-card rounded-xl border border-border p-6">
                   <h3 className="font-medium text-foreground mb-4">Categorias</h3>
                   <div className="space-y-3">
-                    {forumCategories.map((category) => (
+                    <button
+                      type="button"
+                      onClick={() => setFilterCategory(null)}
+                      className={`w-full flex items-center justify-between p-3 rounded-lg hover:bg-secondary transition-colors text-left ${
+                        filterCategory === null ? "bg-secondary" : ""
+                      }`}
+                    >
+                      <span className="text-sm font-medium text-foreground">Todas</span>
+                      <span className="text-sm text-muted-foreground">
+                        {Object.values(categoryCounts).reduce((a, b) => a + b, 0)}
+                      </span>
+                    </button>
+                    {FORUM_CATEGORY_VALUES.map((name) => (
                       <button
-                        key={category.name}
-                        className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-secondary transition-colors"
+                        key={name}
+                        type="button"
+                        onClick={() => setFilterCategory(name)}
+                        className={`w-full flex items-center justify-between p-3 rounded-lg hover:bg-secondary transition-colors ${
+                          filterCategory === name ? "bg-secondary" : ""
+                        }`}
                       >
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${category.color}`}>
-                          {category.name}
+                        <span
+                          className={`px-2 py-1 rounded-full text-xs font-medium ${categoryBadgeClass(name)}`}
+                        >
+                          {name}
                         </span>
-                        <span className="text-sm text-muted-foreground">
-                          {category.count}
-                        </span>
+                        <span className="text-sm text-muted-foreground">{categoryCounts[name] ?? 0}</span>
                       </button>
                     ))}
                   </div>
@@ -200,66 +285,64 @@ export default function CommunityPage() {
             </div>
           )}
 
+          <ForumNewThreadDialog
+            open={newThreadOpen}
+            onOpenChange={setNewThreadOpen}
+            onCreated={(thread) => {
+              setForumThreads((prev) => [thread, ...prev])
+              void refresh()
+              setCategoryCounts((c) => ({
+                ...c,
+                [thread.category]: (c[thread.category] ?? 0) + 1,
+              }))
+            }}
+          />
+
           {activeTab === "reviews" && (
             <div>
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                 <h2 className="font-serif text-2xl font-semibold text-foreground">
                   Avaliações recentes
                 </h2>
-                <Button>Escrever avaliação</Button>
+                <Button asChild>
+                  <Link href="/perfumes">Escrever avaliação</Link>
+                </Button>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                {reviews.map((review) => (
-                  <article
-                    key={review.id}
-                    className="bg-card rounded-xl border border-border p-6"
-                  >
-                    <div className="flex items-start gap-4">
-                      <img
-                        src={review.userAvatar}
-                        alt={review.userName}
-                        className="w-12 h-12 rounded-full object-cover"
-                      />
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-2">
-                          <span className="font-medium text-foreground">{review.userName}</span>
-                          <span className="text-sm text-muted-foreground">{review.date}</span>
-                        </div>
-                        <Link
-                          href={`/perfumes/${review.perfumeId}`}
-                          className="mt-1 text-sm text-primary hover:underline"
-                        >
-                          {review.perfumeName} por {review.perfumeBrand}
-                        </Link>
-                        <div className="flex items-center gap-1 mt-2">
-                          {Array.from({ length: 5 }).map((_, i) => (
-                            <Star
-                              key={i}
-                              className={`h-4 w-4 ${
-                                i < review.rating
-                                  ? "fill-amber-400 text-amber-400"
-                                  : "fill-muted text-muted"
-                              }`}
-                            />
-                          ))}
-                        </div>
-                        <p className="mt-3 text-muted-foreground text-sm line-clamp-3">
-                          {review.content}
-                        </p>
-                        <button className="mt-4 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-                          <ThumbsUp className="h-4 w-4" />
-                          <span>Útil ({review.likes})</span>
-                        </button>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
+              {reviewsLoading ? (
+                <p className="text-sm text-muted-foreground">Carregando avaliações…</p>
+              ) : feedReviews.length === 0 ? (
+                <div className="text-center py-16 bg-card rounded-xl border border-border">
+                  <p className="text-muted-foreground">
+                    Ainda não há avaliações publicadas. Escolha um perfume e seja o primeiro a avaliar.
+                  </p>
+                  <Button asChild className="mt-4">
+                    <Link href="/perfumes">Ver perfumes</Link>
+                  </Button>
+                </div>
+              ) : (
+                <div className="grid md:grid-cols-2 gap-6">
+                  {feedReviews.map((review) => (
+                    <PerfumeReviewCard
+                      key={review.id}
+                      review={review}
+                      currentUserId={currentUserId}
+                      communityVariant
+                      onDeleted={() =>
+                        setFeedReviews((prev) => prev.filter((r) => r.id !== review.id))
+                      }
+                    />
+                  ))}
+                </div>
+              )}
 
-              <div className="mt-8 text-center">
-                <Button variant="outline">Carregar mais avaliações</Button>
-              </div>
+              {!reviewsLoading && feedReviews.length > 0 && (
+                <div className="mt-8 text-center">
+                  <Button asChild variant="outline">
+                    <Link href="/perfumes">Avaliar outro perfume</Link>
+                  </Button>
+                </div>
+              )}
             </div>
           )}
 

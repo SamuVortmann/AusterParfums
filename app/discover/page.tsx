@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Sparkles, FlaskConical, ArrowLeftRight, Dna, Target, Compass, MessageSquare } from "lucide-react"
 import Link from "next/link"
-import { formatCompactNumber, siteStats } from "@/lib/site-stats"
+import { CatalogStatsStrip } from "@/components/catalog-stats-strip"
 
 const tools = [
   {
@@ -119,25 +119,7 @@ export default function DiscoverPage() {
           </CardContent>
         </Card>
 
-        {/* Stats Section */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="text-center">
-            <p className="font-serif text-4xl font-bold text-foreground">{formatCompactNumber(siteStats.perfumes)}</p>
-            <p className="text-sm text-muted-foreground">Fragrâncias</p>
-          </div>
-          <div className="text-center">
-            <p className="font-serif text-4xl font-bold text-foreground">{formatCompactNumber(siteStats.reviews)}</p>
-            <p className="text-sm text-muted-foreground">Avaliações</p>
-          </div>
-          <div className="text-center">
-            <p className="font-serif text-4xl font-bold text-foreground">{formatCompactNumber(siteStats.brands)}</p>
-            <p className="text-sm text-muted-foreground">Marcas</p>
-          </div>
-          <div className="text-center">
-            <p className="font-serif text-4xl font-bold text-foreground">{formatCompactNumber(siteStats.notes)}</p>
-            <p className="text-sm text-muted-foreground">Notas</p>
-          </div>
-        </div>
+        <CatalogStatsStrip />
       </main>
       <Footer />
     </div>

@@ -1,63 +1,18 @@
 "use client"
 
-import { use, useState } from "react"
+import { use, useCallback, useEffect, useState } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { perfumes, notes, getReviewsByPerfume, getSimilarPerfumes, type Review, type Inspiration } from "@/lib/data"
-import { Heart, Star, Share2, Clock, Wind, ThumbsUp, ChevronRight, Sparkles, DollarSign } from "lucide-react"
+import { perfumes, notes, getSimilarPerfumes, type Inspiration } from "@/lib/data"
+import { Heart, Star, Share2, ChevronRight, Sparkles, DollarSign } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { getPerfumeImage } from "@/lib/perfume-images"
-
-function ReviewCard({ review }: { review: Review }) {
-  return (
-    <article className="bg-card rounded-xl border border-border p-6">
-      <div className="flex items-start gap-4">
-        <img
-          src={review.userAvatar}
-          alt={review.userName}
-          className="w-12 h-12 rounded-full object-cover"
-        />
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between gap-2">
-            <h4 className="font-medium text-foreground">{review.userName}</h4>
-            <span className="text-sm text-muted-foreground">{review.date}</span>
-          </div>
-          <div className="flex items-center gap-1 mt-1">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star
-                key={i}
-                className={`h-4 w-4 ${
-                  i < review.rating
-                    ? "fill-amber-400 text-amber-400"
-                    : "fill-muted text-muted"
-                }`}
-              />
-            ))}
-          </div>
-          <p className="mt-3 text-muted-foreground leading-relaxed">
-            {review.content}
-          </p>
-          <div className="mt-4 flex items-center gap-6 text-sm">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Clock className="h-4 w-4" />
-              <span>Fixação: {review.longevity}/10</span>
-            </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Wind className="h-4 w-4" />
-              <span>Projeção: {review.sillage}/10</span>
-            </div>
-          </div>
-          <button className="mt-4 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-            <ThumbsUp className="h-4 w-4" />
-            <span>Útil ({review.likes})</span>
-          </button>
-        </div>
-      </div>
-    </article>
-  )
-}
+import { PerfumeReviewCard } from "@/components/perfume-review-card"
+import { PerfumeReviewFormDialog } from "@/components/perfume-review-form-dialog"
+import type { ReviewDTO } from "@/lib/reviews-serialize"
+import { usePublicStats } from "@/components/public-stats-provider"
 
 function InspirationCard({ inspiration }: { inspiration: Inspiration }) {
   const priceColors = {
@@ -115,15 +70,85 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
   const { id } = use(params)
   const [isLiked, setIsLiked] = useState(false)
   const [activeTab, setActiveTab] = useState<"details" | "inspirations">("details")
-  
+  const [apiReviews, setApiReviews] = useState<ReviewDTO[]>([])
+  const [liveStats, setLiveStats] = useState<{ avgRating: number; count: number } | null>(null)
+  const [reviewsLoaded, setReviewsLoaded] = useState(false)
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null)
+  const [reviewDialogOpen, setReviewDialogOpen] = useState(false)
+  const [dialogMode, setDialogMode] = useState<"create" | "edit">("create")
+  const [editReview, setEditReview] = useState<ReviewDTO | null>(null)
+  const { refresh: refreshPublicStats } = usePublicStats()
+
   const perfume = perfumes.find((p) => p.id === id)
-  
+
+  const loadReviews = useCallback(async () => {
+    try {
+      const res = await fetch(`/api/reviews?perfumeId=${encodeURIComponent(id)}`, { credentials: "include" })
+      const data = await res.json()
+      if (res.ok) {
+        setApiReviews(data.reviews ?? [])
+        setLiveStats(data.stats ?? null)
+      }
+    } catch {
+      /* keep empty */
+    } finally {
+      setReviewsLoaded(true)
+    }
+  }, [id])
+
+  useEffect(() => {
+    void loadReviews()
+  }, [loadReviews])
+
+  useEffect(() => {
+    void (async () => {
+      try {
+        const res = await fetch("/api/auth/me", { credentials: "include" })
+        const data = await res.json()
+        setCurrentUserId(data.user?.id ?? null)
+      } catch {
+        setCurrentUserId(null)
+      }
+    })()
+  }, [])
+
   if (!perfume) {
     notFound()
   }
 
-  const reviews = getReviewsByPerfume(id)
   const inspirations = getSimilarPerfumes(id)
+
+  const useCommunityRating = reviewsLoaded && liveStats !== null && liveStats.count > 0
+  const displayRating = useCommunityRating && liveStats ? liveStats.avgRating : perfume.rating
+  const displayCount = useCommunityRating && liveStats ? liveStats.count : perfume.reviewCount
+
+  const myReview = currentUserId ? apiReviews.find((r) => r.userId === currentUserId) : undefined
+
+  const openReviewDialog = () => {
+    if (!currentUserId) {
+      window.location.href = "/perfil"
+      return
+    }
+    if (myReview) {
+      setDialogMode("edit")
+      setEditReview(myReview)
+    } else {
+      setDialogMode("create")
+      setEditReview(null)
+    }
+    setReviewDialogOpen(true)
+  }
+
+  const handleReviewSaved = (payload: { review: ReviewDTO; stats: { avgRating: number; count: number } }) => {
+    setLiveStats(payload.stats)
+    setApiReviews((prev) => {
+      const others = prev.filter((r) => r.id !== payload.review.id)
+      return [payload.review, ...others].sort(
+        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+      )
+    })
+    void refreshPublicStats()
+  }
   const allNotes = [
     ...perfume.topNotes.map((n) => ({ note: n, type: "Top" })),
     ...perfume.middleNotes.map((n) => ({ note: n, type: "Middle" })),
@@ -281,11 +306,12 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
                     <div className="flex items-center gap-1">
                       <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
                       <span className="text-lg font-semibold text-foreground">
-                        {perfume.rating.toFixed(1)}
+                        {displayRating.toFixed(1)}
                       </span>
                     </div>
                     <span className="text-muted-foreground">
-                      ({perfume.reviewCount.toLocaleString()} avaliações)
+                      ({displayCount.toLocaleString()} avaliações
+                      {useCommunityRating ? "" : " · catálogo"})
                     </span>
                   </div>
                 </div>
@@ -489,27 +515,58 @@ export default function PerfumeDetailPage({ params }: { params: Promise<{ id: st
         {/* Reviews */}
         <section className="py-12 lg:py-16 bg-secondary">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <h2 className="font-serif text-2xl font-semibold text-foreground">
-                Avaliações ({reviews.length.toLocaleString()})
+                Avaliações da comunidade ({reviewsLoaded ? apiReviews.length.toLocaleString() : "…"})
               </h2>
-              <Button>Escrever avaliação</Button>
+              <Button type="button" onClick={openReviewDialog}>
+                {myReview ? "Editar sua avaliação" : "Escrever avaliação"}
+              </Button>
             </div>
 
-            {reviews.length > 0 ? (
+            {!reviewsLoaded ? (
+              <p className="mt-8 text-sm text-muted-foreground">Carregando avaliações…</p>
+            ) : apiReviews.length > 0 ? (
               <div className="mt-8 space-y-6">
-                {reviews.map((review) => (
-                  <ReviewCard key={review.id} review={review} />
+                {apiReviews.map((review) => (
+                  <PerfumeReviewCard
+                    key={review.id}
+                    review={review}
+                    currentUserId={currentUserId}
+                    onEdit={() => {
+                      setDialogMode("edit")
+                      setEditReview(review)
+                      setReviewDialogOpen(true)
+                    }}
+                    onDeleted={() => {
+                      void loadReviews()
+                      void refreshPublicStats()
+                    }}
+                  />
                 ))}
               </div>
             ) : (
               <div className="mt-8 text-center py-12 bg-card rounded-xl border border-border">
-                <p className="text-muted-foreground">Ainda não há avaliações. Seja a primeira pessoa a avaliar esta fragrância.</p>
-                <Button className="mt-4">Escrever avaliação</Button>
+                <p className="text-muted-foreground">
+                  Ainda não há avaliações na comunidade. Seja a primeira pessoa a avaliar esta fragrância.
+                </p>
+                <Button type="button" className="mt-4" onClick={openReviewDialog}>
+                  Escrever avaliação
+                </Button>
               </div>
             )}
           </div>
         </section>
+
+        <PerfumeReviewFormDialog
+          open={reviewDialogOpen}
+          onOpenChange={setReviewDialogOpen}
+          perfumeId={id}
+          perfumeName={perfume.name}
+          mode={dialogMode}
+          initialReview={dialogMode === "edit" ? editReview : null}
+          onSaved={handleReviewSaved}
+        />
         </>
         )}
 

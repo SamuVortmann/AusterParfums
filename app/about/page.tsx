@@ -3,14 +3,7 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Heart, Users, Search, Sparkles } from "lucide-react"
 import Link from "next/link"
-import { formatCompactNumber, siteStats } from "@/lib/site-stats"
-
-const stats = [
-  { value: formatCompactNumber(siteStats.perfumes), label: "Perfumes" },
-  { value: formatCompactNumber(siteStats.brands), label: "Marcas" },
-  { value: formatCompactNumber(siteStats.reviews), label: "Avaliações" },
-  { value: formatCompactNumber(siteStats.forumPosts), label: "Tópicos" },
-]
+import { AboutStatsStrip } from "@/components/about-stats-strip"
 
 const values = [
   {
@@ -85,16 +78,7 @@ export default function AboutPage() {
         {/* Stats */}
         <section className="py-12 bg-card border-y border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {stats.map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <p className="font-serif text-3xl lg:text-4xl font-semibold text-primary">
-                    {stat.value}
-                  </p>
-                  <p className="mt-1 text-sm text-muted-foreground">{stat.label}</p>
-                </div>
-              ))}
-            </div>
+            <AboutStatsStrip />
           </div>
         </section>
 

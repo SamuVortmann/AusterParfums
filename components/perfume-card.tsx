@@ -4,6 +4,7 @@ import { Heart, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
 import { isFavorite, toggleFavorite } from "@/lib/user-store"
+import { usePerfumePublicStats } from "@/components/public-stats-provider"
 
 interface PerfumeCardProps {
   id: string
@@ -18,6 +19,7 @@ interface PerfumeCardProps {
 
 export function PerfumeCard({ id, name, brand, image, rating, reviewCount, topNotes, year }: PerfumeCardProps) {
   const [isLiked, setIsLiked] = useState(false)
+  const { displayRating, displayReviewCount } = usePerfumePublicStats(id, rating, reviewCount)
 
   useEffect(() => {
     setIsLiked(isFavorite(id))
@@ -64,9 +66,9 @@ export function PerfumeCard({ id, name, brand, image, rating, reviewCount, topNo
         <div className="mt-2 flex items-center gap-2">
           <div className="flex items-center gap-1">
             <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-            <span className="text-sm font-medium text-foreground">{rating.toFixed(1)}</span>
+            <span className="text-sm font-medium text-foreground">{displayRating.toFixed(1)}</span>
           </div>
-          <span className="text-sm text-muted-foreground">({reviewCount.toLocaleString()} avaliações)</span>
+          <span className="text-sm text-muted-foreground">({displayReviewCount.toLocaleString()} avaliações)</span>
         </div>
 
         {/* Top Notes */}
