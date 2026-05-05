@@ -100,7 +100,7 @@ export default function PerfumesPage() {
               Explorar perfumes
             </h1>
             <p className="mt-4 text-lg text-muted-foreground max-w-2xl text-pretty">
-              Descubra seu proximo perfume assinatura na nossa colecao com mais de 80.000 fragrancias.
+              Descubra seu proximo perfume assinatura na nossa coleção de diversas fragrâncias.
             </p>
           </div>
         </div>

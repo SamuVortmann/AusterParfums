@@ -40,7 +40,7 @@ export function HeroSection() {
             <span className="block text-primary">Perfume Assinatura</span>
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Explore mais de 80.000 perfumes de 10.000+ marcas. Leia avaliações, compare notas
+            Explore diversas fragrâncias com as mais diversas marcass. Leia avaliações, compare notas
             e encontre a fragrância que combina com você.
           </p>
 
